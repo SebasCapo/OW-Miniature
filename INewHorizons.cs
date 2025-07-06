@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+
 using OWML.Common;
+
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OW-Miniature;
+namespace OWMiniature;
+
 public interface INewHorizons
 {
     #region Obsolete
