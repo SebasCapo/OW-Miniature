@@ -9,6 +9,7 @@
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <NoWarn>MSB3270</NoWarn>
     <DebugType>portable</DebugType>
+    <RootNamespace>OWMiniature</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="OWML" Version="2.15.1" />
