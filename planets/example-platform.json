@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Author_Mod_Platform",
+  "starSystem": "Jam5",
+  "extras": {
+    "isPlatform": true
+  },
+
+  "Props": {
+    "details": [
+      {
+        "rename": "ShatteredCrystal",
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 60
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "signals": [
+        {
+				"audio": "Sun_Collapse",
+				"parentPath": "Sector/ShatteredCrystal",
+				"isRelativeToParent": true,
+				"name": "Test",
+				"frequency": "ENDER_TEST",
+				"onlyAudibleToScope": false,
+				"volume": 1,
+				"maxDistance": 20,
+				"minDistance": 5,
+				"sourceRadius": 5,
+        "detectionRadius": 55,
+        "reveals": "ENDER_TEST_EXPLORE_FACT_1"
+			}
+    ]
+  }
+}

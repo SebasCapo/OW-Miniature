@@ -1,0 +1,107 @@
+﻿{
+    "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+    "name": "Al Ice",
+    "starSystem": "Jam5",
+    "Base": {
+        "groundSize": 76,
+        "surfaceSize": 75,
+        "surfaceGravity": 12
+    },
+    
+    "Orbit": {
+        "semiMajorAxis": 1800,
+        "primaryBody": "Berylliant Giant"
+    },
+
+    "Atmosphere": {
+        "size": 100,
+        "fogTint": {
+            "r": 190,
+            "g": 225,
+            "b": 192,
+            "a": 128
+        },
+        "fogSize": 200,
+        "fogDensity": 0.2,
+        "hasRain": false
+    },
+
+    "MapMarker": {
+        "enabled": true
+    },
+
+    "HeightMap" :
+	{
+	    "heightMap" : "planets/textures/iceheight.png",	
+        "textureMap": "planets/textures/icetest.png",
+	    "minHeight" : 5,
+		"maxHeight" : 100
+	},
+
+    "Props": {
+        "scatter": [
+            {
+                "path": "DreamWorld_Body/Sector_DreamWorld/Sector_DreamZone_1/Props_DreamZone_1/OtherComponentsGroup/Trees_Z1/DreamHouseIsland/Tree_DW_M_Var",
+                "count": 12
+            }
+        ],
+        "details": [
+            {
+                "rename": "IceRecorder",
+                "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
+                "position": {"x": -54.94806, "y": -24.55006, "z": 46.41127},
+                "rotation": {"x": 304.348, "y": 250.1504, "z": 235.0737},
+                "item": {
+                    "name": "Tape Recorder",
+                    "itemType": "Decoration"
+                }
+            }
+        ],
+        "dialogue" :
+		[
+			{
+				"position": {"x": -54.94806, "y": -24.55006, "z": 46.41127},
+				"range": 4,
+				"isRelativeToParent": true,
+				"xmlFile" : "planets/dialogue/TestDialogue.xml"
+			}
+        ],
+            "signals": [
+                {
+                "audio": "Sun_Collapse",
+                "parentPath": "Sector/IceRecorder",
+                "isRelativeToParent": true,
+                "name": "Ice Recorder",
+                "frequency": "ENDER_TEST",
+                "onlyAudibleToScope": false,
+                "volume": 1,
+                "maxDistance": 20,
+                "minDistance": 5,
+                "sourceRadius": 5,
+                "detectionRadius": 55,
+                "reveals": "ENDER_TEST_RUMOR_FACT_3"
+            }
+        ]
+    },
+    	"Spawn": {
+            "playerSpawnPoints": [
+            {
+                "position": {"x": -54.94806, "y": -24.55006, "z": 46.41127},
+                "startWithSuit": true,
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN",
+                "alignRadial": true
+            }
+        ],
+        "shipSpawnPoints": [
+            {
+                "position": {"x": -64.07893, "y": -18.69681, "z": 35.23539},
+                "rotation": {"x": 355.4822, "y": 210.0867, "z": 254.1467},
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN",
+                "alignRadial": true
+            }
+        ]
+    },
+    "ShipLog": {
+        "xmlFile": "planets/shiplog/icey.xml"
+    }
+}
