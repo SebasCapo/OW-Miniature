@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 using HarmonyLib;
 
 using OWMiniature.Experiments;
+using OWMiniature.Utils;
 
 using OWML.Common;
 using OWML.ModHelper;
@@ -11,7 +13,10 @@ namespace OWMiniature;
 
 public class OWMiniature : ModBehaviour
 {
+    public static event Action OnUpdate;
+
     public static OWMiniature Instance;
+    public static IModConsole Console;
     public ExperimentManager ExperimentManager;
     public INewHorizons NewHorizons;
 
@@ -27,7 +32,8 @@ public class OWMiniature : ModBehaviour
     public void Start()
     {
         // Starting here, you'll have access to OWML's mod helper.
-        ModHelper.Console.WriteLine($"My mod {nameof(OWMiniature)} is loaded!", MessageType.Success);
+        Console = ModHelper.Console;
+        Console.WriteLine($"My mod {nameof(OWMiniature)} is loaded!", MessageType.Success);
 
         // Get the New Horizons API and load configs
         NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
@@ -41,9 +47,18 @@ public class OWMiniature : ModBehaviour
         LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
     }
 
+    public void Update()
+    {
+        OnUpdate?.Invoke();
+    }
+
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
     {
-        if (newScene != OWScene.SolarSystem) return;
+        MapUtils.ResetCache();
+
+        if (newScene != OWScene.SolarSystem)
+            return;
+
         ModHelper.Console.WriteLine("Loaded into solar system!", MessageType.Success);
     }
 }
