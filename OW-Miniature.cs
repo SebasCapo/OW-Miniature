@@ -2,6 +2,8 @@
 
 using HarmonyLib;
 
+using OWMiniature.Experiments;
+
 using OWML.Common;
 using OWML.ModHelper;
 
@@ -10,11 +12,13 @@ namespace OWMiniature;
 public class OWMiniature : ModBehaviour
 {
     public static OWMiniature Instance;
+    public ExperimentManager ExperimentManager;
     public INewHorizons NewHorizons;
 
     public void Awake()
     {
         Instance = this;
+        ExperimentManager = new ExperimentManager();
         // You won't be able to access OWML's mod helper in Awake.
         // So you probably don't want to do anything here.
         // Use Start() instead.
@@ -29,6 +33,7 @@ public class OWMiniature : ModBehaviour
         NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
         NewHorizons.LoadConfigs(this);
 
+        ExperimentManager.Setup();
         new Harmony("Ender.OW-Miniature").PatchAll(Assembly.GetExecutingAssembly());
 
         // Example of accessing game code.
