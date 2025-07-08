@@ -11,6 +11,10 @@ namespace OWMiniature.Visuals
     /// </summary>
     public class PlanetSelectorLine : MonoBehaviour
     {
+        private const float LineHeight = 1350f;
+        private const int LineVertices = 256;
+        private const int LineWidth = 100;
+
         /// <summary>
         /// Reference to the <see cref="AstroObject"/> that this line is assigned to.
         /// </summary>
@@ -43,27 +47,28 @@ namespace OWMiniature.Visuals
 
         private void CreateLine()
         {
-            const int width = 100;
-            const int vertices = 256;
-
             Line = gameObject.AddComponent<LineRenderer>();
 
             Line.material = VisualUtils.NormalLine;
             Line.textureMode = LineTextureMode.Stretch;
-            Line.positionCount = vertices;
+            Line.positionCount = LineVertices;
 
-            Line.startWidth = width;
-            Line.endWidth = width;
+            Line.startWidth = LineWidth;
+            Line.endWidth = LineWidth;
             Line.useWorldSpace = false;
             Line.loop = false;
 
             Line.startColor = Color.red;
-            Line.endColor = Color.yellow;
+
+            Color color = Color.yellow;
+            color.a = 0f;
+
+            Line.endColor = color;
 
             Line.positionCount = 2;
             Line.enabled = true;
 
-            Line.SetPositions([Vector3.zero, Vector3.up * 850f]);
+            Line.SetPositions([Vector3.zero, Vector3.up * LineHeight]);
         }
 
         private void ReportMissingComponent<T>()
