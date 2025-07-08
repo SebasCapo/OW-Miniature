@@ -16,15 +16,26 @@ namespace OWMiniature.Experiments
         {
             foreach (ExperimentBase experiment in Experiments)
             {
+                if (!experiment.IsEnabled)
+                    continue;
+
                 experiment.Setup();
             }
         }
 
-        public void TriggerExperiment<T>() where T : ExperimentBase
+        /// <summary>
+        /// Allows triggering a specific experiment from outside of them.
+        /// </summary>
+        /// <typeparam name="T">The specified experiment.</typeparam>
+        /// <param name="allowDisabledExperiments">Whether this will trigger disabled experiments.</param>
+        public void TriggerExperiment<T>(bool allowDisabledExperiments = false) where T : ExperimentBase
         {
             foreach (ExperimentBase experiment in Experiments)
             {
                 if (experiment is not T)
+                    continue;
+
+                if (allowDisabledExperiments && !experiment.IsEnabled)
                     continue;
 
                 experiment.Trigger();
