@@ -1,13 +1,22 @@
 ﻿using OWMiniature.Utils;
 
+using UnityEngine;
+
 namespace OWMiniature.Experiments
 {
-    public class MapNotificationExperiment : ExperimentBase
+    public class PlanetToggleExperiment : ExperimentBase
     {
+        /// <inheritdoc />
+        public override bool IsEnabled => false;
+
+        private GameObject _sun;
+
         /// <inheritdoc />
         internal override void Enable()
         {
             base.Enable();
+
+            _sun = GameObject.Find("Amph_Body");
 
             GlobalMessenger.AddListener("EnterMapView", Trigger);
             GlobalMessenger.AddListener("ExitMapView", Trigger);
@@ -25,10 +34,9 @@ namespace OWMiniature.Experiments
         /// <inheritdoc />
         public override void Trigger()
         {
-            bool isMapOpen = MapUtils.IsMapOpen;
-            string debugMessage = isMapOpen ? "The map is now open." : "The map is now closed.";
+            bool isVisible = !MapUtils.IsMapOpen;
 
-            OWMiniature.Instance.ModHelper.Console.WriteLine(debugMessage);
+            _sun.SetActive(isVisible);
         }
     }
 }

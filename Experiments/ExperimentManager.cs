@@ -19,7 +19,7 @@ namespace OWMiniature.Experiments
                 if (!experiment.IsEnabled)
                     continue;
 
-                experiment.Setup();
+                experiment.Enable();
             }
         }
 

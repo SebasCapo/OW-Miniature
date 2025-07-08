@@ -15,14 +15,14 @@
         /// <summary>
         /// Allows us to define any setups the experiment may need.
         /// </summary>
-        internal virtual void Setup()
+        internal virtual void Enable()
         {
         }
 
         /// <summary>
         /// Allows us to get rid of anything the experiment was using.
         /// </summary>
-        internal virtual void Exit()
+        internal virtual void Disable()
         {
         }
 
