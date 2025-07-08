@@ -18,8 +18,8 @@ namespace OWMiniature.Experiments
 
             _sun = GameObject.Find("Amph_Body");
 
-            GlobalMessenger.AddListener("EnterMapView", Trigger);
-            GlobalMessenger.AddListener("ExitMapView", Trigger);
+            GlobalMessenger.AddListener(EventUtils.EnterMapView, Trigger);
+            GlobalMessenger.AddListener(EventUtils.ExitMapView, Trigger);
         }
 
         /// <inheritdoc />
@@ -27,8 +27,8 @@ namespace OWMiniature.Experiments
         {
             base.Disable();
 
-            GlobalMessenger.RemoveListener("EnterMapView", Trigger);
-            GlobalMessenger.RemoveListener("ExitMapView", Trigger);
+            GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
+            GlobalMessenger.RemoveListener(EventUtils.ExitMapView, Trigger);
         }
 
         /// <inheritdoc />
