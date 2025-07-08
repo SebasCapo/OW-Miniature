@@ -83,28 +83,5 @@ namespace OWMiniature.Utils
 
             return obj.TryGetComponent(out orbitLine);
         }
-
-        //public static void CreateSelectorLine(AstroObject astroObject)
-        //{
-        //    Transform astroTr = astroObject.transform;
-
-        //    for (int i = 0; i < astroTr.childCount; i++)
-        //    {
-        //        Transform child = astroTr.GetChild(i);
-
-        //        if (TryGetOrbitLine(child, out OrbitLine orbitLine))
-        //        {
-        //            _lineRenderer = orbitLine._lineRenderer;
-        //            _orbitTransform = orbitLine.transform;
-        //            continue;
-        //        }
-
-        //        if (TryGetReferenceFrameVolume(child, out ReferenceFrameVolume rfVol))
-        //        {
-        //            _referenceFrame = rfVol._referenceFrame;
-        //            continue;
-        //        }
-        //    }
-        //}
     }
 }
