@@ -7,10 +7,12 @@
         "surfaceSize": 75,
         "surfaceGravity": 12
     },
+    
     "Orbit": {
         "semiMajorAxis": 1800,
         "primaryBody": "Berylliant Giant"
     },
+
     "Atmosphere": {
         "size": 100,
         "fogTint": {
@@ -23,14 +25,36 @@
         "fogDensity": 0.2,
         "hasRain": false
     },
+
     "MapMarker": {
         "enabled": true
     },
+
     "HeightMap" :
 	{
 	    "heightMap" : "planets/textures/iceheight.png",	
         "textureMap": "planets/textures/icetest.png",
 	    "minHeight" : 5,
 		"maxHeight" : 100
-	}
+	},
+
+    "Props": {
+        "scatter": [
+            {
+                "path": "DreamWorld_Body/Sector_DreamWorld/Sector_DreamZone_1/Props_DreamZone_1/OtherComponentsGroup/Trees_Z1/DreamHouseIsland/Tree_DW_M_Var",
+                "count": 12
+            }
+        ],
+        "details": [
+            {
+                "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
+                "position": {"x": -18.07895, "y": -67.42191, "z": 30.05723},
+                "rotation": {"x": 348.345, "y": 262.3329, "z": 205.0679},
+                "item": {
+                    "name": "Tape Recorder",
+                    "itemType": "Decoration"
+                }
+            }
+        ]
+    }
 }
