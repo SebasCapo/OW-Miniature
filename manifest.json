@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/manifest_schema.json",
-  "filename": "MiniSystemTest.dll",
+  "filename": "OW-Miniature.dll",
   "author": "Ender, Beryl",
   "name": "TBD Mod Name Entry",
   "uniqueName": "Ender.BerylModJam5",

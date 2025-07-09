@@ -1,20 +1,44 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
+using OWMiniature.Visuals;
+
+using UnityEngine;
 
 namespace OWMiniature.Utils
 {
     public static class MapUtils
     {
+        public const string RFVolumeName = "RFVolume";
+        public const string OrbitName = "Orbit";
+
+        public static Dictionary<ReferenceFrame, PlanetSelectorLine> Lines { get; } = [];
+
         /// <summary>
         /// Easy access to the global <see cref="global::MapController"/>.
         /// </summary>
-        public static MapController MapController 
+        public static MapController MapController
         {
             get
             {
-                if(_mapController == null)
+                if (_mapController == null)
                     _mapController = Object.FindObjectOfType<MapController>();
 
                 return _mapController;
+            }
+        }
+
+        /// <summary>
+        /// Fetches all <see cref="AstroObject"/> instances on the Scene.
+        /// </summary>
+        /// <returns>The cached <see cref="AstroObject"/> array.</returns>
+        public static AstroObject[] AstroObjects
+        {
+            get
+            {
+                if (_astroObjects == null || _astroObjects.Length == 0)
+                    _astroObjects = Object.FindObjectsOfType<AstroObject>();
+
+                return _astroObjects;
             }
         }
 
@@ -29,5 +53,35 @@ namespace OWMiniature.Utils
         public static bool IsMapOpen => MapController._mapMarkerManager.isActiveAndEnabled || MapController._isMapMode;
 
         private static MapController _mapController;
+        private static AstroObject[] _astroObjects;
+
+        /// <summary>
+        /// Resets the mod's cache.
+        /// </summary>
+        public static void ResetCache()
+        {
+            _mapController = null;
+            _astroObjects = null;
+        }
+
+        public static bool TryGetReferenceFrameVolume(Component obj, out ReferenceFrameVolume refFrameVol)
+        {
+            refFrameVol = null;
+
+            if (!obj.gameObject.name.Equals(RFVolumeName))
+                return false;
+
+            return obj.TryGetComponent(out refFrameVol);
+        }
+
+        public static bool TryGetOrbitLine(Component obj, out OrbitLine orbitLine)
+        {
+            orbitLine = null;
+
+            if (!obj.gameObject.name.Equals(OrbitName))
+                return false;
+
+            return obj.TryGetComponent(out orbitLine);
+        }
     }
 }

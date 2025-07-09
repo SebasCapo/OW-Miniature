@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace OWMiniature.Experiments
 {
@@ -7,10 +9,31 @@ namespace OWMiniature.Experiments
     /// </summary>
     public class ExperimentManager
     {
-        public List<ExperimentBase> Experiments { get; } =
-        [
-            new MapNotificationExperiment(),
-        ];
+        public List<ExperimentBase> Experiments { get; } = new List<ExperimentBase>();
+
+        /// <summary>
+        /// Default constructor.
+        /// 
+        /// <para>Fetches and initializes all experiments in the project.</para>
+        /// </summary>
+        public ExperimentManager()
+        {
+            Experiments.Clear();
+            Type[] assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type item in assemblyTypes)
+            {
+                if (!item.IsSubclassOf(typeof(ExperimentBase)) || item.IsAbstract)
+                    continue;
+
+                object instance = Activator.CreateInstance(item);
+
+                if (instance is not ExperimentBase experiment)
+                    continue;
+
+                Experiments.Add(experiment);
+            }
+        }
 
         public void Setup()
         {
