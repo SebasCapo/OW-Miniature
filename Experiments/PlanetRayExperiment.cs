@@ -1,11 +1,13 @@
-﻿using OWMiniature.Utils;
+﻿using System.Collections.Generic;
+
+using OWMiniature.Utils;
 using OWMiniature.Visuals;
 
 using UnityEngine;
 
 namespace OWMiniature.Experiments
 {
-    public class PlanetSelectExperiment : ExperimentBase
+    public class PlanetRayExperiment : ExperimentBase
     {
         /// <inheritdoc />
         public override bool IsEnabled => false;
@@ -39,7 +41,7 @@ namespace OWMiniature.Experiments
             if (frame == null)
                 return;
 
-            if (!MapUtils.Lines.TryGetValue(frame, out PlanetaryLineBase selector))
+            if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
             {
                 GameObject lineObj = new GameObject("Custom OrbitLine");
                 AstroObject astroObject = frame._attachedAstroObject;
@@ -48,7 +50,8 @@ namespace OWMiniature.Experiments
                 lineTransform.SetParent(astroObject.transform);
                 lineTransform.localPosition = Vector3.zero;
 
-                selector = lineObj.AddComponent<SelectionLine>();
+                selector = lineObj.AddComponent<ConnectionLine>();
+                selector.TargetPosition = Object.FindObjectsOfType<AstroObject>()[2].transform;
                 selector.Assign(astroObject.transform, frame);
             }
 

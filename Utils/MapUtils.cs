@@ -11,7 +11,7 @@ namespace OWMiniature.Utils
         public const string RFVolumeName = "RFVolume";
         public const string OrbitName = "Orbit";
 
-        public static Dictionary<ReferenceFrame, PlanetSelectorLine> Lines { get; } = [];
+        public static Dictionary<ReferenceFrame, PlanetaryLineBase> Lines { get; } = [];
 
         /// <summary>
         /// Easy access to the global <see cref="global::MapController"/>.
@@ -62,6 +62,21 @@ namespace OWMiniature.Utils
         {
             _mapController = null;
             _astroObjects = null;
+        }
+
+        public static bool TryGetLine<T>(ReferenceFrame frame, out T line)
+            where T : PlanetaryLineBase
+        {
+            line = null;
+
+            if (!Lines.TryGetValue(frame, out var lineBase))
+                return false;
+
+            if (lineBase is not T value)
+                return false;
+
+            line = value;
+            return true;
         }
 
         public static bool TryGetReferenceFrameVolume(Component obj, out ReferenceFrameVolume refFrameVol)

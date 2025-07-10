@@ -42,7 +42,7 @@ namespace OWMiniature.Utils
             where T : Object
         {
             T[] foundResources = Resources.FindObjectsOfTypeAll<T>();
-
+            
             for (int i = 0; i < foundResources.Length; i++)
             {
                 T obj = foundResources[i];
@@ -54,6 +54,16 @@ namespace OWMiniature.Utils
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Quicker way to get a color with a specific alpha.
+        /// </summary>
+        /// <returns>The exact same specified <paramref name="color"/>, but with the specified <paramref name="color"/>.</returns>
+        public static Color WithAlpha(this Color color, float alpha)
+        {
+            color.a = alpha;
+            return color;
         }
     }
 }
