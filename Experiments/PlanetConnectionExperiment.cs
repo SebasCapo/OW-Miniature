@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 
+using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
-using OWMiniature.Visuals;
 
 using OWML.Common;
 
@@ -50,7 +49,7 @@ namespace OWMiniature.Experiments
                 return;
             }
 
-            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", OWML.Common.MessageType.Success);
+            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", MessageType.Success);
         }
 
         private void SelectFrame(ReferenceFrame frame)

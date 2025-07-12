@@ -24,6 +24,11 @@ namespace OWMiniature.Utils
         /// </summary>
         public const string ExitMapView = "ExitMapView";
 
+        /// <summary>
+        /// Triggered whenever the observatory map is opened.
+        /// </summary>
+        public const string TriggerObservatoryMap = "TriggerObservatoryMap";
+
         /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
         public static event Action<CanvasMapMarkerInitEvent> MarkerInit;
 

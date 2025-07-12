@@ -7,6 +7,9 @@ namespace OWMiniature.Experiments
 {
     public class MapMarkerExperiment : ExperimentBase
     {
+        /// <inheritdoc />
+        public override bool IsEnabled => false;
+
         private MapMarker _mapMarker;
 
         /// <inheritdoc />
@@ -14,7 +17,7 @@ namespace OWMiniature.Experiments
         {
             base.Enable();
 
-            GlobalMessenger.AddListener(EventUtils.EnterMapView, Trigger);
+            //GlobalMessenger.AddListener(EventUtils.EnterMapView, Trigger);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, Trigger);
 
             EventUtils.MarkerInit += OnMarkerInit;
@@ -22,7 +25,7 @@ namespace OWMiniature.Experiments
 
         private void OnMarkerInit(CanvasMapMarkerInitEvent ev)
         {
-            if (ev.Marker.name != _mapMarker.name)
+            if (ev.Marker.gameObject != _mapMarker.gameObject)
                 return;
 
             ev.Label = "XENDED-191116";
@@ -33,7 +36,7 @@ namespace OWMiniature.Experiments
         {
             base.Disable();
 
-            GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
+            //GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, Trigger);
 
             EventUtils.MarkerInit -= OnMarkerInit;
@@ -44,7 +47,7 @@ namespace OWMiniature.Experiments
         {
             GameObject ship = GameObject.Find("Ship_Body");
             GameObject obj = new GameObject("TEST");
-
+            
             // This is important as to not trigger any Awake() methods before setup.
             obj.SetActive(false);
 
@@ -53,46 +56,62 @@ namespace OWMiniature.Experiments
             _mapMarker._labelID = UITextType.LocationPlayer_Cap;
 
             AddCollider(obj);
-            AddRigidbody(obj);
 
-            OWRigidbody owr = AddOWRigidbody(obj);
+            Rigidbody body = AddRigidbody(obj);
+            OWRigidbody owr = AddCustomRigidbody(obj, body);
             ReferenceFrameVolume rf = AddReferenceFrame(obj);
+            CenterOfTheUniverseOffsetApplier offset = obj.AddComponent<CenterOfTheUniverseOffsetApplier>();
 
+            offset._body = owr;
+            rf._attachedOWRigidbody = owr;
             rf._referenceFrame = new ReferenceFrame(owr);
             rf._referenceFrame._bracketsRadius = 8;
-
-            rf._attachedOWRigidbody = owr;
 
             obj.transform.position = ship.transform.position + Vector3.right * 2000;
 
             // We can now re-enable the object as everything is setup correctly.
             obj.SetActive(true);
+            body.velocity = Vector3.zero;
         }
 
-        private static OWRigidbody AddOWRigidbody(GameObject obj)
+        private static OWRigidbody AddCustomRigidbody(GameObject obj, Rigidbody rb)
         {
-            OWRigidbody body = obj.AddComponent<OWRigidbody>();
 
-            body._isTargetable = true;
-            body.tag = "Ship";
+            OWRigidbody owr = obj.AddComponent<OWRigidbody>();
+            KinematicRigidbody krb = obj.AddComponent<KinematicRigidbody>();
 
-            return body;
+            owr._rigidbody = rb;
+            owr._kinematicRigidbody = krb;
+            owr._origParent = MapUtils.SolarSystemRoot.transform;
+            owr._maintainOriginalCenterOfMass = true;
+            owr._autoGenerateCenterOfMass = true;
+            owr._kinematicSimulation = true;
+            owr._isTargetable = true;
+            owr.tag = "Ship";
+
+            owr.MakeKinematic();
+            owr.EnableKinematicSimulation();
+
+            return owr;
         }
 
         private static Rigidbody AddRigidbody(GameObject obj)
         {
             Rigidbody body = obj.AddComponent<Rigidbody>();
 
-            // Values taken from Ship_Body.
+            // Most of these values are taken directly from 'Ship_Body'.
+            body.drag = 0f;
             body.angularDrag = 0.92f;
-            body.centerOfMass = new Vector3(0, -5, 0);
+            body.centerOfMass = new Vector3(0, 0, 0);
             body.inertiaTensor = new Vector3(69.63f, 15.19f, 63.71f);
             body.inertiaTensorRotation = new Quaternion(-0.077f, -0.02f, 0.0042f, 0.9968f);
-
+            
+            body.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            body.interpolation = RigidbodyInterpolation.None;
+            body.isKinematic = true;
             body.useGravity = false;
             body.tag = "Ship";
 
-            body.isKinematic = true;
             return body;
         }
 

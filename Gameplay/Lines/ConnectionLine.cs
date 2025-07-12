@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OWMiniature.Visuals
+namespace OWMiniature.Gameplay.Lines
 {
     public class ConnectionLine : PlanetaryLineBase
     {

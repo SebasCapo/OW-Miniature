@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
-using OWMiniature.Visuals;
 
 using UnityEngine;
 

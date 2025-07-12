@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace OWMiniature.Visuals
+namespace OWMiniature.Gameplay.Lines
 {
     /// <summary>
     /// Component in charge of creating and updating visual lines between planets.
