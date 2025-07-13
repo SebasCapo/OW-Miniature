@@ -1,44 +1,35 @@
-﻿using System.Collections.Generic;
-
-using OWMiniature.Gameplay.Lines;
+﻿using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
 
 using OWML.Common;
 
+using System.Collections.Generic;
+
 using UnityEngine;
 
-namespace OWMiniature.Experiments
+namespace OWMiniature.Gameplay.Interactables
 {
-    public class PlanetConnectionExperiment : ExperimentBase
+    public class ConnectionsMap : MapInteractableBase
     {
-        private const string LineObjectDefaultName = "Custom OrbitLine";
-
-        /// <inheritdoc />
-        public override bool IsEnabled => false;
-
+        private const string LineObjectDefaultName = "PlanetaryLine";
         private readonly List<PlanetaryLineBase> _lines = new List<PlanetaryLineBase>();
 
         /// <inheritdoc />
-        internal override void Enable()
-        {
-            base.Enable();
+        public override CustomMapMode MapMode => CustomMapMode.Connections;
 
-            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, OnTargetSelect);
-            GlobalMessenger.AddListener(EventUtils.ExitMapView, Trigger);
+        /// <inheritdoc />
+        protected override void OnEnterMapView()
+        {
+            base.OnEnterMapView();
+
+
         }
 
         /// <inheritdoc />
-        internal override void Disable()
+        protected override void OnExitMapView()
         {
-            base.Disable();
+            base.OnExitMapView();
 
-            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, OnTargetSelect);
-            GlobalMessenger.RemoveListener(EventUtils.ExitMapView, Trigger);
-        }
-
-        /// <inheritdoc />
-        public override void Trigger()
-        {
             _lines.Clear();
         }
 
@@ -53,7 +44,6 @@ namespace OWMiniature.Experiments
                 return;
             }
 
-            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", MessageType.Success);
         }
 
         private void SelectFrame(ReferenceFrame frame)
@@ -88,7 +78,7 @@ namespace OWMiniature.Experiments
                 _lines.Add(selection);
                 return;
             }
-            
+
             ConnectionLine connection = lineObj.AddComponent<ConnectionLine>();
             PlanetaryLineBase previousLine = _lines[_lines.Count - 1];
 

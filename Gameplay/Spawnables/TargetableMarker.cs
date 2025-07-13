@@ -23,7 +23,7 @@ namespace OWMiniature.Gameplay.Spawnables
         /// <summary>
         /// The radius of the marker.
         /// </summary>
-        public float Radius { get; set; }
+        public float Radius { get; set; } = 700f;
 
         /// <inheritdoc />
         protected override void Start()

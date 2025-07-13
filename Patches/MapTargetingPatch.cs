@@ -5,7 +5,7 @@ using OWMiniature.Utils;
 namespace OWMiniature.Patches
 {
     [HarmonyPatch]
-    public class ForceTargetingPatch
+    public class MapTargetingPatch
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(ReferenceFrameTracker), nameof(ReferenceFrameTracker.Update))]

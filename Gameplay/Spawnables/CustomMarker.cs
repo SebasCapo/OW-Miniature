@@ -18,6 +18,16 @@ namespace OWMiniature.Gameplay.Spawnables
         public string Label { get; set; } = string.Empty;
 
         /// <summary>
+        /// The <see cref="CustomMapMode"/> assigned to this marker.
+        /// </summary>
+        public CustomMapMode MapMode { get; set; } = CustomMapMode.None;
+
+        /// <summary>
+        /// Indicates whether this marker is visible only when the specified <see cref="MapMode"/> is active.
+        /// </summary>
+        public bool MapModeExclusive { get; set; } = true;
+
+        /// <summary>
         /// The <see cref="global::MapMarker"/> instance used by this component.
         /// </summary>
         protected MapMarker MapMarker { get; private set; }
@@ -26,6 +36,7 @@ namespace OWMiniature.Gameplay.Spawnables
         protected virtual void Awake()
         {
             EventUtils.MarkerInit += OnMarkerInit;
+            GlobalMessenger.AddListener(EventUtils.EnterMapView, OnEnterMapView);
         }
 
         /// <inheritdoc />
@@ -40,6 +51,7 @@ namespace OWMiniature.Gameplay.Spawnables
         protected virtual void OnDestroy()
         {
             EventUtils.MarkerInit -= OnMarkerInit;
+            GlobalMessenger.RemoveListener(EventUtils.EnterMapView, OnEnterMapView);
         }
 
         private void OnMarkerInit(CanvasMapMarkerInitEvent ev)
@@ -48,6 +60,21 @@ namespace OWMiniature.Gameplay.Spawnables
                 return;
 
             ev.Label = Label;
+        }
+
+        protected virtual void OnEnterMapView()
+        {
+            //if (!MapModeExclusive)
+            //{
+            //    // Don't think this will happen, but if we were to toggle "MapModeExclusive" after it was disabled
+            //    // it wouldn't get re-enabled again, so adding this to avoid any issues.
+            //    if (!MapMarker.enabled)
+            //        MapMarker.enabled = true;
+
+            //    return;
+            //}
+
+            //MapMarker.enabled = MapUtils.CustomMap == MapMode;
         }
     }
 }

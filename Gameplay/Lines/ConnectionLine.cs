@@ -4,6 +4,8 @@ namespace OWMiniature.Gameplay.Lines
 {
     public class ConnectionLine : PlanetaryLineBase
     {
+        private const int DefaultVertices = 15;
+
         /// <summary>
         /// The target position at which the line will be pointing at.
         /// </summary>
@@ -14,6 +16,9 @@ namespace OWMiniature.Gameplay.Lines
 
         /// <inheritdoc />
         public override Color EndColor => Color.cyan;
+
+        /// <inheritdoc />
+        public override float LineWidth { get; set; } = 45f;
 
         /// <inheritdoc />
         public override bool UseWorldspace => true;
@@ -29,10 +34,18 @@ namespace OWMiniature.Gameplay.Lines
         }
 
         /// <inheritdoc />
+        protected override void CreateLine()
+        {
+            base.CreateLine();
+
+            Line.numCapVertices = DefaultVertices;
+        }
+
+        /// <inheritdoc />
         protected override void OnUpdate()
         {
-            Line.SetPosition(0, _cachedTransform.position);
-            Line.SetPosition(1, TargetPosition.position);
+            Line.SetPosition(1, _cachedTransform.position);
+            Line.SetPosition(0, TargetPosition.position);
         }
     }
 }

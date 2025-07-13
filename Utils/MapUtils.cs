@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay;
+using OWMiniature.Gameplay.Interactables;
 using OWMiniature.Gameplay.Lines;
+using OWMiniature.Gameplay.Spawnables;
 
 using UnityEngine;
 
@@ -14,6 +17,20 @@ namespace OWMiniature.Utils
         private const float CustomZoomDuration = 1f;
 
         public static Dictionary<ReferenceFrame, PlanetaryLineBase> Lines { get; } = [];
+
+        public static CustomMapMode CustomMap
+        {
+            get
+            {
+                foreach (MapInteractableBase map in MapInteractableBase.Instances)
+                {
+                    if (map.IsOpen)
+                        return map.MapMode;
+                }
+
+                return CustomMapMode.None;
+            }
+        }
 
         /// <summary>
         /// Easy access to the global <see cref="global::MapController"/>.
@@ -131,6 +148,14 @@ namespace OWMiniature.Utils
 
             line = value;
             return true;
+        }
+
+        public static bool IsMarkerActive(this TargetableMarker marker)
+        {
+            if (!marker.MapModeExclusive)
+                return true;
+
+            return marker.MapMode == CustomMap;
         }
 
         /// <summary>

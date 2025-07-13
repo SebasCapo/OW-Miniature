@@ -12,6 +12,11 @@ namespace OWMiniature.Gameplay.Lines
         /// <inheritdoc />
         public override Color EndColor => Color.yellow.WithAlpha(0f);
 
+        /// <summary>
+        /// How many positions the <see cref="LineRenderer"/> will be at.
+        /// </summary>
+        public virtual float LineHeight { get; set; } = 1350f;
+
         /// <inheritdoc />
         protected override void CreateLine()
         {

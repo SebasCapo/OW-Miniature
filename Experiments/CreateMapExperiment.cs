@@ -41,7 +41,7 @@ namespace OWMiniature.Experiments
                 obj.transform.position = ship.transform.position;
             }
 
-            obj.AddComponent<TestMap>();
+            obj.AddComponent<ConnectionsMap>();
 
             var capsule = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Object.Destroy(capsule.GetComponent<SphereCollider>());
