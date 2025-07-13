@@ -40,6 +40,8 @@ public class OWMiniature : ModBehaviour
         NewHorizons.LoadConfigs(this);
 
         ExperimentManager.Setup();
+        TargetTrackingHandler.Register();
+
         new Harmony("Ender.OW-Miniature").PatchAll(Assembly.GetExecutingAssembly());
 
         // Example of accessing game code.
