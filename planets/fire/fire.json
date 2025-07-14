@@ -1,6 +1,6 @@
 ﻿{
     "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
-    "name": "Amph",
+    "name": "Molten Fury",
     "starSystem": "Jam5",
     "Base": {
         "groundSize": 101,
@@ -8,11 +8,11 @@
         "surfaceGravity": 12
     },
     "Orbit": {
-        "semiMajorAxis": 1100,
-        "primaryBody": "Berylliant Giant"
+        "semiMajorAxis": 900,
+        "primaryBody": "Bright Spark"
     },
     "Atmosphere": {
-        "size": 300,
+        "size": 200,
         "fogTint": {
             "r": 200,
             "g": 200,
@@ -25,7 +25,7 @@
         "clouds": {
             "outerCloudRadius": 150,
             "innerCloudRadius": 125,
-            "texturePath": "planets/textures/cloudtest.png",
+            "texturePath": "assets/textures/cloudtest.png",
             "tint":
             {
                 "r" : 190,

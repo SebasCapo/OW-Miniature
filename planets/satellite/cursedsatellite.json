@@ -3,11 +3,11 @@
 	"name": "Quantum Satellite",
 	"starSystem": "Jam5",
 	"Base": {
-		"surfaceSize": 50
+		"surfaceSize": 100
 	},
 	"Orbit": {
 		"semiMajorAxis": 2300,
-		"primaryBody": "Berylliant Giant",
+		"primaryBody": "Bright Spark",
 		"siderealPeriod": 2,
 		"axialTilt": 0.5,
 		"inclination": 90,
@@ -20,19 +20,25 @@
     "Props":{
         "details": [
             {
-                "path": "GiantsDeep_Body/Sector_GD/Sector_GDInterior/Jellyfish_GDInterior/Jellyfish_Pivot/Jellyfish_Body/Beast_GD_Jellyfish_v4"
+                "rename": "QuantumSatellite",
+                "path": "HearthianMapSatellite_Body/Sector_HearthianMapSatellite/Geometry_HearthianMapSatellite"
             }
         ],
         "signals": [
             {
                 "audio": "QuantumAmbience_LP",
                 "detectionRadius": 100000.0,
-                "frequency": "Traveler",
+                "frequency": "ENDER_TEST",
                 "identificationRadius": 100.0,
-                "name": "Probe Test",
+                "name": "Satellite",
                 "position": {"x": 0, "y": 0, "z": 0},
-                "sourceRadius": 10.0
+                "sourceRadius": 10.0,
+                "reveals": "ENDER_TEST_EXPLORE_FACT_2",
+                "parentPath": "QuantumSatellite"
             }
         ]
+    },
+    "ShipLog": {
+        "xmlFile": "planets/shiplog/cursedsatellite.xml"
     }
 }

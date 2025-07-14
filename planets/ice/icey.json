@@ -1,0 +1,132 @@
+﻿{
+    "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+    "name": "Distant Shoulder",
+    "starSystem": "Jam5",
+    "Base": {
+        "groundSize": 50,
+        "surfaceSize": 60,
+        "surfaceGravity": 12
+    },
+    
+    "Orbit": {
+        "semiMajorAxis": 1800,
+        "primaryBody": "Bright Spark"
+    },
+
+    "Atmosphere": {
+        "size": 100,
+        "fogTint": {
+            "r": 190,
+            "g": 225,
+            "b": 192,
+            "a": 128
+        },
+        "fogSize": 200,
+        "fogDensity": 0.2,
+        "hasRain": false
+    },
+
+    "MapMarker": {
+        "enabled": true
+    },
+
+    "HeightMap" :
+	{
+	    "heightMap" : "assets/textures/iceheight.png",	
+        "textureMap": "assets/textures/icetest.png",
+	    "minHeight" : 71,
+		"maxHeight" : 80
+	},
+
+    "Props": {
+        "scatter": [
+            {
+                "path": "DreamWorld_Body/Sector_DreamWorld/Sector_DreamZone_1/Props_DreamZone_1/OtherComponentsGroup/Trees_Z1/DreamHouseIsland/Tree_DW_M_Var",
+                "count": 12
+            }
+        ],
+        "details": [
+            {
+                "rename": "IceRecorder",
+                "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
+                "position": {"x": -54.38809, "y": -23.97603, "z": 44.96029},
+                "rotation": {"x": 70.82868, "y": 111.1416, "z": 158.5766}
+            },
+            {
+                "rename": "Toy",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
+                "position": {"x": -51.66012, "y": -41.05832, "z": 36.03502},
+                "rotation": {"x": 316.0674, "y": 356.6983, "z": 136.7351}
+            }
+        ],
+        "dialogue" :
+		[
+			{
+                "position": {"x": -54.38809, "y": -23.97603, "z": 44.96029},
+				"range": 4,
+				"isRelativeToParent": true,
+				"xmlFile" : "assets/dialogue/TestDialogue.xml"
+			}
+        ],
+            "signals": [
+                {
+                "audio": "Sun_Collapse",
+                "parentPath": "Sector/IceRecorder",
+                "isRelativeToParent": true,
+                "name": "Ice Recorder",
+                "frequency": "ENDER_TEST",
+                "onlyAudibleToScope": false,
+                "volume": 1,
+                "maxDistance": 20,
+                "minDistance": 5,
+                "sourceRadius": 5,
+                "detectionRadius": 55,
+                "reveals": "ENDER_TEST_RUMOR_FACT_3"
+            }
+        ],
+        "translatorText":[
+            {
+                "position": {"x": -52.40792, "y": -35.62379, "z": 38.87939},
+                "rotation": {"x": 43.03547, "y": 65.68145, "z": 129.4987},
+				"xmlFile": "assets/nomai/WallText.xml",
+				"type": "scroll",
+				"seed": 12,
+				"arcInfo":[
+					{ "type": "adult" },
+					{ "type": "adult" },
+					{ "type": "adult" },
+                    { "type": "child" },
+					{ "type": "adult" }
+				],
+				"alignRadial": true
+			},
+            {
+                "rename": "Board",
+                "type": "whiteboard",
+                "position": {"x": -52.66012, "y": -39.05832, "z": 35.03502},
+                "rotation": {"x": 316.0674, "y": 356.6983, "z": 136.7351}
+            }
+        ]
+    },
+    
+    	"Spawn": {
+            "playerSpawnPoints": [
+            {
+                "position": {"x": -54.94806, "y": -24.55006, "z": 46.41127},
+                "startWithSuit": true,
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN",
+                "alignRadial": true
+            }
+        ],
+        "shipSpawnPoints": [
+            {
+                "position": {"x": -63.45527, "y": -28.14703, "z": 27.61709},
+                "rotation": {"x": 57.98199, "y": 63.83078, "z": 134.7893},
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN"
+            }
+        ]
+    },
+    "ShipLog": {
+        "xmlFile": "planets/shiplog/icey.xml"
+    }
+}

@@ -9,8 +9,8 @@
   "Props": {
     "details": [
       {
-        "rename": "Treepot",
-        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Props_VesselDimension/Prefab_NOM_NomaiTree_VarDRY_3/GEO_Treepot_3",
+        "rename": "ShatteredCrystal",
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
         "position": {
           "x": 0,
           "y": 0,
@@ -21,12 +21,23 @@
           "y": 0,
           "z": 0
         }
-      },
-      {
-        "path": "WhiteholeStation_Body/Sector_WhiteholeStation/Props_WhiteHoleStation/Prefab_NOM_NomaiTree_Var_2/GEO_NomaiTree_1_Trunk",
-        "parentPath": "Sector/Treepot",
-        "isRelativeToParent": true
       }
+    ],
+    "signals": [
+        {
+				"audio": "Sun_Collapse",
+				"parentPath": "Sector/ShatteredCrystal",
+				"isRelativeToParent": true,
+				"name": "Test",
+				"frequency": "ENDER_TEST",
+				"onlyAudibleToScope": false,
+				"volume": 1,
+				"maxDistance": 20,
+				"minDistance": 5,
+				"sourceRadius": 5,
+        "detectionRadius": 55,
+        "reveals": "ENDER_TEST_EXPLORE_FACT_1"
+			}
     ]
   }
 }

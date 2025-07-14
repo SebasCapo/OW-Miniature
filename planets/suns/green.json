@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Blue",
+  "starSystem": "Jam5",
+  "removeChildren": [ "Sector/Star/Audio_Star/SurfaceAudio_Sun" ],
+  "Base": {
+    "gravityFallOff": "inverseSquared",
+    "surfaceSize": 100,
+    "surfaceGravity": 10
+  },
+  "Orbit": {
+    "semiMajorAxis": 100,
+    "primaryBody": "Bright Spark",
+    "initialRotation": 0,
+    "trueAnomaly": 240
+  },
+  "Star": {
+    "stellarDeathType": "supernova",
+    "size": 10,
+    "solarLuminosity": 1,
+    "lightTint": {
+      "r": 255,
+      "g": 250,
+      "b": 240
+    },
+    "tint": {
+      "r": 25,
+      "g": 250,
+      "b": 25
+    },
+    "supernovaSize": 2400,
+    "supernovaSpeed": 200
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplog/AuthorModSystem.xml",
+    "spriteFolder": "planets/shiplog/sprites"
+  },
+  "MapMarker": {
+      "enabled": true
+  }
+}
