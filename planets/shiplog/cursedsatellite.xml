@@ -1,0 +1,31 @@
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+
+ <!-- "Quantum Satellite" test entry -->
+ <ID>cursedsatellite</ID>
+  <Entry>
+    <ID>ENDER_TEST_ROOT</ID>
+    <Name>Test</Name>
+    <Curiosity>ENDER_TEST_CURIOSITY</Curiosity>
+    <IsCuriosity/>
+    <IgnoreMoreToExplore/>
+
+    <RumorFact>
+      <ID>ENDER_TEST_RUMOR_FACT</ID>
+      <RumorName>Satellite</RumorName>
+      <Text>help.</Text>
+    </RumorFact>
+
+    <!-- crystal demo entry -->
+    <ExploreFact>
+      <ID>ENDER_TEST_EXPLORE_FACT_1</ID>
+      <Text>test 1.</Text>
+    </ExploreFact>
+
+    <!-- Satellite itself demo entry -->
+    <ExploreFact>
+      <ID>ENDER_TEST_EXPLORE_FACT_2</ID>
+      <Text>test 2!</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>
