@@ -19,19 +19,5 @@ namespace OWMiniature.Gameplay.Lines
                 door.Close(null);
             }
         }
-
-        public void SetOpenState(bool isOpen)
-        {
-            foreach (NomaiMultiPartDoor door in Doors)
-            {
-                if (isOpen)
-                {
-                    door.Open(null);
-                    continue;
-                }
-
-                door.Close(null);
-            }
-        }
     }
 }
