@@ -18,6 +18,7 @@ namespace OWMiniature.Experiments
         /// </summary>
         public ExperimentManager()
         {
+#if DEBUG
             Experiments.Clear();
             Type[] assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -33,6 +34,7 @@ namespace OWMiniature.Experiments
 
                 Experiments.Add(experiment);
             }
+#endif
         }
 
         public void Setup()

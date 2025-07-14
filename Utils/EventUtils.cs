@@ -1,4 +1,8 @@
-﻿namespace OWMiniature.Utils
+﻿using System;
+
+using OWMiniature.Utils.Events;
+
+namespace OWMiniature.Utils
 {
     /// <summary>
     /// Static class that holds every event we may need to use, for easy access.
@@ -19,5 +23,17 @@
         /// Triggered whenever the map is closed.
         /// </summary>
         public const string ExitMapView = "ExitMapView";
+
+        /// <summary>
+        /// Triggered whenever the observatory map is opened.
+        /// </summary>
+        public const string TriggerObservatoryMap = "TriggerObservatoryMap";
+
+        /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
+        public static event Action<CanvasMapMarkerInitEvent> MarkerInit;
+
+        /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
+        /// <remarks>This method allows remotely triggering this event.</remarks>
+        internal static void InvokeRemotely(this CanvasMapMarkerInitEvent ev) => MarkerInit?.Invoke(ev);
     }
 }
