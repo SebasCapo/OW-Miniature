@@ -21,8 +21,7 @@
     "size": 0.01,
     "solarLuminosity": 1,
     "supernovaSize": 2400,
-    "supernovaSpeed": 200,
-    "lifespan": 3
+    "supernovaSpeed": 200
   },
   "MapMarker": {
       "enabled": true

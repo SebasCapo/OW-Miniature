@@ -29,8 +29,7 @@
       "b": 250
     },
     "supernovaSize": 2400,
-    "supernovaSpeed": 200,
-    "lifespan": 10
+    "supernovaSpeed": 200
   },
   "ShipLog": {
     "xmlFile": "planets/shiplog/AuthorModSystem.xml",
