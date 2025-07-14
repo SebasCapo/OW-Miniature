@@ -22,13 +22,15 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.OnEnterMapView();
 
-
+            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, OnTargetSelect);
         }
 
         /// <inheritdoc />
         protected override void OnExitMapView()
         {
             base.OnExitMapView();
+
+            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, OnTargetSelect);
 
             _lines.Clear();
         }
@@ -38,17 +40,15 @@ namespace OWMiniature.Gameplay.Interactables
             if (frame == null)
                 return;
 
-            if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
-            {
-                SelectFrame(frame);
+            if (MapUtils.TryGetLine(frame, out ConnectionLine selector))
                 return;
-            }
 
+            SelectFrame(frame);
         }
 
-        private void SelectFrame(ReferenceFrame frame)
+        private bool TryGetTarget(ReferenceFrame frame, out Transform attachedObject)
         {
-            Transform attachedObject;
+            attachedObject = default;
 
             if (frame._attachedAstroObject != null)
             {
@@ -61,8 +61,20 @@ namespace OWMiniature.Gameplay.Interactables
             else
             {
                 OWMiniature.Console.WriteLine("A target was selected that isn't attached to neither an AstroObject or OWRigidbody.", MessageType.Warning);
-                return;
+                return false;
             }
+
+            // We don't want to add a line to an object that already has it.
+            if (attachedObject.TryGetComponent(out PlanetaryLineBase _))
+                return false;
+
+            return true;
+        }
+
+        private void SelectFrame(ReferenceFrame frame)
+        {
+            if (!TryGetTarget(frame, out Transform attachedObject))
+                return;
 
             GameObject lineObj = new GameObject(LineObjectDefaultName);
             Transform lineTransform = lineObj.transform;

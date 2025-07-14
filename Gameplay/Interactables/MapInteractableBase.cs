@@ -16,7 +16,7 @@ namespace OWMiniature.Gameplay.Interactables
         /// <summary>
         /// The range at which the player must be to interact with this object.
         /// </summary>
-        public virtual float InteractRange => 1f;
+        public virtual float InteractRange => 1.45f;
 
         /// <summary>
         /// The size of the interactable.
