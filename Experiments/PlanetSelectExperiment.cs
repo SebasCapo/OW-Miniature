@@ -39,20 +39,20 @@ namespace OWMiniature.Experiments
             if (frame == null)
                 return;
 
-            if (!MapUtils.Lines.TryGetValue(frame, out PlanetaryLineBase selector))
-            {
-                GameObject lineObj = new GameObject("Custom OrbitLine");
-                AstroObject astroObject = frame._attachedAstroObject;
-                Transform lineTransform = lineObj.transform;
+            //if (!MapUtils.Lines.TryGetValue(frame, out PlanetaryLineBase selector))
+            //{
+            //    GameObject lineObj = new GameObject("Custom OrbitLine");
+            //    AstroObject astroObject = frame._attachedAstroObject;
+            //    Transform lineTransform = lineObj.transform;
 
-                lineTransform.SetParent(astroObject.transform);
-                lineTransform.localPosition = Vector3.zero;
+            //    lineTransform.SetParent(astroObject.transform);
+            //    lineTransform.localPosition = Vector3.zero;
 
-                selector = lineObj.AddComponent<SelectionLine>();
-                selector.Assign(astroObject.transform, frame);
-            }
+            //    selector = lineObj.AddComponent<SelectionLine>();
+            //    selector.Assign(astroObject.transform, frame);
+            //}
 
-            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", OWML.Common.MessageType.Success);
+            //OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", OWML.Common.MessageType.Success);
         }
     }
 }

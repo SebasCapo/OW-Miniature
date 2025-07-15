@@ -55,6 +55,20 @@ namespace OWMiniature.Gameplay.Lines
         public virtual bool UseWorldspace { get; } = false;
 
         /// <summary>
+        /// Whether the line will be destroyed upon exiting the map.
+        /// </summary>
+        public virtual bool DestroyLineOnMapExit { get; set; } = true;
+
+        /// <summary>
+        /// Indicates whether this line is currently visible.
+        /// </summary>
+        public bool IsVisible
+        {
+            get => Line.enabled;
+            set => Line.enabled = value;
+        }
+
+        /// <summary>
         /// Indicates whether this line was initialized and assigned.
         /// </summary>
         protected bool IsAssigned { get; private set; }
@@ -63,7 +77,7 @@ namespace OWMiniature.Gameplay.Lines
         /// Assigns this <see cref="PlanetaryLineBase"/> instance to the specified
         /// <see cref="AstroObject"/> and <see cref="ReferenceFrame"/>.
         /// </summary>
-        public void Assign(Transform attachedObject, ReferenceFrame frame)
+        public void Assign(Transform attachedObject)
         {
             /**
              * Astro Objects tend to have their <see cref="RefFrame"/>
@@ -72,11 +86,9 @@ namespace OWMiniature.Gameplay.Lines
              * So we mostly need to fetch everything from its children <see cref="GameObject"/>.
              */
             AttachedObject = attachedObject;
-            RefFrame = frame;
-
-            MapUtils.Lines[frame] = this;
             IsAssigned = true;
 
+            MapUtils.Lines.Add(this);
             CreateLine();
         }
 
@@ -96,7 +108,7 @@ namespace OWMiniature.Gameplay.Lines
             Line.loop = false;
 
             Line.positionCount = PositionCount;
-            Line.colorGradient = GenerateGradient(StartColor, EndColor);
+            Line.colorGradient = VisualUtils.GenerateGradient(StartColor, EndColor);
             //Line.startColor = StartColor;
             //Line.endColor = EndColor;
 
@@ -113,7 +125,7 @@ namespace OWMiniature.Gameplay.Lines
         {
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, TerminateLine);
 
-            MapUtils.Lines.Remove(RefFrame);
+            MapUtils.Lines.Remove(this);
         }
 
         /// <inheritdoc />
@@ -128,34 +140,10 @@ namespace OWMiniature.Gameplay.Lines
             OnUpdate();
         }
 
-        private void TerminateLine() =>
-            Destroy(gameObject);
-
-        public static Gradient GenerateGradient(Color startColor, Color endColor)
+        private void TerminateLine()
         {
-            Gradient gradient = new Gradient();
-
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].time = 0f;
-            colorKeys[0].color = startColor;
-
-            colorKeys[1].time = 1f;
-            colorKeys[1].color = endColor;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[3];
-            alphaKeys[0].time = 0f;
-            alphaKeys[0].alpha = 1f;
-
-            alphaKeys[1].time = .85f;
-            alphaKeys[1].alpha = 1f;
-
-            alphaKeys[2].time = 1f;
-            alphaKeys[2].alpha = .0f;
-
-            gradient.colorKeys = colorKeys;
-            gradient.alphaKeys = alphaKeys;
-
-            return gradient;
+            if (DestroyLineOnMapExit)
+                Destroy(gameObject);
         }
     }
 }

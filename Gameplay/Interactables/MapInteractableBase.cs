@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
+
+using OWML.Common;
 
 using UnityEngine;
 
@@ -11,6 +14,8 @@ namespace OWMiniature.Gameplay.Interactables
     /// </summary>
     public abstract class MapInteractableBase : MonoBehaviour
     {
+        protected const string LineObjectDefaultName = "PlanetaryLine";
+
         public static readonly List<MapInteractableBase> Instances = new List<MapInteractableBase>();
 
         /// <summary>
@@ -40,6 +45,11 @@ namespace OWMiniature.Gameplay.Interactables
         /// </summary>
         public bool IsOpen { get; private set; }
 
+        /// <summary>
+        /// The <see cref="PlanetaryLineBase">lines</see> created by this <see cref="MapInteractableBase"/>.
+        /// </summary>
+        protected readonly List<PlanetaryLineBase> Lines = new List<PlanetaryLineBase>();
+
         private InteractReceiver _interactVolume;
         private SphereCollider _sphereCollider;
 
@@ -62,6 +72,8 @@ namespace OWMiniature.Gameplay.Interactables
             _interactVolume.OnPressInteract += OnPressInteract;
             GlobalMessenger.AddListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, ExitMapView);
+
+            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
         }
 
         /// <inheritdoc />
@@ -79,6 +91,8 @@ namespace OWMiniature.Gameplay.Interactables
             GlobalMessenger.RemoveListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, ExitMapView);
 
+            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
+
             Instances.Remove(this);
         }
 
@@ -95,12 +109,25 @@ namespace OWMiniature.Gameplay.Interactables
         /// <summary>
         /// 
         /// </summary>
+        protected virtual void OnTargetSelect(ReferenceFrame frame, Transform attachedObject) { }
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void OnPressInteract()
         {
             IsOpen = true;
 
             MapUtils.OpenMap();
             _interactVolume.ResetInteraction();
+        }
+
+        private void TargetSelect(ReferenceFrame frame)
+        {
+            if (!TryGetTarget(frame, out Transform attachedObject))
+                return;
+
+            OnTargetSelect(frame, attachedObject);
         }
 
         private void EnterMapView()
@@ -121,8 +148,34 @@ namespace OWMiniature.Gameplay.Interactables
             // But we don't have time for that!
             MapUtils.ForceTargeting = false;
             IsOpen = false;
+            Lines.Clear();
 
             OnExitMapView();
+        }
+
+        private bool TryGetTarget(ReferenceFrame frame, out Transform attachedObject)
+        {
+            attachedObject = default;
+
+            if (frame._attachedAstroObject != null)
+            {
+                attachedObject = frame._attachedAstroObject.transform;
+            }
+            else if (frame._attachedOWRigidbody != null)
+            {
+                attachedObject = frame._attachedOWRigidbody.transform;
+            }
+            else
+            {
+                OWMiniature.Console.WriteLine("A target was selected that isn't attached to neither an AstroObject or OWRigidbody.", MessageType.Warning);
+                return false;
+            }
+
+            // We don't want to add a line to an object that already has it.
+            if (attachedObject.TryGetComponent(out PlanetaryLineBase _))
+                return false;
+
+            return true;
         }
     }
 }
