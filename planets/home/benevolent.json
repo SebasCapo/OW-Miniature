@@ -3,7 +3,7 @@
     "name": "Benevolent Reprieve",
     "starSystem": "Jam5",
     "Base": {
-        "groundSize": 370,
+        "groundSize": 0,
         "surfaceSize": 440,
         "surfaceGravity": 23
     },

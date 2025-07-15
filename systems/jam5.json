@@ -4,9 +4,37 @@
   "initialReveal": [
     "AUTHOR_MOD_SYSTEM_EXPLORE_FACT"
   ],
+  	"Vessel": {
+    "hasPhysics": false,
+    "alwaysPresent": true,
+    "vesselSpawn": {
+      "parentBody": "Bright Spark",
+      "isRelativeToParent": true,	
+      "position": {
+        "x": 0,
+        "y": 1000,
+        "z": 0
+      }
+    }
+	},
   "curiosities": [
     {
       "id": "AUTHOR_MOD_CURIOSITY",
+      "color": {
+        "r": 240,
+        "g": 150,
+        "b": 150,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 240,
+        "g": 180,
+        "b": 180,
+        "a": 255
+      }
+    },
+    {
+      "id": "ENDER_TEST_CURIOSITY",
       "color": {
         "r": 240,
         "g": 150,
