@@ -14,10 +14,10 @@
         "semiMajorAxis": 2300,
         "siderealPeriod": 2,
         "axialTilt": 0.5,
-        "inclination": 55,
-        "showOrbitLine": true,
+        "inclination": 45,
+        "showOrbitLine": false,
         "dottedOrbitLine": true,
-        "trueAnomaly": 300,
+        "trueAnomaly": 0,
     },
     "Volumes": {
         "zeroGravityVolumes": [

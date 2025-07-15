@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
 
 using UnityEngine;
@@ -9,11 +10,23 @@ namespace OWMiniature.Gameplay.Wrappers
     public class EnergyReplicator : MonoBehaviour
     {
         private const float MaxAngularVelocity = 0.75f;
+        private const float RayActivationThreshold = 8f;
+        private const float AngleThreshold = 0.15f;
+        private const float MaxRotationAngle = 180f;
+        private const float ShootingPosOffset = 20f;
+        private const float RaySpeed = 0.25f;
+        private const float LineWidth = 15f;
+
+        public static readonly List<EnergyReplicator> Instances = new List<EnergyReplicator>();
+
+        private static Color StartColor = new Color(0.15f, 0.15f, 1f, 0.8f);
+        private static Color EndColor = new Color(0.15f, 0.15f, 1f, 0.05f);
 
         public KinematicRigidbody Rigidbody { get; set; }
 
-        public Vector3 ShootingPosition => _cachedTransform.position + Forward * 20f;
+        public Transform ShootingPosition { get; private set; }
         public Vector3 Forward => _cachedTransform.right;
+        private ConnectionLine Line { get; set; }
 
         private Vector3 _cachedAngularVelocity;
         private Transform _cachedTransform;
@@ -36,8 +49,13 @@ namespace OWMiniature.Gameplay.Wrappers
             _target = target;
             _hasTarget = target != null;
 
+            Line.TargetPosition = target;
+            Line.LerpValue = 0f;
+            Line.LerpSpeed = _hasTarget ? RaySpeed : 0f;
+
             if (!_hasTarget)
             {
+                Line.IsVisible = false;
                 Rigidbody.angularVelocity = _cachedAngularVelocity;
                 return;
             }
@@ -49,11 +67,53 @@ namespace OWMiniature.Gameplay.Wrappers
         /// <inheritdoc />
         protected void Awake()
         {
-            Rigidbody = GetComponent<KinematicRigidbody>();
             _cachedTransform = transform;
+            Rigidbody = GetComponent<KinematicRigidbody>();
+
+            GameObject shootPos = _cachedTransform.CreateChild(Forward * ShootingPosOffset, "ShootingPos");
+            ShootingPosition = shootPos.transform;
+
+            Line = shootPos.AddComponent<ConnectionLine>();
+            Line.DestroyLineOnMapExit = false;
+            Line.SetColors(StartColor, EndColor);
+            Line.LineWidth = LineWidth;
+            Line.Assign(ShootingPosition);
+
+            Line.TargetPosition = _cachedTransform;
+            Line.IsVisible = false;
+
+            Instances.Add(this);
+
+            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, (f) =>
+            {
+                if (!MapUtils.IsMapOpen)
+                    return;
+
+                OWMiniature.Console.WriteLine($"Target has been locked on.");
+
+                Transform test;
+
+                if (f._attachedAstroObject != null)
+                    test = f._attachedAstroObject.transform;
+                else
+                    test = f._attachedOWRigidbody.transform;
+
+                if (test != null)
+                {
+                    if (test.gameObject.TryGetComponent(out EnergyReplicator energyRep))
+                        test = null;
+                }
+
+                SetTarget(test);
+            });
         }
-        
+
         /// <inheritdoc />
+        protected void OnDestroy()
+        {
+            Instances.Remove(this);
+        }
+
         protected void Update()
         {
             if (!_hasTarget)
@@ -62,10 +122,23 @@ namespace OWMiniature.Gameplay.Wrappers
             Vector3 dir = _target.position - transform.position;
             Vector3 rotAxis = Vector3.Cross(Forward, dir);
             float angle = Vector3.Angle(Forward, dir);
+            bool isRotating = angle > AngleThreshold;
 
-            if (angle > 0.1f)
+            Line.IsVisible = angle <= RayActivationThreshold;
+
+            if (!Line.IsVisible)
             {
-                float rotationSpeed = Mathf.Clamp(angle / 180f * MaxAngularVelocity, 0, MaxAngularVelocity);
+                Line.LerpValue = 0f;
+                Line.LerpSpeed = 0f;
+            }
+            else
+            {
+                Line.LerpSpeed = RaySpeed;
+            }
+
+            if (isRotating)
+            {
+                float rotationSpeed = Mathf.Clamp(angle / MaxRotationAngle * MaxAngularVelocity, 0, MaxAngularVelocity);
                 Rigidbody.angularVelocity = rotAxis.normalized * rotationSpeed;
             }
             else

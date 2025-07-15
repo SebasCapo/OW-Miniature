@@ -78,11 +78,11 @@ namespace OWMiniature.Gameplay.Lines
             if (LerpValue < AnimEnd)
             {
                 LerpValue = Mathf.Clamp01(LerpValue + Time.deltaTime * LerpSpeed);
-                target = Vector3.Lerp(target, origin, LerpValue);
+                target = Vector3.Lerp(origin, target, LerpValue);
             }
 
-            Line.SetPosition(0, target);
-            Line.SetPosition(1, origin);
+            Line.SetPosition(0, origin);
+            Line.SetPosition(1, target);
         }
     }
 }

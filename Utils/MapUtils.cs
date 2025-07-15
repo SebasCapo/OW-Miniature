@@ -84,7 +84,7 @@ namespace OWMiniature.Utils
         /// 
         /// The reason for this is because <see cref="MapController._isMapMode"/> only gets set at the end of the map enabling state.
         /// </remarks>
-        public static bool IsMapOpen => MapController._mapMarkerManager.isActiveAndEnabled || MapController._isMapMode;
+        public static bool IsMapOpen => MapController._isMapMode;
 
         /// <summary>
         /// Whether targeting the map will be forced active.
@@ -137,7 +137,7 @@ namespace OWMiniature.Utils
             GameObject lineObj = new GameObject(objName);
             Transform lineTransform = lineObj.transform;
 
-            lineTransform.SetParent(target, true);
+            lineTransform.SetParent(target, false);
             lineTransform.localPosition = localPos ?? Vector3.zero;
             return lineObj;
         }
