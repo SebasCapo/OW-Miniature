@@ -8,7 +8,8 @@ namespace OWMiniature.Experiments
 {
     public class CustomMarkerExperiment : ExperimentBase
     {
-        public override bool IsEnabled => true;
+        /// <inheritdoc />
+        public override bool IsEnabled => false;
 
         /// <inheritdoc />
         internal override void Enable()
