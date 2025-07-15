@@ -44,16 +44,16 @@ namespace OWMiniature.Experiments
 
         private void OnTargetSelect(ReferenceFrame frame)
         {
-            if (frame == null)
-                return;
+            //if (frame == null)
+            //    return;
 
-            if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
-            {
-                SelectFrame(frame);
-                return;
-            }
+            //if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
+            //{
+            //    SelectFrame(frame);
+            //    return;
+            //}
 
-            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", MessageType.Success);
+            //OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", MessageType.Success);
         }
 
         private void SelectFrame(ReferenceFrame frame)
@@ -84,7 +84,7 @@ namespace OWMiniature.Experiments
             {
                 SelectionLine selection = lineObj.AddComponent<SelectionLine>();
 
-                selection.Assign(attachedObject, frame);
+                selection.Assign(attachedObject);
                 _lines.Add(selection);
                 return;
             }
@@ -93,7 +93,7 @@ namespace OWMiniature.Experiments
             PlanetaryLineBase previousLine = _lines[_lines.Count - 1];
 
             connection.TargetPosition = previousLine.transform;
-            connection.Assign(attachedObject, frame);
+            connection.Assign(attachedObject);
             _lines.Add(connection);
         }
     }

@@ -64,17 +64,17 @@ namespace OWMiniature.Gameplay.Spawnables
 
         protected virtual void OnEnterMapView()
         {
-            //if (!MapModeExclusive)
-            //{
-            //    // Don't think this will happen, but if we were to toggle "MapModeExclusive" after it was disabled
-            //    // it wouldn't get re-enabled again, so adding this to avoid any issues.
-            //    if (!MapMarker.enabled)
-            //        MapMarker.enabled = true;
+            if (!MapModeExclusive)
+            {
+                // Don't think this will happen, but if we were to toggle "MapModeExclusive" after it was disabled
+                // it wouldn't get re-enabled again, so adding this to avoid any issues.
+                if (!MapMarker.enabled)
+                    MapMarker.enabled = true;
 
-            //    return;
-            //}
+                return;
+            }
 
-            //MapMarker.enabled = MapUtils.CustomMap == MapMode;
+            MapMarker.enabled = MapUtils.CustomMap == MapMode;
         }
     }
 }
