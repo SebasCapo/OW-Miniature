@@ -4,6 +4,7 @@ using System.Reflection;
 using HarmonyLib;
 
 using OWMiniature.Experiments;
+using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
 using OWML.Common;
@@ -13,12 +14,14 @@ namespace OWMiniature;
 
 public class OWMiniature : ModBehaviour
 {
-    public static event Action OnUpdate;
+    private const string SolarSystemName = "Jam5";
 
     public static OWMiniature Instance;
     public static IModConsole Console;
     public ExperimentManager ExperimentManager;
     public INewHorizons NewHorizons;
+
+    public static event Action OnLoadComplete;
 
     public void Awake()
     {
@@ -38,6 +41,7 @@ public class OWMiniature : ModBehaviour
         // Get the New Horizons API and load configs
         NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
         NewHorizons.LoadConfigs(this);
+        NewHorizons.GetStarSystemLoadedEvent().AddListener(OnSystemLoaded);
 
         ExperimentManager.Setup();
         TargetTrackingHandler.Register();
@@ -49,14 +53,18 @@ public class OWMiniature : ModBehaviour
         LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
     }
 
-    public void Update()
+    private void OnSystemLoaded(string starSystem)
     {
-        OnUpdate?.Invoke();
+        if (!starSystem.Equals(SolarSystemName))
+            return;
+
+        EnergyReplicator.Generate();
     }
 
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
     {
         MapUtils.ResetCache();
+        PlanetaryUtils.ResetCache();
 
         if (newScene != OWScene.SolarSystem)
             return;
