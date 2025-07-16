@@ -1,0 +1,77 @@
+{
+	"$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+	"name": "Nomai Vessel",
+	"starSystem": "Jam5",
+	"Base": {
+		"surfaceSize": 100
+	},
+	"Orbit": {
+		"semiMajorAxis": 2300,
+		"primaryBody": "Bright Spark",
+		"inclination": 90,
+        "trueAnomaly": 90,
+        "staticPosition": {
+            "x": 0,
+            "y": 1000,
+            "z": 0
+        },
+        "isStatic": true
+	},
+    "MapMarker": {
+		"enabled": false
+	},
+    "Props":{
+        "details": [
+            {
+                "rename": "QuantumSatellite",
+                "path": "HearthianMapSatellite_Body/Sector_HearthianMapSatellite/Geometry_HearthianMapSatellite"
+            },
+            { 
+				"rename": "VesselRecorder",
+                "isRelativeToParent": true,
+				"path" : "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo", 
+                "position": {"x": 11.17003, "y": -6.920934, "z": -21.70194},
+                "rotation": {"x": 0.07074948, "y": 1.081161, "z": 0.1141388}
+			}, 
+            {
+                "rename": "Neem",
+                "isRelativeToParent": true,
+				"path" : "QuantumMoon_Body/Sector_QuantumMoon/State_EYE/Interactables_EYEState/ConversationPivot/Character_NOM_Solanum/Nomai_ANIM_SkyWatching_Idle", 
+				"position": {"x": 9.199162, "y": -6.924936, "z": -21.60563},
+                "rotation": {"x": 0.0, "y": 1, "z": 0.0}
+             }
+        ],
+        "dialogue": [
+			{
+				"position": {"x": 11.17003, "y": -6.920934, "z": -21.70194},
+				"xmlFile" : "assets/dialogue/TestRecorder3.xml"
+			},
+            {
+				"position": {"x": 9.199162, "y": -6.924936, "z": -21.60563},
+                "pathToAnimController": "Sector/Neem",
+                "lookAtRadius" : 10,
+				"xmlFile" : "assets/dialogue/Neem.xml"
+			}
+        ],
+        "warpReceivers": [
+            {
+                "position": {"x": -9.32375, "y": -6.890217, "z": -26.49962},
+                "rotation": {"x": 0, "y": 30.28897, "z": 0},
+                "frequency": "Frequency2"
+            }
+        ]
+    },
+        "Spawn": {
+            "playerSpawnPoints": [
+            {
+                "position": {"x": -0.09818339, "y": -5.890474, "z": -64.54631},
+                "startWithSuit": true,
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_NOMAI",
+                "alignRadial": true
+            }
+        ]
+    },
+    "ShipLog": {
+        "xmlFile": "planets/shiplog/cursedsatellite.xml"
+    }
+}

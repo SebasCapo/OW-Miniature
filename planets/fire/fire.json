@@ -1,0 +1,43 @@
+﻿{
+    "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+    "name": "Molten Fury",
+    "starSystem": "Jam5",
+    "Base": {
+        "groundSize": 101,
+        "surfaceSize": 100,
+        "surfaceGravity": 12
+    },
+    "Orbit": {
+        "semiMajorAxis": 900,
+        "primaryBody": "Bright Spark"
+    },
+    "Atmosphere": {
+        "size": 200,
+        "fogTint": {
+            "r": 200,
+            "g": 200,
+            "b": 200,
+            "a": 175
+        },
+        "fogSize": 200,
+        "fogDensity": 0.2,
+        "hasRain": true,
+        "clouds": {
+            "outerCloudRadius": 150,
+            "innerCloudRadius": 125,
+            "texturePath": "assets/textures/cloudtest.png",
+            "tint":
+            {
+                "r" : 190,
+                "g" : 150,
+                "b" : 19,
+                "a" : 255
+            },
+            "fluidType": "plasma",
+            "hasLightning": true
+        }
+    },
+    "MapMarker": {
+        "enabled": true
+    }
+}
