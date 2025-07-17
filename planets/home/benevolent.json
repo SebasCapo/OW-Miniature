@@ -70,15 +70,6 @@
             "rotation": {"x": 356.882, "y": 323.1868, "z": 352.1926}
         }
         ],
-        "warpTransmitters": [
-            {
-                "position": {"x": 48.2111, "y": 433.2049, "z": 30.163},
-                "rotation": {"x": 3.3365, "y": 0, "z": 351.95},
-                "frequency": "Frequency1",
-                "alignRadial": true,
-                "alignmentWindow": 360
-            }
-        ],
         "dialogue" :
         [
             {

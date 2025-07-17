@@ -1,0 +1,56 @@
+{
+	"$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+	"name": "Overview Station",
+	"starSystem": "Jam5",
+	"Base": {
+		"surfaceSize": 100
+	},
+	"Orbit": {
+		"semiMajorAxis": 2300,
+		"primaryBody": "Bright Spark",
+		"inclination": 0,
+        "trueAnomaly": 90,
+        "staticPosition": {
+            "x": 0,
+            "y": -1500,
+            "z": 0
+        },
+        "isStatic": true
+	},
+    "MapMarker": {
+		"enabled": true
+	},
+     "Volumes": {
+        "zeroGravityVolumes": [
+            {
+                "radius": 100,
+                "priority": 2
+            }
+        ],
+    },
+    "Props": {
+        "details": 
+        [
+            {
+                "path": "WhiteholeStation_Body/Sector_WhiteholeStation",
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_WhiteHoleStation",
+                    "SectorTrigger_WhiteHoleStation",
+                    "Interactibles_WhiteholeStation/Arc_WH_WarpTowerInstructions",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_SharedStone",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_Tablet",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_WhiteHolePetroglyphBoard",
+                    "Interactibles_WhiteholeStation/StationRotationInterface"
+                ],
+                "rename": "OverviewStation",
+                "keepLoaded": true
+            },
+            {
+                "path": "WhiteholeStationSuperstructure_Body/Geometry_WhiteholeStationSuperstructure/ControlledByProxy_WhiteholeStation",
+                "rename": "OverviewStation",
+                "keepLoaded": true
+            },
+        ]
+    }
+}
