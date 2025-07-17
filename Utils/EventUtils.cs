@@ -29,11 +29,23 @@ namespace OWMiniature.Utils
         /// </summary>
         public const string TriggerObservatoryMap = "TriggerObservatoryMap";
 
+        /// <summary>
+        /// Triggered whenever the player enters the ship.
+        /// </summary>
+        public const string EnterShip = "EnterShip";
+
         /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
-        public static event Action<CanvasMapMarkerInitEvent> MarkerInit;
+        public static event Action<CanvasMapMarkerInitEvent> InitMarker;
+
+        /// <inheritdoc cref="CanvasMapMarkerToggleEvent"/>
+        public static event Action<CanvasMapMarkerToggleEvent> ToggleMarker;
 
         /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
         /// <remarks>This method allows remotely triggering this event.</remarks>
-        internal static void InvokeRemotely(this CanvasMapMarkerInitEvent ev) => MarkerInit?.Invoke(ev);
+        internal static void InvokeRemotely(this CanvasMapMarkerInitEvent ev) => InitMarker?.Invoke(ev);
+
+        /// <inheritdoc cref="CanvasMapMarkerToggleEvent"/>
+        /// <remarks>This method allows remotely triggering this event.</remarks>
+        internal static void InvokeRemotely(this CanvasMapMarkerToggleEvent ev) => ToggleMarker?.Invoke(ev);
     }
 }
