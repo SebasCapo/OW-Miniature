@@ -69,8 +69,8 @@ namespace OWMiniature.Gameplay.Lines
             get => Line.enabled;
             set
             {
-                if (!VisibleInWorld)
-                    value = MapUtils.IsMapOpen;
+                if (!VisibleInWorld && !MapUtils.IsMapOpen)
+                    value = false;
 
                 Line.enabled = value;
             }

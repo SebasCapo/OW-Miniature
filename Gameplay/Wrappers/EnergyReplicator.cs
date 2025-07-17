@@ -9,8 +9,8 @@ namespace OWMiniature.Gameplay.Wrappers
 {
     public class EnergyReplicator : MonoBehaviour
     {
-        private const float MaxAngularVelocity = 0.75f;
-        private const float RayActivationThreshold = 7.5f;
+        private const float MaxAngularVelocity = 1.57f;
+        private const float RayActivationThreshold = 8f;
         private const float AngleThreshold = 0.15f;
         private const float MaxRotationAngle = 180f;
         private const float ShootingPosOffset = 25f;
@@ -130,7 +130,7 @@ namespace OWMiniature.Gameplay.Wrappers
             {
                 bool shouldBeHidden = !Line.VisibleInWorld && !MapUtils.IsMapOpen;
 
-                if (!shouldBeHidden)
+                if (shouldBeHidden)
                     Line.LerpValue = 0f;
 
                 Line.LerpSpeed = 0f;
