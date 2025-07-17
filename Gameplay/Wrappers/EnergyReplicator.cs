@@ -83,29 +83,6 @@ namespace OWMiniature.Gameplay.Wrappers
             Line.IsVisible = false;
 
             Instances.Add(this);
-
-            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, (f) =>
-            {
-                if (!MapUtils.IsMapOpen)
-                    return;
-
-                OWMiniature.Console.WriteLine($"Target has been locked on.");
-
-                Transform test;
-
-                if (f._attachedAstroObject != null)
-                    test = f._attachedAstroObject.transform;
-                else
-                    test = f._attachedOWRigidbody.transform;
-
-                if (test != null)
-                {
-                    if (test.gameObject.TryGetComponent(out EnergyReplicator energyRep))
-                        test = null;
-                }
-
-                SetTarget(test);
-            });
         }
 
         /// <inheritdoc />

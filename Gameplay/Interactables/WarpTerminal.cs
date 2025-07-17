@@ -39,26 +39,18 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.OnTargetSelect(frame, attachedObject);
 
-            Debug.Log("Test 1");
-
             if (!attachedObject.TryGetComponent(out TargetableMarker marker))
                 return;
-
-            Debug.Log("Test 2");
 
             if (!marker.HasTarget)
                 return;
 
-            Debug.Log("Test 3");
-
             if (!Receivers.TryGetValue(marker.Target, out NomaiWarpReceiver receiver))
                 return;
 
-            Debug.Log("Test 4");
-
-            foreach (var item in PlanetaryUtils.Transmitters.Values)
+            foreach (NomaiWarpTransmitter transmitter in PlanetaryUtils.Transmitters.Values)
             {
-                item.OpenBlackHole(receiver);
+                transmitter._targetReceiver = receiver;
             }
         }
     }

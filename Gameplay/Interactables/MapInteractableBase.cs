@@ -109,7 +109,7 @@ namespace OWMiniature.Gameplay.Interactables
             GlobalMessenger.AddListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, ExitMapView);
 
-            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
+            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, TargetSelect);
         }
 
         /// <inheritdoc />
@@ -171,6 +171,9 @@ namespace OWMiniature.Gameplay.Interactables
 
         private void TargetSelect(ReferenceFrame frame)
         {
+            if (!IsOpen)
+                return;
+
             if (!TryGetTarget(frame, out Transform attachedObject))
                 return;
 

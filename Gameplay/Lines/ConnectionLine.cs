@@ -24,6 +24,9 @@ namespace OWMiniature.Gameplay.Lines
         /// <inheritdoc />
         public override bool UseWorldspace => true;
 
+        /// <inheritdoc />
+        public override bool VisibleInWorld { get; set; } = false;
+
         /// <summary>
         /// The point between the "origin" and "target" position at which the line will end.
         /// </summary>
