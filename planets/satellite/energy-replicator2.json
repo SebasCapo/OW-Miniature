@@ -7,7 +7,7 @@
         "surfaceSize": 50,
     },
     "MapMarker": {
-        "enabled": false
+        "enabled": true
     },
     "Orbit": {
         "primaryBody": "Bright Spark",
