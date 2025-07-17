@@ -2,6 +2,7 @@
 
 using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
+using OWMiniature.Utils.Events;
 
 using OWML.Common;
 
@@ -52,6 +53,41 @@ namespace OWMiniature.Gameplay.Interactables
 
         private InteractReceiver _interactVolume;
         private SphereCollider _sphereCollider;
+        private ScreenPrompt _screenPrompt;
+
+        public static T Attach<T>(GameObject target, bool debugSphere = false)
+            where T : MapInteractableBase
+        {
+            GameObject terminalObj = target.transform.root.CreateChild(objName: typeof(T).Name + "_Terminal");
+            terminalObj.transform.position = target.transform.position + Vector3.up;
+
+            T terminal = terminalObj.AddComponent<T>();
+
+            if (!debugSphere)
+                return terminal;
+
+            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+            Destroy(sphere.GetComponent<SphereCollider>());
+            sphere.GetComponent<MeshRenderer>().material.color = terminal.MapMode switch
+            {
+                CustomMapMode.Connections => Color.red,
+                CustomMapMode.EnergyReplicators => Color.blue,
+                CustomMapMode.WarpTower => Color.magenta,
+                _ => Color.green,
+            };
+
+            sphere.transform.SetParent(terminalObj.transform);
+            sphere.transform.localPosition = Vector3.zero;
+            
+            return terminal;
+        }
+
+        public static T Attach<T>(bool debugSphere = false)
+            where T : MapInteractableBase
+        {
+            return Attach<T>(GameObject.Find(typeof(T).Name), debugSphere);
+        }
 
         /// <inheritdoc />
         protected virtual void Awake()
@@ -82,6 +118,12 @@ namespace OWMiniature.Gameplay.Interactables
             // The modding wiki warns that this can happen, and it has happened a few times already.
             // Unsure if its always needed, but it doesn't hurt to be safe!
             _sphereCollider.enabled = true;
+
+            if (_screenPrompt == null)
+            {
+                _screenPrompt = new ScreenPrompt(InputLibrary.lockOn, $"{MapMode}", 0, ScreenPrompt.DisplayState.Normal, false);
+                Locator.GetPromptManager().AddScreenPrompt(_screenPrompt, PromptPosition.UpperRight, false);
+            }
         }
 
         /// <inheritdoc />
@@ -92,6 +134,11 @@ namespace OWMiniature.Gameplay.Interactables
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, ExitMapView);
 
             GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
+
+            if (_screenPrompt != null)
+            {
+                Locator.GetPromptManager()?.RemoveScreenPrompt(_screenPrompt, PromptPosition.UpperRight);
+            }
 
             Instances.Remove(this);
         }
@@ -136,6 +183,8 @@ namespace OWMiniature.Gameplay.Interactables
                 return;
 
             MapUtils.ForceTargeting = AllowTargeting;
+
+            UpdatePromptVisibility(true);
             OnEnterMapView();
         }
 
@@ -150,6 +199,7 @@ namespace OWMiniature.Gameplay.Interactables
             IsOpen = false;
             Lines.Clear();
 
+            UpdatePromptVisibility(false);
             OnExitMapView();
         }
 
@@ -176,6 +226,14 @@ namespace OWMiniature.Gameplay.Interactables
                 return false;
 
             return true;
+        }
+
+        private void UpdatePromptVisibility(bool isVisible)
+        {
+            if (_screenPrompt != null)
+            {
+                _screenPrompt.SetVisibility(isVisible);
+            }
         }
     }
 }

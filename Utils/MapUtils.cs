@@ -142,7 +142,7 @@ namespace OWMiniature.Utils
             return lineObj;
         }
 
-        public static bool IsMarkerActive(this TargetableMarker marker)
+        public static bool IsMarkerActive(this CustomMarker marker)
         {
             if (!marker.MapModeExclusive)
                 return true;

@@ -1,8 +1,6 @@
 ﻿using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
 
-using OWML.Common;
-
 using UnityEngine;
 
 namespace OWMiniature.Gameplay.Interactables

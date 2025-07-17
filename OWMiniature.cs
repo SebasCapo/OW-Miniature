@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
 
 using HarmonyLib;
 
 using OWMiniature.Experiments;
+using OWMiniature.Gameplay;
+using OWMiniature.Gameplay.Interactables;
+using OWMiniature.Gameplay.Spawnables;
 using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
 using OWML.Common;
 using OWML.ModHelper;
+
+using UnityEngine;
 
 namespace OWMiniature;
 
@@ -59,11 +65,40 @@ public class OWMiniature : ModBehaviour
             return;
 
         EnergyReplicator.Generate();
+        StarController.Generate();
+        WarpPlatform.Generate();
+
+        // These had to be spawned with a few seconds delay, I don't understand why, I hate it.
+        StartCoroutine(SpawnDelayed(5f));
+    }
+
+    private IEnumerator SpawnDelayed(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+        {
+            Transform astroTransform = astro.gameObject.transform;
+            GameObject markerObj = astroTransform.CreateChild(objName: "Custom Marker");
+            TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
+
+            marker.Label = $"<color=green>Test</color>";
+            marker.MapMode = CustomMapMode.EnergyReplicators;
+            marker.MapModeExclusive = true;
+            marker.SetTarget(astroTransform);
+        }
+
+        MapInteractableBase.Attach<EnergyReplicatorTerminal>(true);
+        MapInteractableBase.Attach<WarpTerminal>(true);
+        MapInteractableBase.Attach<ConnectionsMap>(true);
+
+        VisualUtils.PrepareMarkers();
     }
 
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
     {
         MapUtils.ResetCache();
+        VisualUtils.ResetCache();
         PlanetaryUtils.ResetCache();
 
         if (newScene != OWScene.SolarSystem)

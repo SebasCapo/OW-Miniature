@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 namespace OWMiniature.Utils
 {
@@ -28,6 +30,8 @@ namespace OWMiniature.Utils
                 return _dottedLine;
             }
         }
+
+        public static readonly List<MapMarker> Markers = new List<MapMarker>();
 
         private static Material _normalLine;
         private static Material _dottedLine;
@@ -94,6 +98,22 @@ namespace OWMiniature.Utils
         {
             color.a = alpha;
             return color;
+        }
+
+        public static void PrepareMarkers()
+        {
+            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+            {
+                if (!astro.TryGetComponent(out MapMarker marker))
+                    continue;
+
+                Markers.Add(marker);
+            }
+        }
+
+        public static void ResetCache()
+        {
+            Markers.Clear();
         }
     }
 }
