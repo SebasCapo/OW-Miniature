@@ -31,22 +31,28 @@ namespace OWMiniature.Gameplay.Spawnables
             } 
         }
 
-        public bool IsActive() => this.IsMarkerActive();
-
         /// <summary>
         /// The radius of the marker.
         /// </summary>
         public float Radius { get; set; } = 700f;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Transform Target { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasTarget { get; private set; }
+
         private ReferenceFrameVolume _frameVolume;
         private Transform _cachedTransform;
-        private Transform _target;
-        private bool _hasTarget;
 
         public void SetTarget(Transform target)
         {
-            _hasTarget = target != null;
-            _target = target;
+            HasTarget = target != null;
+            Target = target;
 
             _cachedTransform.position = target.position;
         }
@@ -88,10 +94,10 @@ namespace OWMiniature.Gameplay.Spawnables
         /// <inheritdoc />
         protected void Update()
         {
-            if (!_hasTarget)
+            if (!HasTarget)
                 return;
 
-            _cachedTransform.position = _target.position;
+            _cachedTransform.position = Target.position;
         }
 
         private OWRigidbody AddCustomRigidbody(GameObject obj, Rigidbody rb)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay.Spawnables;
 using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
@@ -9,7 +10,7 @@ namespace OWMiniature.Gameplay.Interactables
 {
     public class WarpTerminal : MapInteractableBase
     {
-        public static Dictionary<AstroObject, NomaiWarpReceiver> Receivers = new Dictionary<AstroObject, NomaiWarpReceiver>();
+        public static Dictionary<Transform, NomaiWarpReceiver> Receivers = new Dictionary<Transform, NomaiWarpReceiver>();
 
         /// <inheritdoc />
         public override CustomMapMode MapMode => CustomMapMode.WarpTower;
@@ -19,14 +20,17 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.Awake();
 
-            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+            foreach (NomaiWarpReceiver receiver in FindObjectsOfType<NomaiWarpReceiver>())
             {
-                NomaiWarpReceiver receiver = astro.GetComponentInChildren<NomaiWarpReceiver>();
+                Transform targetTransform = receiver.transform;
+                GameObject markerObj = targetTransform.CreateChild(objName: "Custom Marker");
+                TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
 
-                if (receiver == null)
-                    continue;
-
-                Receivers[astro] = receiver;
+                marker.Label = $"<color=#b39dfc>Warp Available!</color>";
+                marker.MapMode = CustomMapMode.WarpTower;
+                marker.MapModeExclusive = true;
+                marker.SetTarget(targetTransform);
+                Receivers[targetTransform] = receiver;
             }
         }
 
@@ -35,9 +39,26 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.OnTargetSelect(frame, attachedObject);
 
-            foreach (EnergyReplicator replicator in EnergyReplicator.Instances)
+            Debug.Log("Test 1");
+
+            if (!attachedObject.TryGetComponent(out TargetableMarker marker))
+                return;
+
+            Debug.Log("Test 2");
+
+            if (!marker.HasTarget)
+                return;
+
+            Debug.Log("Test 3");
+
+            if (!Receivers.TryGetValue(marker.Target, out NomaiWarpReceiver receiver))
+                return;
+
+            Debug.Log("Test 4");
+
+            foreach (var item in PlanetaryUtils.Transmitters.Values)
             {
-                replicator.SetTarget(attachedObject);
+                item.OpenBlackHole(receiver);
             }
         }
     }
