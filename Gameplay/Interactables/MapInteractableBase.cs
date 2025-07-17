@@ -55,8 +55,6 @@ namespace OWMiniature.Gameplay.Interactables
         private SphereCollider _sphereCollider;
         private ScreenPrompt _screenPrompt;
 
-        private static int _instanceCount = 0;
-
         public static T Attach<T>(GameObject target, bool debugSphere = false)
             where T : MapInteractableBase
         {
@@ -71,11 +69,11 @@ namespace OWMiniature.Gameplay.Interactables
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
             Destroy(sphere.GetComponent<SphereCollider>());
-            sphere.GetComponent<MeshRenderer>().material.color = _instanceCount++ switch
+            sphere.GetComponent<MeshRenderer>().material.color = terminal.MapMode switch
             {
-                0 => Color.red,
-                1 => Color.blue,
-                2 => Color.yellow,
+                CustomMapMode.Connections => Color.red,
+                CustomMapMode.EnergyReplicators => Color.blue,
+                CustomMapMode.WarpTower => Color.magenta,
                 _ => Color.green,
             };
 

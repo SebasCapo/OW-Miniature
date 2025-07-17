@@ -14,6 +14,8 @@ namespace OWMiniature.Experiments
         /// <inheritdoc />
         public override bool IsEnabled => false;
 
+        private bool _test;
+
         /// <inheritdoc />
         internal override void Enable()
         {
@@ -29,8 +31,6 @@ namespace OWMiniature.Experiments
 
             GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
         }
-
-        private bool _test;
 
         /// <inheritdoc />
         public override void Trigger()
