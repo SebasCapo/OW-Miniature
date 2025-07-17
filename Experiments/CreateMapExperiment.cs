@@ -1,4 +1,6 @@
-﻿using OWMiniature.Gameplay.Interactables;
+﻿using Epic.OnlineServices.Sessions;
+
+using OWMiniature.Gameplay.Interactables;
 using OWMiniature.Gameplay.Spawnables;
 using OWMiniature.Utils;
 using OWMiniature.Utils.Events;
@@ -28,28 +30,15 @@ namespace OWMiniature.Experiments
             GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
         }
 
+        private bool _test;
+
         /// <inheritdoc />
         public override void Trigger()
         {
             GameObject ship = GameObject.Find("Player_Body");
-            GameObject station = GameObject.Find("CentralStation_Body");
-            GameObject obj = new GameObject("Observatory Map");
+            GameObject station = GameObject.Find((_test = !_test) ? "CentralStation_Body" : "Author_Mod_Platform_Body");
 
-            if (station != null)
-            {
-                obj.transform.SetParent(station.transform, true);
-                obj.transform.position = ship.transform.position;
-            }
-
-            obj.AddComponent<ConnectionsMap>();
-
-            var capsule = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            Object.Destroy(capsule.GetComponent<SphereCollider>());
-            capsule.transform.SetParent(obj.transform);
-            capsule.transform.localPosition = Vector3.zero;
-
-            //CustomMarker marker = obj.AddComponent<CustomMarker>();
-            //marker.Label = "Custom Map is here";
+            MapInteractableBase.Attach<ConnectionsMap>(station, true).transform.position = ship.transform.position;
         }
     }
 }

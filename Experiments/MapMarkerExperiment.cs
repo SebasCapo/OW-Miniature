@@ -20,7 +20,7 @@ namespace OWMiniature.Experiments
             //GlobalMessenger.AddListener(EventUtils.EnterMapView, Trigger);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, Trigger);
 
-            EventUtils.MarkerInit += OnMarkerInit;
+            EventUtils.InitMarker += OnMarkerInit;
         }
 
         private void OnMarkerInit(CanvasMapMarkerInitEvent ev)
@@ -39,7 +39,7 @@ namespace OWMiniature.Experiments
             //GlobalMessenger.RemoveListener(EventUtils.EnterMapView, Trigger);
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, Trigger);
 
-            EventUtils.MarkerInit -= OnMarkerInit;
+            EventUtils.InitMarker -= OnMarkerInit;
         }
 
         /// <inheritdoc />

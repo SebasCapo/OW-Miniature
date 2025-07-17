@@ -1,4 +1,6 @@
-﻿using OWMiniature.Utils;
+﻿using Newtonsoft.Json.Linq;
+
+using OWMiniature.Utils;
 
 using UnityEngine;
 
@@ -55,9 +57,9 @@ namespace OWMiniature.Gameplay.Lines
         public virtual bool UseWorldspace { get; } = false;
 
         /// <summary>
-        /// Whether the line will be destroyed upon exiting the map.
+        /// Whether the line can be viewed in the world, or must only be seen through the map.
         /// </summary>
-        public virtual bool DestroyLineOnMapExit { get; set; } = true;
+        public virtual bool VisibleInWorld { get; set; } = true;
 
         /// <summary>
         /// Indicates whether this line is currently visible.
@@ -65,7 +67,13 @@ namespace OWMiniature.Gameplay.Lines
         public bool IsVisible
         {
             get => Line.enabled;
-            set => Line.enabled = value;
+            set
+            {
+                if (!VisibleInWorld)
+                    value = MapUtils.IsMapOpen;
+
+                Line.enabled = value;
+            }
         }
 
         /// <summary>
@@ -101,7 +109,7 @@ namespace OWMiniature.Gameplay.Lines
 
             Line.material = VisualUtils.NormalLine;
             Line.textureMode = LineTextureMode.Stretch;
-
+            
             Line.startWidth = LineWidth * StartWidthMultiplier;
             Line.endWidth = LineWidth;
             Line.useWorldSpace = UseWorldspace;
@@ -112,19 +120,15 @@ namespace OWMiniature.Gameplay.Lines
             //Line.startColor = StartColor;
             //Line.endColor = EndColor;
 
-            Line.enabled = true;
+            IsVisible = true;
         }
 
         /// <inheritdoc />
-        protected virtual void Awake()
-        {
-            GlobalMessenger.AddListener(EventUtils.ExitMapView, TerminateLine);
-        }
+        protected virtual void Awake() { }
 
+        /// <inheritdoc />
         protected virtual void OnDestroy()
         {
-            GlobalMessenger.RemoveListener(EventUtils.ExitMapView, TerminateLine);
-
             MapUtils.Lines.Remove(this);
         }
 
@@ -137,13 +141,15 @@ namespace OWMiniature.Gameplay.Lines
             if (!IsAssigned)
                 return;
 
-            OnUpdate();
-        }
+            bool shouldBeHidden = !VisibleInWorld && !MapUtils.IsMapOpen;
 
-        private void TerminateLine()
-        {
-            if (DestroyLineOnMapExit)
-                Destroy(gameObject);
+            if (IsVisible && shouldBeHidden)
+            {
+                IsVisible = false;
+                return;
+            }
+
+            OnUpdate();
         }
     }
 }

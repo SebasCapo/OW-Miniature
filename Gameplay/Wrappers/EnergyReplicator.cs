@@ -10,10 +10,10 @@ namespace OWMiniature.Gameplay.Wrappers
     public class EnergyReplicator : MonoBehaviour
     {
         private const float MaxAngularVelocity = 0.75f;
-        private const float RayActivationThreshold = 8f;
+        private const float RayActivationThreshold = 7.5f;
         private const float AngleThreshold = 0.15f;
         private const float MaxRotationAngle = 180f;
-        private const float ShootingPosOffset = 20f;
+        private const float ShootingPosOffset = 25f;
         private const float RaySpeed = 0.25f;
         private const float LineWidth = 15f;
 
@@ -74,7 +74,7 @@ namespace OWMiniature.Gameplay.Wrappers
             ShootingPosition = shootPos.transform;
 
             Line = shootPos.AddComponent<ConnectionLine>();
-            Line.DestroyLineOnMapExit = false;
+            Line.VisibleInWorld = false;
             Line.SetColors(StartColor, EndColor);
             Line.LineWidth = LineWidth;
             Line.Assign(ShootingPosition);
@@ -128,7 +128,11 @@ namespace OWMiniature.Gameplay.Wrappers
 
             if (!Line.IsVisible)
             {
-                Line.LerpValue = 0f;
+                bool shouldBeHidden = !Line.VisibleInWorld && !MapUtils.IsMapOpen;
+
+                if (!shouldBeHidden)
+                    Line.LerpValue = 0f;
+
                 Line.LerpSpeed = 0f;
             }
             else

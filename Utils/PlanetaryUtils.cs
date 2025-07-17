@@ -28,7 +28,7 @@ namespace OWMiniature.Utils
             get
             {
                 if (_modObjects == null || _modObjects.Length == 0)
-                    _modObjects = AllObjects.Where(astro => astro._primaryBody == Sun).ToArray();
+                    _modObjects = AllObjects.Where(astro => astro._primaryBody == Sun || astro == Sun).ToArray();
 
                 return _modObjects;
             }
@@ -80,7 +80,7 @@ namespace OWMiniature.Utils
             }
         }
 
-        private static AstroObject[] AllObjects
+        public static AstroObject[] AllObjects
         {
             get
             {
@@ -104,12 +104,6 @@ namespace OWMiniature.Utils
             _modObjects = null;
             _allObjects = null;
             _sun = null;
-        }
-
-        private static string GetHierarchyName(this string name)
-        {
-            // Based on how New Horizons writes name strings.
-            return name.Replace(" ", string.Empty).Replace("'", string.Empty) + "_Body";
         }
 
         private static AstroObject GetSunObject()
