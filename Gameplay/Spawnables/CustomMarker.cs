@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using OWMiniature.Utils;
+﻿using OWMiniature.Utils;
 using OWMiniature.Utils.Events;
 
 using UnityEngine;
@@ -15,8 +12,6 @@ namespace OWMiniature.Gameplay.Spawnables
     /// </summary>
     public class CustomMarker : MonoBehaviour
     {
-        public static List<CustomMarker> Instances = new List<CustomMarker>();
-
         /// <summary>
         /// The label that will be given to this marker on the map.
         /// </summary>
@@ -33,48 +28,21 @@ namespace OWMiniature.Gameplay.Spawnables
         public bool MapModeExclusive { get; set; } = true;
 
         /// <summary>
-        /// Indicates whether 
-        /// </summary>
-        public bool HasArrowIcon 
-        {
-            get => _markerType == MapMarker.MarkerType.Player;
-            set => _markerType = value ? MapMarker.MarkerType.Player : MapMarker.MarkerType.Planet;
-        }
-
-        /// <summary>
-        /// Indicates whether this map marker is enabled.
-        /// </summary>
-        public virtual bool IsEnabled
-        {
-            get => !MapMarker._disableMapMarker;
-            set
-            {
-                MapMarker._disableMapMarker = !value;
-            }
-        }
-
-        /// <summary>
         /// The <see cref="global::MapMarker"/> instance used by this component.
         /// </summary>
         protected MapMarker MapMarker { get; private set; }
 
-        private MapMarker.MarkerType _markerType;
-
         /// <inheritdoc />
         protected virtual void Awake()
         {
-            EventUtils.InitMarker += OnMarkerInit;
-            EventUtils.ToggleMarker += OnMarkerToggle;
-            GlobalMessenger.AddListener(EventUtils.EnterMapView, RefreshVisibility);
-            GlobalMessenger.AddListener(EventUtils.EnterShip, RefreshVisibility);
-
-            Instances.Add(this);
+            EventUtils.MarkerInit += OnMarkerInit;
+            GlobalMessenger.AddListener(EventUtils.EnterMapView, OnEnterMapView);
         }
 
         /// <inheritdoc />
         protected virtual void Start()
         {
-            MapMarker = gameObject.GetAddComponent<MapMarker>();
+            MapMarker = gameObject.AddComponent<MapMarker>();
             MapMarker._markerType = MapMarker.MarkerType.Player;
             MapMarker._labelID = UITextType.LocationPlayer_Cap;
         }
@@ -82,16 +50,11 @@ namespace OWMiniature.Gameplay.Spawnables
         /// <inheritdoc />
         protected virtual void OnDestroy()
         {
-            EventUtils.InitMarker -= OnMarkerInit;
-            EventUtils.ToggleMarker -= OnMarkerToggle;
-            GlobalMessenger.RemoveListener(EventUtils.EnterMapView, RefreshVisibility);
-            GlobalMessenger.RemoveListener(EventUtils.EnterShip, RefreshVisibility);
-
-            Instances.Remove(this);
+            EventUtils.MarkerInit -= OnMarkerInit;
+            GlobalMessenger.RemoveListener(EventUtils.EnterMapView, OnEnterMapView);
         }
 
-        /// <inheritdoc cref="CanvasMapMarkerInitEvent"/>
-        protected virtual void OnMarkerInit(CanvasMapMarkerInitEvent ev)
+        private void OnMarkerInit(CanvasMapMarkerInitEvent ev)
         {
             if (ev.Marker.gameObject != MapMarker.gameObject)
                 return;
@@ -99,35 +62,19 @@ namespace OWMiniature.Gameplay.Spawnables
             ev.Label = Label;
         }
 
-        protected virtual void RefreshVisibility()
+        protected virtual void OnEnterMapView()
         {
-            if (!MapModeExclusive)
-            {
-                // Don't think this will happen, but if we were to toggle "MapModeExclusive" after it was disabled
-                // it wouldn't get re-enabled again, so adding this to avoid any issues.
-                if (!IsEnabled)
-                    IsEnabled = true;
+            //if (!MapModeExclusive)
+            //{
+            //    // Don't think this will happen, but if we were to toggle "MapModeExclusive" after it was disabled
+            //    // it wouldn't get re-enabled again, so adding this to avoid any issues.
+            //    if (!MapMarker.enabled)
+            //        MapMarker.enabled = true;
 
-                return;
-            }
+            //    return;
+            //}
 
-            IsEnabled = this.IsMarkerActive();
-        }
-
-        private void LateUpdate()
-        {
-            MapMarker.enabled = true;
-        }
-
-        private void OnMarkerToggle(CanvasMapMarkerToggleEvent ev)
-        {
-            if (!MapMarker._canvasMarkerInitialized)
-                return;
-
-            if (ev.CanvasMarker != MapMarker._canvasMarker)
-                return;
-
-            ev.IsVisible = this.IsMarkerActive();
+            //MapMarker.enabled = MapUtils.CustomMap == MapMode;
         }
     }
 }

@@ -5,7 +5,6 @@ namespace OWMiniature.Gameplay.Lines
     public class ConnectionLine : PlanetaryLineBase
     {
         private const int DefaultVertices = 15;
-        private const float AnimEnd = 1f;
 
         /// <summary>
         /// The target position at which the line will be pointing at.
@@ -13,10 +12,10 @@ namespace OWMiniature.Gameplay.Lines
         public Transform TargetPosition { get; set; }
 
         /// <inheritdoc />
-        public override Color StartColor => _startColor;
+        public override Color StartColor => Color.green;
 
         /// <inheritdoc />
-        public override Color EndColor => _endColor;
+        public override Color EndColor => Color.cyan;
 
         /// <inheritdoc />
         public override float LineWidth { get; set; } = 45f;
@@ -24,34 +23,7 @@ namespace OWMiniature.Gameplay.Lines
         /// <inheritdoc />
         public override bool UseWorldspace => true;
 
-        /// <summary>
-        /// The point between the "origin" and "target" position at which the line will end.
-        /// </summary>
-        /// <remarks>
-        /// Automatically increases every frame based on <see cref="LerpSpeed"/>.
-        /// </remarks>
-        public float LerpValue { get; set; } = AnimEnd;
-
-        /// <summary>
-        /// How long it takes the line to go from "origin" to "target" position
-        /// </summary>
-        public float LerpSpeed { get; set; } = 0.5f;
-
         private Transform _cachedTransform;
-        private Color _startColor/* = Color.green*/;
-        private Color _endColor/* = Color.cyan*/;
-
-        /// <summary>
-        /// Sets the <see cref="StartColor"/> and <see cref="EndColor"/> of this line.
-        /// </summary>
-        /// <remarks>
-        /// A <see cref="Gradient"/> will be made between the two.
-        /// </remarks>
-        public void SetColors(Color startColor, Color endColor)
-        {
-            _startColor = startColor;
-            _endColor = endColor;
-        }
 
         /// <inheritdoc />
         protected override void Awake()
@@ -72,17 +44,8 @@ namespace OWMiniature.Gameplay.Lines
         /// <inheritdoc />
         protected override void OnUpdate()
         {
-            Vector3 target = TargetPosition.position;
-            Vector3 origin = _cachedTransform.position;
-
-            if (LerpValue < AnimEnd)
-            {
-                LerpValue = Mathf.Clamp01(LerpValue + Time.deltaTime * LerpSpeed);
-                target = Vector3.Lerp(origin, target, LerpValue);
-            }
-
-            Line.SetPosition(0, origin);
-            Line.SetPosition(1, target);
+            Line.SetPosition(1, _cachedTransform.position);
+            Line.SetPosition(0, TargetPosition.position);
         }
     }
 }

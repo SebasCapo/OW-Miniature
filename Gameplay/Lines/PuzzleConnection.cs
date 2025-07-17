@@ -19,5 +19,6 @@ namespace OWMiniature.Gameplay.Lines
                 door.Close(null);
             }
         }
+
     }
 }

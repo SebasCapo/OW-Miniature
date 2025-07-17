@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 using OWMiniature.Gameplay;
 using OWMiniature.Gameplay.Interactables;
 using OWMiniature.Gameplay.Lines;
 using OWMiniature.Gameplay.Spawnables;
-using OWMiniature.Utils.Events;
 
 using UnityEngine;
 
@@ -18,29 +16,19 @@ namespace OWMiniature.Utils
         private const float CustomZoomDistance = 3000f;
         private const float CustomZoomDuration = 1f;
 
-        public static List<PlanetaryLineBase> Lines { get; } = [];
-
-        public static event System.Action<MapModeChangeEvent> ModeChanged;
+        public static Dictionary<ReferenceFrame, PlanetaryLineBase> Lines { get; } = [];
 
         public static CustomMapMode CustomMap
         {
             get
             {
-                CustomMapMode mode = CustomMapMode.None;
-
                 foreach (MapInteractableBase map in MapInteractableBase.Instances)
                 {
                     if (map.IsOpen)
-                    {
-                        mode = map.MapMode;
-                        break;
-                    }
+                        return map.MapMode;
                 }
 
-                if (_cachedMapMode != mode)
-                    ModeChanged?.Invoke(new MapModeChangeEvent(_cachedMapMode, mode));
-
-                return _cachedMapMode = mode;
+                return CustomMapMode.None;
             }
         }
 
@@ -77,6 +65,21 @@ namespace OWMiniature.Utils
         }
 
         /// <summary>
+        /// Fetches all <see cref="AstroObject"/> instances on the Scene.
+        /// </summary>
+        /// <returns>The cached <see cref="AstroObject"/> array.</returns>
+        public static AstroObject[] AstroObjects
+        {
+            get
+            {
+                if (_astroObjects == null || _astroObjects.Length == 0)
+                    _astroObjects = Object.FindObjectsOfType<AstroObject>();
+
+                return _astroObjects;
+            }
+        }
+
+        /// <summary>
         /// Indicates whether the Map is currently open.
         /// </summary>
         /// <remarks>
@@ -84,16 +87,16 @@ namespace OWMiniature.Utils
         /// 
         /// The reason for this is because <see cref="MapController._isMapMode"/> only gets set at the end of the map enabling state.
         /// </remarks>
-        public static bool IsMapOpen => MapController._isMapMode;
+        public static bool IsMapOpen => MapController._mapMarkerManager.isActiveAndEnabled || MapController._isMapMode;
 
         /// <summary>
         /// Whether targeting the map will be forced active.
         /// </summary>
         public static bool ForceTargeting { get; set; }
 
-        private static CustomMapMode _cachedMapMode;
         private static MapController _mapController;
         private static GameObject _solarSystemRoot;
+        private static AstroObject[] _astroObjects;
         private static float _defaultMapZoomDistance;
         private static float _defaultMapZoomDuration;
         private static bool _mapResetEventRegistered;
@@ -105,6 +108,7 @@ namespace OWMiniature.Utils
         {
             _solarSystemRoot = null;
             _mapController = null;
+            _astroObjects = null;
         }
 
         /// <summary>
@@ -128,21 +132,25 @@ namespace OWMiniature.Utils
         }
 
         /// <summary>
-        /// Creates an empty <see cref="GameObject"/> that is attached to <paramref name="target"/>.
+        /// Attempts to fetch a <see cref="PlanetaryLineBase"/> from the specified <see cref="ReferenceFrame"/>.
         /// </summary>
-        /// <param name="target"></param>
-        /// <returns>The newly created <see cref="GameObject"/>.</returns>
-        public static GameObject CreateChild(this Transform target, Vector3? localPos = null, string objName = "GameObject")
+        /// <returns>Whether a line was found.</returns>
+        public static bool TryGetLine<T>(ReferenceFrame frame, out T line)
+            where T : PlanetaryLineBase
         {
-            GameObject lineObj = new GameObject(objName);
-            Transform lineTransform = lineObj.transform;
+            line = null;
 
-            lineTransform.SetParent(target, false);
-            lineTransform.localPosition = localPos ?? Vector3.zero;
-            return lineObj;
+            if (!Lines.TryGetValue(frame, out var lineBase))
+                return false;
+
+            if (lineBase is not T value)
+                return false;
+
+            line = value;
+            return true;
         }
 
-        public static bool IsMarkerActive(this CustomMarker marker)
+        public static bool IsMarkerActive(this TargetableMarker marker)
         {
             if (!marker.MapModeExclusive)
                 return true;

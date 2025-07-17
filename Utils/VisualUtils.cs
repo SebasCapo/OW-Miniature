@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace OWMiniature.Utils
 {
@@ -31,40 +29,8 @@ namespace OWMiniature.Utils
             }
         }
 
-        public static readonly List<MapMarker> Markers = new List<MapMarker>();
-
         private static Material _normalLine;
         private static Material _dottedLine;
-
-        /// <summary>
-        /// Creates a <see cref="Gradient"/> between <paramref name="startColor"/> and <paramref name="endColor"/>.
-        /// </summary>
-        public static Gradient GenerateGradient(Color startColor, Color endColor)
-        {
-            Gradient gradient = new Gradient();
-
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].time = 0f;
-            colorKeys[0].color = startColor;
-
-            colorKeys[1].time = 1f;
-            colorKeys[1].color = endColor;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[3];
-            alphaKeys[0].time = 0f;
-            alphaKeys[0].alpha = 1f;
-
-            alphaKeys[1].time = .85f;
-            alphaKeys[1].alpha = 1f;
-
-            alphaKeys[2].time = 1f;
-            alphaKeys[2].alpha = .0f;
-
-            gradient.colorKeys = colorKeys;
-            gradient.alphaKeys = alphaKeys;
-
-            return gradient;
-        }
 
         /// <summary>
         /// Fetches a specific resource from Unity's database.
@@ -98,22 +64,6 @@ namespace OWMiniature.Utils
         {
             color.a = alpha;
             return color;
-        }
-
-        public static void PrepareMarkers()
-        {
-            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
-            {
-                if (!astro.TryGetComponent(out MapMarker marker))
-                    continue;
-
-                Markers.Add(marker);
-            }
-        }
-
-        public static void ResetCache()
-        {
-            Markers.Clear();
         }
     }
 }

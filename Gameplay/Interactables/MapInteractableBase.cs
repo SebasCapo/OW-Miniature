@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using OWMiniature.Gameplay.Lines;
 using OWMiniature.Utils;
-using OWMiniature.Utils.Events;
-
-using OWML.Common;
 
 using UnityEngine;
 
@@ -15,8 +11,6 @@ namespace OWMiniature.Gameplay.Interactables
     /// </summary>
     public abstract class MapInteractableBase : MonoBehaviour
     {
-        protected const string LineObjectDefaultName = "PlanetaryLine";
-
         public static readonly List<MapInteractableBase> Instances = new List<MapInteractableBase>();
 
         /// <summary>
@@ -46,48 +40,8 @@ namespace OWMiniature.Gameplay.Interactables
         /// </summary>
         public bool IsOpen { get; private set; }
 
-        /// <summary>
-        /// The <see cref="PlanetaryLineBase">lines</see> created by this <see cref="MapInteractableBase"/>.
-        /// </summary>
-        protected readonly List<PlanetaryLineBase> Lines = new List<PlanetaryLineBase>();
-
         private InteractReceiver _interactVolume;
         private SphereCollider _sphereCollider;
-        private ScreenPrompt _screenPrompt;
-
-        public static T Attach<T>(GameObject target, bool debugSphere = false)
-            where T : MapInteractableBase
-        {
-            GameObject terminalObj = target.transform.root.CreateChild(objName: typeof(T).Name + "_Terminal");
-            terminalObj.transform.position = target.transform.position + Vector3.up;
-
-            T terminal = terminalObj.AddComponent<T>();
-
-            if (!debugSphere)
-                return terminal;
-
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
-            Destroy(sphere.GetComponent<SphereCollider>());
-            sphere.GetComponent<MeshRenderer>().material.color = terminal.MapMode switch
-            {
-                CustomMapMode.Connections => Color.red,
-                CustomMapMode.EnergyReplicators => Color.blue,
-                CustomMapMode.WarpTower => Color.magenta,
-                _ => Color.green,
-            };
-
-            sphere.transform.SetParent(terminalObj.transform);
-            sphere.transform.localPosition = Vector3.zero;
-            
-            return terminal;
-        }
-
-        public static T Attach<T>(bool debugSphere = false)
-            where T : MapInteractableBase
-        {
-            return Attach<T>(GameObject.Find(typeof(T).Name), debugSphere);
-        }
 
         /// <inheritdoc />
         protected virtual void Awake()
@@ -108,8 +62,6 @@ namespace OWMiniature.Gameplay.Interactables
             _interactVolume.OnPressInteract += OnPressInteract;
             GlobalMessenger.AddListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, ExitMapView);
-
-            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
         }
 
         /// <inheritdoc />
@@ -118,12 +70,6 @@ namespace OWMiniature.Gameplay.Interactables
             // The modding wiki warns that this can happen, and it has happened a few times already.
             // Unsure if its always needed, but it doesn't hurt to be safe!
             _sphereCollider.enabled = true;
-
-            if (_screenPrompt == null)
-            {
-                _screenPrompt = new ScreenPrompt(InputLibrary.lockOn, $"{MapMode}", 0, ScreenPrompt.DisplayState.Normal, false);
-                Locator.GetPromptManager().AddScreenPrompt(_screenPrompt, PromptPosition.UpperRight, false);
-            }
         }
 
         /// <inheritdoc />
@@ -132,13 +78,6 @@ namespace OWMiniature.Gameplay.Interactables
             _interactVolume.OnPressInteract -= OnPressInteract;
             GlobalMessenger.RemoveListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.RemoveListener(EventUtils.ExitMapView, ExitMapView);
-
-            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
-
-            if (_screenPrompt != null)
-            {
-                Locator.GetPromptManager()?.RemoveScreenPrompt(_screenPrompt, PromptPosition.UpperRight);
-            }
 
             Instances.Remove(this);
         }
@@ -156,11 +95,6 @@ namespace OWMiniature.Gameplay.Interactables
         /// <summary>
         /// 
         /// </summary>
-        protected virtual void OnTargetSelect(ReferenceFrame frame, Transform attachedObject) { }
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected virtual void OnPressInteract()
         {
             IsOpen = true;
@@ -169,22 +103,12 @@ namespace OWMiniature.Gameplay.Interactables
             _interactVolume.ResetInteraction();
         }
 
-        private void TargetSelect(ReferenceFrame frame)
-        {
-            if (!TryGetTarget(frame, out Transform attachedObject))
-                return;
-
-            OnTargetSelect(frame, attachedObject);
-        }
-
         private void EnterMapView()
         {
             if (!IsOpen)
                 return;
 
             MapUtils.ForceTargeting = AllowTargeting;
-
-            UpdatePromptVisibility(true);
             OnEnterMapView();
         }
 
@@ -197,43 +121,8 @@ namespace OWMiniature.Gameplay.Interactables
             // But we don't have time for that!
             MapUtils.ForceTargeting = false;
             IsOpen = false;
-            Lines.Clear();
 
-            UpdatePromptVisibility(false);
             OnExitMapView();
-        }
-
-        private bool TryGetTarget(ReferenceFrame frame, out Transform attachedObject)
-        {
-            attachedObject = default;
-
-            if (frame._attachedAstroObject != null)
-            {
-                attachedObject = frame._attachedAstroObject.transform;
-            }
-            else if (frame._attachedOWRigidbody != null)
-            {
-                attachedObject = frame._attachedOWRigidbody.transform;
-            }
-            else
-            {
-                OWMiniature.Console.WriteLine("A target was selected that isn't attached to neither an AstroObject or OWRigidbody.", MessageType.Warning);
-                return false;
-            }
-
-            // We don't want to add a line to an object that already has it.
-            if (attachedObject.TryGetComponent(out PlanetaryLineBase _))
-                return false;
-
-            return true;
-        }
-
-        private void UpdatePromptVisibility(bool isVisible)
-        {
-            if (_screenPrompt != null)
-            {
-                _screenPrompt.SetVisibility(isVisible);
-            }
         }
     }
 }

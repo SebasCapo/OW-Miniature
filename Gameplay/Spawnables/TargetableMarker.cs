@@ -20,44 +20,10 @@ namespace OWMiniature.Gameplay.Spawnables
         private const string ReferenceFrameObjectName = "RFVolume";
         private const float MinColliderMultiplier = 0.2857f;
 
-        /// <inheritdoc />
-        public override bool IsEnabled 
-        {
-            get => base.IsEnabled;
-            set 
-            {
-                base.IsEnabled = value;
-                _frameVolume.gameObject.SetActive(value);
-            } 
-        }
-
-        public bool IsActive() => this.IsMarkerActive();
-
         /// <summary>
         /// The radius of the marker.
         /// </summary>
         public float Radius { get; set; } = 700f;
-
-        private ReferenceFrameVolume _frameVolume;
-        private Transform _cachedTransform;
-        private Transform _target;
-        private bool _hasTarget;
-
-        public void SetTarget(Transform target)
-        {
-            _hasTarget = target != null;
-            _target = target;
-
-            _cachedTransform.position = target.position;
-        }
-
-        /// <inheritdoc />
-        protected override void Awake()
-        {
-            base.Awake();
-
-            _cachedTransform = transform;
-        }
 
         /// <inheritdoc />
         protected override void Start()
@@ -67,7 +33,7 @@ namespace OWMiniature.Gameplay.Spawnables
 
             base.Start();
 
-            AddCollider(gameObject, true);
+            AddCollider(gameObject);
 
             Rigidbody body = AddRigidbody(gameObject);
             OWRigidbody owr = AddCustomRigidbody(gameObject, body);
@@ -78,29 +44,19 @@ namespace OWMiniature.Gameplay.Spawnables
             rf._attachedOWRigidbody = owr;
             rf._referenceFrame = new ReferenceFrame(owr);
             rf._referenceFrame._bracketsRadius = 8;
-            _frameVolume = rf;
 
             // We can now re-enable the object as everything is setup correctly.
             gameObject.SetActive(true);
             body.velocity = Vector3.zero;
         }
 
-        /// <inheritdoc />
-        protected void Update()
-        {
-            if (!_hasTarget)
-                return;
-
-            _cachedTransform.position = _target.position;
-        }
-
         private OWRigidbody AddCustomRigidbody(GameObject obj, Rigidbody rb)
         {
             OWRigidbody owr = obj.GetAddComponent<OWRigidbody>();
-            KinematicRigidbody krd = obj.GetAddComponent<KinematicRigidbody>();
+            KinematicRigidbody krb = obj.GetAddComponent<KinematicRigidbody>();
 
             owr._rigidbody = rb;
-            owr._kinematicRigidbody = krd;
+            owr._kinematicRigidbody = krb;
             owr._origParent = MapUtils.SolarSystemRoot.transform;
             owr._maintainOriginalCenterOfMass = true;
             owr._autoGenerateCenterOfMass = true;

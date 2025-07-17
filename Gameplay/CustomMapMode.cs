@@ -3,8 +3,6 @@
     public enum CustomMapMode
     {
         None,
-        WarpTower,
-        EnergyReplicators,
         Connections,
     }
 }

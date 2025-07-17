@@ -22,12 +22,22 @@
     "solarLuminosity": 0,
     "supernovaSize": 2400,
     "supernovaSpeed": 200
-  },
+  },  
   "ShipLog": {
     "xmlFile": "planets/shiplog/AuthorModSystem.xml",
     "spriteFolder": "planets/shiplog/sprites"
   },
   "MapMarker": {
       "enabled": true
+  },
+  "Spawn": {
+            "playerSpawnPoints": [
+            {
+                "position": {"x": -54.94806, "y": -24.55006, "z": 46.41127},
+                "startWithSuit": true,
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_VESSEL",
+                "alignRadial": true
+            }
+        ]
   }
 }

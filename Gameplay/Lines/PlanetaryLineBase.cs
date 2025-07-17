@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-using OWMiniature.Utils;
+﻿using OWMiniature.Utils;
 
 using UnityEngine;
 
@@ -57,26 +55,6 @@ namespace OWMiniature.Gameplay.Lines
         public virtual bool UseWorldspace { get; } = false;
 
         /// <summary>
-        /// Whether the line can be viewed in the world, or must only be seen through the map.
-        /// </summary>
-        public virtual bool VisibleInWorld { get; set; } = true;
-
-        /// <summary>
-        /// Indicates whether this line is currently visible.
-        /// </summary>
-        public bool IsVisible
-        {
-            get => Line.enabled;
-            set
-            {
-                if (!VisibleInWorld && !MapUtils.IsMapOpen)
-                    value = false;
-
-                Line.enabled = value;
-            }
-        }
-
-        /// <summary>
         /// Indicates whether this line was initialized and assigned.
         /// </summary>
         protected bool IsAssigned { get; private set; }
@@ -85,7 +63,7 @@ namespace OWMiniature.Gameplay.Lines
         /// Assigns this <see cref="PlanetaryLineBase"/> instance to the specified
         /// <see cref="AstroObject"/> and <see cref="ReferenceFrame"/>.
         /// </summary>
-        public void Assign(Transform attachedObject)
+        public void Assign(Transform attachedObject, ReferenceFrame frame)
         {
             /**
              * Astro Objects tend to have their <see cref="RefFrame"/>
@@ -94,9 +72,11 @@ namespace OWMiniature.Gameplay.Lines
              * So we mostly need to fetch everything from its children <see cref="GameObject"/>.
              */
             AttachedObject = attachedObject;
+            RefFrame = frame;
+
+            MapUtils.Lines[frame] = this;
             IsAssigned = true;
 
-            MapUtils.Lines.Add(this);
             CreateLine();
         }
 
@@ -109,27 +89,31 @@ namespace OWMiniature.Gameplay.Lines
 
             Line.material = VisualUtils.NormalLine;
             Line.textureMode = LineTextureMode.Stretch;
-            
+
             Line.startWidth = LineWidth * StartWidthMultiplier;
             Line.endWidth = LineWidth;
             Line.useWorldSpace = UseWorldspace;
             Line.loop = false;
 
             Line.positionCount = PositionCount;
-            Line.colorGradient = VisualUtils.GenerateGradient(StartColor, EndColor);
+            Line.colorGradient = GenerateGradient(StartColor, EndColor);
             //Line.startColor = StartColor;
             //Line.endColor = EndColor;
 
-            IsVisible = true;
+            Line.enabled = true;
         }
 
         /// <inheritdoc />
-        protected virtual void Awake() { }
+        protected virtual void Awake()
+        {
+            GlobalMessenger.AddListener(EventUtils.ExitMapView, TerminateLine);
+        }
 
-        /// <inheritdoc />
         protected virtual void OnDestroy()
         {
-            MapUtils.Lines.Remove(this);
+            GlobalMessenger.RemoveListener(EventUtils.ExitMapView, TerminateLine);
+
+            MapUtils.Lines.Remove(RefFrame);
         }
 
         /// <inheritdoc />
@@ -141,15 +125,37 @@ namespace OWMiniature.Gameplay.Lines
             if (!IsAssigned)
                 return;
 
-            bool shouldBeHidden = !VisibleInWorld && !MapUtils.IsMapOpen;
-
-            if (IsVisible && shouldBeHidden)
-            {
-                IsVisible = false;
-                return;
-            }
-
             OnUpdate();
+        }
+
+        private void TerminateLine() =>
+            Destroy(gameObject);
+
+        public static Gradient GenerateGradient(Color startColor, Color endColor)
+        {
+            Gradient gradient = new Gradient();
+
+            GradientColorKey[] colorKeys = new GradientColorKey[2];
+            colorKeys[0].time = 0f;
+            colorKeys[0].color = startColor;
+
+            colorKeys[1].time = 1f;
+            colorKeys[1].color = endColor;
+
+            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[3];
+            alphaKeys[0].time = 0f;
+            alphaKeys[0].alpha = 1f;
+
+            alphaKeys[1].time = .85f;
+            alphaKeys[1].alpha = 1f;
+
+            alphaKeys[2].time = 1f;
+            alphaKeys[2].alpha = .0f;
+
+            gradient.colorKeys = colorKeys;
+            gradient.alphaKeys = alphaKeys;
+
+            return gradient;
         }
     }
 }

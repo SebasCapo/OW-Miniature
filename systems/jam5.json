@@ -8,13 +8,14 @@
     "hasPhysics": false,
     "alwaysPresent": true,
     "vesselSpawn": {
-      "parentBody": "Bright Spark",
+      "parentBody": "Nomai Vessel",
       "isRelativeToParent": true,	
       "position": {
         "x": 0,
-        "y": 1000,
+        "y": 0,
         "z": 0
-      }
+      },
+      "rename": "Rename"
     }
 	},
   "curiosities": [

@@ -38,24 +38,24 @@ namespace OWMiniature.Experiments
 
         private void OnTargetSelect(ReferenceFrame frame)
         {
-            //if (frame == null)
-            //    return;
+            if (frame == null)
+                return;
 
-            //if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
-            //{
-            //    GameObject lineObj = new GameObject("Custom OrbitLine");
-            //    AstroObject astroObject = frame._attachedAstroObject;
-            //    Transform lineTransform = lineObj.transform;
+            if (!MapUtils.TryGetLine(frame, out ConnectionLine selector))
+            {
+                GameObject lineObj = new GameObject("Custom OrbitLine");
+                AstroObject astroObject = frame._attachedAstroObject;
+                Transform lineTransform = lineObj.transform;
 
-            //    lineTransform.SetParent(astroObject.transform);
-            //    lineTransform.localPosition = Vector3.zero;
+                lineTransform.SetParent(astroObject.transform);
+                lineTransform.localPosition = Vector3.zero;
 
-            //    selector = lineObj.AddComponent<ConnectionLine>();
-            //    selector.TargetPosition = Object.FindObjectsOfType<AstroObject>()[2].transform;
-            //    selector.Assign(astroObject.transform, frame);
-            //}
+                selector = lineObj.AddComponent<ConnectionLine>();
+                selector.TargetPosition = Object.FindObjectsOfType<AstroObject>()[2].transform;
+                selector.Assign(astroObject.transform, frame);
+            }
 
-            //OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", OWML.Common.MessageType.Success);
+            OWMiniature.Console.WriteLine($"{selector.name} has a selector line!", OWML.Common.MessageType.Success);
         }
     }
 }
