@@ -35,20 +35,6 @@
           "y": 0,
           "z": 0
         }
-      },
-      {
-        "rename": "WarpTerminal",
-        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
-        "position": {
-          "x": 5,
-          "y": 0,
-          "z": 60
-        },
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0
-        }
       }
     ],
     "signals": [

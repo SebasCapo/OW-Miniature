@@ -150,7 +150,7 @@
                 "rotation": {"x": 0, "y": 0, "z": 0}
             },
             {
-                "rename": "WarpTerminal_Terminal",
+                "rename": "WarpTerminal",
                 "parentPath": "DistantShoulder_Body/Sector/WarpTower/Geometry_Tower_GD/ControlledByProxy_Arch/Structure_HT_TT_Tower_GD/Structure_HT_TT_Tower_GD/Structure_HT_TT_Tower_GD_collider",
                 "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
                 "keepLoaded": true,

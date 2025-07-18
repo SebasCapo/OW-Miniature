@@ -82,7 +82,7 @@ public class OWMiniature : ModBehaviour
             GameObject markerObj = astroTransform.CreateChild(objName: "Custom Marker");
             TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
 
-            marker.Label = $"<color=green>Test</color>";
+            marker.StartingLabel = $"<color=green>Test</color>";
             marker.MapMode = CustomMapMode.EnergyReplicators;
             marker.MapModeExclusive = true;
             marker.SetTarget(astroTransform);
