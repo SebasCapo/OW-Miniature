@@ -37,6 +37,7 @@
                 "removeChildren": [
                     "Props_WhiteHoleStation",
                     "SectorTrigger_WhiteHoleStation",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_WarpTransmitter",
                     "Interactibles_WhiteholeStation/Arc_WH_WarpTowerInstructions",
                     "Interactibles_WhiteholeStation/Prefab_NOM_SharedStone",
                     "Interactibles_WhiteholeStation/Prefab_NOM_Tablet",
@@ -51,6 +52,15 @@
                 "rename": "OverviewStation",
                 "keepLoaded": true
             },
-        ]
+        ],
+        "warpReceivers": [
+            {
+                "position": {"x": 0, "y": 0, "z": -16.25},
+                "rotation": {"x": 0, "y": 90, "z": 180},
+                "frequency": "Frequency1",
+                "alignRadial": true,
+                "alignmentWindow": 360
+            }
+        ],
     }
 }

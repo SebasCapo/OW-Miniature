@@ -16,6 +16,8 @@ namespace OWMiniature.Gameplay.Interactables
     public abstract class MapInteractableBase : MonoBehaviour
     {
         protected const string LineObjectDefaultName = "PlanetaryLine";
+        private const string TerminalChildObj = "Props_NOM_Vessel_Computer 1";
+        private const float TerminalHeightOffset = 1f;
 
         public static readonly List<MapInteractableBase> Instances = new List<MapInteractableBase>();
 
@@ -92,6 +94,11 @@ namespace OWMiniature.Gameplay.Interactables
         /// <inheritdoc />
         protected virtual void Awake()
         {
+            if (transform.TryGetChildByName(TerminalChildObj, out Transform child))
+            {
+                child.position += Vector3.up * TerminalHeightOffset;
+            }
+
             Instances.Add(this);
 
             gameObject.layer = OWLayerMask.blockableInteractMask;
