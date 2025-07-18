@@ -21,12 +21,13 @@
 		"enabled": true
 	},
      "Volumes": {
-        "zeroGravityVolumes": [
+        "zeroGravityVolumes": 
+        [
             {
                 "radius": 100,
                 "priority": 2
             }
-        ],
+        ]
     },
     "Props": {
         "details": 
@@ -51,16 +52,15 @@
                 "path": "WhiteholeStationSuperstructure_Body/Geometry_WhiteholeStationSuperstructure/ControlledByProxy_WhiteholeStation",
                 "rename": "OverviewStation",
                 "keepLoaded": true
-            },
+            }
         ],
         "warpReceivers": [
             {
                 "position": {"x": 0, "y": 0, "z": -16.25},
                 "rotation": {"x": 0, "y": 90, "z": 180},
                 "frequency": "Frequency1",
-                "alignRadial": true,
-                "alignmentWindow": 360
+                "alignRadial": true
             }
-        ],
+        ]
     }
 }
