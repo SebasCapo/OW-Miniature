@@ -130,7 +130,7 @@ namespace OWMiniature.Utils
 
         public static void ResetCache()
         {
-            BaseMarkers.Clear();
+            _baseMarkers.Clear();
         }
     }
 }
