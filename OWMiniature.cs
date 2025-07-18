@@ -91,8 +91,6 @@ public class OWMiniature : ModBehaviour
         MapInteractableBase.Attach<EnergyReplicatorTerminal>(true);
         MapInteractableBase.Attach<WarpTerminal>(true);
         MapInteractableBase.Attach<ConnectionsMap>(true);
-
-        VisualUtils.PrepareMarkers();
     }
 
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
