@@ -13,7 +13,7 @@
         "primaryBody": "Bright Spark"
     },
     "Atmosphere": {
-        "size": 100,
+        "size": 65,
         "fogTint": {
             "r": 172,
             "g": 198,
@@ -22,7 +22,8 @@
         },
         "fogSize": 200,
         "fogDensity": 0.6,
-        "hasRain": false
+        "hasRain": false,
+        "atmosphereSunIntensity": 0.06
     },
 
     "MapMarker": {
@@ -245,5 +246,10 @@
     },
     "ShipLog": {
         "xmlFile": "planets/shiplog/icey.xml"
-    }
+    },
+    "AmbientLights": [
+        {
+            "intensity": 0.7
+        }
+    ]
 }
