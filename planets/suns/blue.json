@@ -1,6 +1,5 @@
 ﻿{
   "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
-  "name": "Green",
   "starSystem": "Jam5",
   "removeChildren": [ "Sector/Star/Audio_Star/SurfaceAudio_Sun" ],
   "Base": {
@@ -24,9 +23,9 @@
       "b": 240
     },
     "tint": {
-      "r": 25,
-      "g": 25,
-      "b": 250
+      "r": 230,
+      "g": 118,
+      "b": 87
     },
     "supernovaSize": 2400,
     "supernovaSpeed": 200
