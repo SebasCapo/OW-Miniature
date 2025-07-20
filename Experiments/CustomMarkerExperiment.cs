@@ -34,7 +34,7 @@ namespace OWMiniature.Experiments
             GameObject obj = new GameObject("TEST");
 
             CustomMarker marker = obj.AddComponent<TargetableMarker>();
-            marker.Label = "XENDED-191116";
+            marker.StartingLabel = "XENDED-191116";
             marker.MapMode = CustomMapMode.Connections;
 
             obj.transform.position = ship.transform.position + Vector3.right * Random.Range(1500, 6000);

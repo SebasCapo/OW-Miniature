@@ -7,6 +7,7 @@ using OWMiniature.Utils.Events;
 using OWML.Common;
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace OWMiniature.Gameplay.Interactables
 {
@@ -16,8 +17,11 @@ namespace OWMiniature.Gameplay.Interactables
     public abstract class MapInteractableBase : MonoBehaviour
     {
         protected const string LineObjectDefaultName = "PlanetaryLine";
+        private const string TerminalChildObj = "Props_NOM_Vessel_Computer 1";
+        private const string BaseChildObj = "Base";
 
         public static readonly List<MapInteractableBase> Instances = new List<MapInteractableBase>();
+        private static readonly Color LightColor = new Color(0.4332f, 0.3985f, 0.8868f, 1);
 
         /// <summary>
         /// The range at which the player must be to interact with this object.
@@ -47,6 +51,16 @@ namespace OWMiniature.Gameplay.Interactables
         public bool IsOpen { get; private set; }
 
         /// <summary>
+        /// The offset applied to the base of the interactable.
+        /// </summary>
+        protected virtual Vector3 BaseOffset => Vector3.zero;
+
+        /// <summary>
+        /// The offset applied to the base of the interactable.
+        /// </summary>
+        protected virtual Vector3 TerminalHeightOffset => Vector3.up;
+
+        /// <summary>
         /// The <see cref="PlanetaryLineBase">lines</see> created by this <see cref="MapInteractableBase"/>.
         /// </summary>
         protected readonly List<PlanetaryLineBase> Lines = new List<PlanetaryLineBase>();
@@ -58,10 +72,28 @@ namespace OWMiniature.Gameplay.Interactables
         public static T Attach<T>(GameObject target, bool debugSphere = false)
             where T : MapInteractableBase
         {
-            GameObject terminalObj = target.transform.root.CreateChild(objName: typeof(T).Name + "_Terminal");
-            terminalObj.transform.position = target.transform.position + Vector3.up;
+            Transform targetTransform = target.transform;
+            GameObject terminalObj = targetTransform.root.CreateChild(objName: typeof(T).Name + "_Terminal");
+            terminalObj.transform.position = targetTransform.position + targetTransform.up;
 
             T terminal = terminalObj.AddComponent<T>();
+
+            // If the target terminal is our custom "Computer", we want the pilar to be at a lower level than normal.
+            if (targetTransform.TryGetChildByName(TerminalChildObj, out Transform child))
+            {
+                child.localPosition = terminal.TerminalHeightOffset;
+            }
+
+            if (targetTransform.TryGetChildByName(BaseChildObj, out Transform baseTransform))
+            {
+                baseTransform.localPosition = terminal.BaseOffset;
+            }
+
+            GameObject lightObj = terminalObj.transform.CreateChild();
+            Light light = lightObj.AddComponent<Light>();
+            light.range = 15f;
+            light.color = LightColor;
+            light.enabled = true;
 
             if (!debugSphere)
                 return terminal;
@@ -109,7 +141,7 @@ namespace OWMiniature.Gameplay.Interactables
             GlobalMessenger.AddListener(EventUtils.EnterMapView, EnterMapView);
             GlobalMessenger.AddListener(EventUtils.ExitMapView, ExitMapView);
 
-            GlobalMessenger<ReferenceFrame>.RemoveListener(EventUtils.TargetReferenceFrame, TargetSelect);
+            GlobalMessenger<ReferenceFrame>.AddListener(EventUtils.TargetReferenceFrame, TargetSelect);
         }
 
         /// <inheritdoc />
@@ -165,12 +197,15 @@ namespace OWMiniature.Gameplay.Interactables
         {
             IsOpen = true;
 
-            MapUtils.OpenMap();
+            MapUtils.OpenMap(transform);
             _interactVolume.ResetInteraction();
         }
 
         private void TargetSelect(ReferenceFrame frame)
         {
+            if (!IsOpen)
+                return;
+
             if (!TryGetTarget(frame, out Transform attachedObject))
                 return;
 
@@ -183,6 +218,7 @@ namespace OWMiniature.Gameplay.Interactables
                 return;
 
             MapUtils.ForceTargeting = AllowTargeting;
+            VisualUtils.ToggleBaseMarkers(false);
 
             UpdatePromptVisibility(true);
             OnEnterMapView();
@@ -196,6 +232,8 @@ namespace OWMiniature.Gameplay.Interactables
             // Would be best to use interfaces and listen for their state instead of globally disabling the property.
             // But we don't have time for that!
             MapUtils.ForceTargeting = false;
+            VisualUtils.ToggleBaseMarkers(true);
+
             IsOpen = false;
             Lines.Clear();
 

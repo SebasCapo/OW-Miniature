@@ -24,9 +24,9 @@
       "b": 240
     },
     "tint": {
-      "r": 250,
-      "g": 25,
-      "b": 25
+      "r": 192,
+      "g": 255,
+      "b": 244
     },
     "supernovaSize": 2400,
     "supernovaSpeed": 200

@@ -6,9 +6,13 @@
         "surfaceGravity": 0,
         "surfaceSize": 50,
     },
-    "MapMarker": {
-        "enabled": true
+    "ReferenceFrame":
+    {
+        "enabled": false
     },
+    "MapMarker": {
+		"enabled": false
+	},
     "Orbit": {
         "primaryBody": "Bright Spark",
         "semiMajorAxis": 2300,

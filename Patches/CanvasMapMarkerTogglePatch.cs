@@ -14,13 +14,13 @@ namespace OWMiniature.Patches
         [HarmonyPatch(typeof(CanvasMapMarker), nameof(CanvasMapMarker.SetVisibility), [typeof(bool)])]
         public static bool InitPatch(CanvasMapMarker __instance, ref bool value)
         {
-            if (MapUtils.CustomMap is not CustomMapMode.None)
-                value = false;
+            //if (MapUtils.CustomMap is not CustomMapMode.None)
+            //    value = false;
 
-            CanvasMapMarkerToggleEvent ev = new CanvasMapMarkerToggleEvent(__instance, value);
-            ev.InvokeRemotely();
+            //CanvasMapMarkerToggleEvent ev = new CanvasMapMarkerToggleEvent(__instance, value);
+            //ev.InvokeRemotely();
 
-            value = ev.IsVisible;
+            //value = ev.IsVisible;
             return true;
         }
     }

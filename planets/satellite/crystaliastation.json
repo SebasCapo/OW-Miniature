@@ -1,0 +1,86 @@
+{
+	"$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+	"name": "Crystalia Station",
+	"starSystem": "Jam5",
+	"Base": {
+		"surfaceSize": 100
+	},
+	"Orbit": {
+		"semiMajorAxis": 2300,
+		"primaryBody": "Bright Spark",
+		"inclination": 0,
+        "trueAnomaly": 90,
+        "staticPosition": {
+            "x": 0,
+            "y": -1500,
+            "z": 0
+        },
+        "isStatic": true
+	},
+    "ReferenceFrame":
+    {
+        "enabled": false
+    },
+    "MapMarker": {
+		"enabled": false
+	},
+     "Volumes": {
+        "zeroGravityVolumes": 
+        [
+            {
+                "radius": 100,
+                "priority": 2
+            }
+        ]
+    },
+    "Props": {
+        "details": 
+        [
+            {
+                "path": "WhiteholeStation_Body/Sector_WhiteholeStation",
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_WhiteHoleStation",
+                    "SectorTrigger_WhiteHoleStation",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_WarpTransmitter",
+                    "Interactibles_WhiteholeStation/Arc_WH_WarpTowerInstructions",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_SharedStone",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_Tablet",
+                    "Interactibles_WhiteholeStation/Prefab_NOM_WhiteHolePetroglyphBoard",
+                    "Interactibles_WhiteholeStation/StationRotationInterface"
+                ],
+                "rename": "OverviewStation",
+                "keepLoaded": false
+            },
+            {
+                "path": "WhiteholeStationSuperstructure_Body/Geometry_WhiteholeStationSuperstructure/ControlledByProxy_WhiteholeStation",
+                "rename": "OverviewStation_Ring",
+                "keepLoaded": false
+            },
+            {
+                "rename": "EnergyReplicatorTerminal",
+                "parentPath": "CrystaliaStation_Body/Sector/OverviewStation",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "keepLoaded": false,
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": { "x": -0.018, "y": -1.679, "z": -23.97223 },
+                "rotation": { "x": 30, "y": 90.00024, "z": 90.00024 },
+            }
+        ],
+        "warpReceivers": [
+            {
+                "position": {"x": 0, "y": 0, "z": -16.25},
+                "rotation": {"x": 0, "y": 90, "z": 180},
+                "frequency": "Frequency1",
+                "alignRadial": true
+            }
+        ]
+    }
+}

@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
 
+using OWMiniature.Gameplay.Spawnables;
 using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
 using UnityEngine;
+using UnityEngine.Timeline;
 
 namespace OWMiniature.Gameplay.Interactables
 {
     public class WarpTerminal : MapInteractableBase
     {
-        public static Dictionary<AstroObject, NomaiWarpReceiver> Receivers = new Dictionary<AstroObject, NomaiWarpReceiver>();
+        private const string MarkerAvailableText = $"<color=#b39dfc>Warp Available!</color>";
+        private const string MarkerSelectedText = $"<color=#aefc9d>Target Selected</color>";
+
+        public static Dictionary<Transform, NomaiWarpReceiver> Receivers = new Dictionary<Transform, NomaiWarpReceiver>();
 
         /// <inheritdoc />
         public override CustomMapMode MapMode => CustomMapMode.WarpTower;
@@ -19,14 +24,17 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.Awake();
 
-            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+            foreach (NomaiWarpReceiver receiver in FindObjectsOfType<NomaiWarpReceiver>())
             {
-                NomaiWarpReceiver receiver = astro.GetComponentInChildren<NomaiWarpReceiver>();
+                Transform targetTransform = receiver.transform;
+                GameObject markerObj = targetTransform.CreateChild(objName: "Custom Marker");
+                TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
 
-                if (receiver == null)
-                    continue;
-
-                Receivers[astro] = receiver;
+                marker.StartingLabel = MarkerAvailableText;
+                marker.MapMode = CustomMapMode.WarpTower;
+                marker.MapModeExclusive = true;
+                marker.SetTarget(targetTransform);
+                Receivers[targetTransform] = receiver;
             }
         }
 
@@ -35,9 +43,36 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.OnTargetSelect(frame, attachedObject);
 
-            foreach (EnergyReplicator replicator in EnergyReplicator.Instances)
+            if (!attachedObject.TryGetComponent(out TargetableMarker marker))
+                return;
+
+            if (!marker.HasTarget)
+                return;
+
+            if (!Receivers.TryGetValue(marker.Target, out NomaiWarpReceiver receiver))
+                return;
+
+            foreach (NomaiWarpTransmitter transmitter in PlanetaryUtils.Transmitters.Values)
             {
-                replicator.SetTarget(attachedObject);
+                transmitter._targetReceiver = receiver;
+            }
+
+            UpdateLabels(marker);
+        }
+
+        private void UpdateLabels(CustomMarker selectedMarker)
+        {
+            selectedMarker.UpdateLabel(MarkerSelectedText);
+
+            foreach (CustomMarker marker in CustomMarker.Instances)
+            {
+                if (marker.MapMode != MapMode)
+                    continue;
+
+                if (marker == selectedMarker)
+                    continue;
+
+                marker.UpdateLabel(MarkerAvailableText);
             }
         }
     }

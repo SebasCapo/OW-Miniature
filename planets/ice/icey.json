@@ -4,26 +4,26 @@
     "starSystem": "Jam5",
     "Base": {
         "groundSize": 50,
-        "surfaceSize": 60,
-        "surfaceGravity": 12
+        "surfaceSize": 100,
+        "surfaceGravity": 10
     },
     
     "Orbit": {
         "semiMajorAxis": 1800,
         "primaryBody": "Bright Spark"
     },
-
     "Atmosphere": {
-        "size": 100,
+        "size": 65,
         "fogTint": {
-            "r": 190,
-            "g": 225,
-            "b": 192,
-            "a": 128
+            "r": 172,
+            "g": 198,
+            "b": 227,
+            "a": 60
         },
         "fogSize": 200,
-        "fogDensity": 0.2,
-        "hasRain": false
+        "fogDensity": 0.6,
+        "hasRain": false,
+        "atmosphereSunIntensity": 0.06
     },
 
     "MapMarker": {
@@ -39,13 +39,92 @@
 	},
 
     "Props": {
-        "scatter": [
+        "scatter": 
+        [
             {
-                "path": "DreamWorld_Body/Sector_DreamWorld/Sector_DreamZone_1/Props_DreamZone_1/OtherComponentsGroup/Trees_Z1/DreamHouseIsland/Tree_DW_M_Var",
-                "count": 12
+                "path": "BrittleHollow_Body/Sector_BH/Sector Great Southern Triangle/Fragment 71_GreatSouthernTriangle/Core_Fragment_71_GreatSouthernTriangle/Props_Core_Fragment_71_GreatSouthernTriangle/Ice_BH_Lump_B",
+                "count": 12,
+                "keepLoaded": false,
+                "offset": { "x": 0, "y": 0, "z": 0},
+                "preventOverlap": true,
+                "scale": 0.5,
+                "seed": 1
+            },
+            {
+                "path": "BrittleHollow_Body/Sector_BH/Sector Great Southern Triangle/Fragment 71_GreatSouthernTriangle/Core_Fragment_71_GreatSouthernTriangle/Props_Core_Fragment_71_GreatSouthernTriangle/Ice_BH_Lump_B",
+                "count": 5,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": 0, "z": 0},
+                "preventOverlap": true,
+                "scale": 1,
+                "seed": 1
+            },
+            {
+                "path": "BrittleHollow_Body/Sector_BH/Sector Great Southern Triangle/Fragment 71_GreatSouthernTriangle/Core_Fragment_71_GreatSouthernTriangle/Props_Core_Fragment_71_GreatSouthernTriangle/Ice_BH_Lump_B",
+                "count": 3,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": -1, "z": 0},
+                "preventOverlap": true,
+                "scale": 2,
+                "seed": 1
+            },
+            {
+                "path": "BrittleHollow_Body/Sector_BH/Sector Great Southern Triangle/Fragment 71_GreatSouthernTriangle/Core_Fragment_71_GreatSouthernTriangle/Props_Core_Fragment_71_GreatSouthernTriangle/Ice_BH_Lump_B",
+                "count": 3,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": -2, "z": 0},
+                "preventOverlap": true,
+                "scale": 3,
+                "seed": 1
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/IceShard_Arrangment_2/DB_IceShard_Arrangment_2/IceGeo",
+                "count": 10,
+                "keepLoaded": false,
+                "offset": { "x": 0, "y": -0.25, "z": 0},
+                "preventOverlap": false,
+                "scale": 0.5,
+                "seed": 1
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/IceShard_Arrangment_2/DB_IceShard_Arrangment_2/IceGeo",
+                "count": 7,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": -0.5, "z": 0},
+                "preventOverlap": true,
+                "scale": 1,
+                "seed": 1
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/IceShard_Arrangment_2/DB_IceShard_Arrangment_2/IceGeo",
+                "count": 7,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": -0.5, "z": 0},
+                "preventOverlap": true,
+                "scale": 1.5,
+                "seed": 1
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/IceShard_Arrangment_2/DB_IceShard_Arrangment_2/IceGeo",
+                "count": 3,
+                "keepLoaded": true,
+                "offset": { "x": 0, "y": -1.5, "z": 0},
+                "preventOverlap": true,
+                "scale": 2.5,
+                "seed": 1
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/IceShard_Arrangment_2/DB_IceShard_Arrangment_2/IceGeo",
+                "count": 25,
+                "keepLoaded": false,
+                "offset": { "x": 0, "y": -0.15, "z": 0},
+                "preventOverlap": false,
+                "scale": 0.4,
+                "seed": 1
             }
         ],
-        "details": [
+        "details": 
+        [
             {
                 "rename": "IceRecorder",
                 "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
@@ -57,6 +136,35 @@
                 "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
                 "position": {"x": -51.66012, "y": -41.05832, "z": 36.03502},
                 "rotation": {"x": 316.0674, "y": 356.6983, "z": 136.7351}
+            },
+            {
+                "rename": "WarpTower",
+                "path": "TowerTwin_Body/Sector_TowerTwin/Sector_Tower_GD",
+                "removeChildren": [
+                    "Interactables_Tower_GD",
+                    "Props_Tower_GD/Tower_GD",
+                    "Props_Tower_GD/Tower_GD_VisibleFrom_TowerTwin",
+                    "Props_Tower_GD/Furniture/OtherComponentsGroup/Props_NOM_Container (2)"
+                ],
+                "keepLoaded": true,
+                "position": {"x": 0, "y": -12, "z": 0},
+                "rotation": {"x": 0, "y": 0, "z": 0}
+            },
+            {
+                "rename": "WarpTerminal",
+                "parentPath": "DistantShoulder_Body/Sector/WarpTower/Geometry_Tower_GD/ControlledByProxy_Arch/Structure_HT_TT_Tower_GD/Structure_HT_TT_Tower_GD/Structure_HT_TT_Tower_GD_collider",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "keepLoaded": true,
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": {"x": -6.418944, "y": 81.50753, "z": -6.164954},
+                "rotation": {"x": 359.9726, "y": 57.47131, "z": 359.957}
             }
         ],
         "dialogue" :
@@ -107,11 +215,14 @@
                 "rotation": {"x": 316.0674, "y": 356.6983, "z": 136.7351}
             }
         ],
-        "warpReceivers": [
+        "warpTransmitters": [
             {
-                "position": {"x": -42.66012, "y": -39.05832, "z": 25.03502},
-                "rotation": {"x": 0, "y": 30.28897, "z": 0},
-                "frequency": "Frequency3"
+                "position": {"x": 0, "y": 80.762, "z": 0},
+                "rotation": {"x": 0, "y": 0, "z": 0},
+                "frequency": "BrightSpark_Transmitter",
+                "alignRadial": true,
+                "alignmentWindow": 360,
+                "parentPath": "Sector/WarpTower"
             }
         ]
     },
@@ -135,5 +246,10 @@
     },
     "ShipLog": {
         "xmlFile": "planets/shiplog/icey.xml"
-    }
+    },
+    "AmbientLights": [
+        {
+            "intensity": 0.7
+        }
+    ]
 }

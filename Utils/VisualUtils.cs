@@ -31,8 +31,28 @@ namespace OWMiniature.Utils
             }
         }
 
-        public static readonly List<MapMarker> Markers = new List<MapMarker>();
+        public static List<MapMarker> BaseMarkers
+        {
+            get
+            {
+                if (_baseMarkers == null || _baseMarkers.Count == 0)
+                {
+                    _baseMarkers = new List<MapMarker>();
 
+                    foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+                    {
+                        if (!astro.TryGetComponent(out MapMarker marker))
+                            continue;
+
+                        _baseMarkers.Add(marker);
+                    }
+                }
+
+                return _baseMarkers;
+            }
+        }
+
+        private static List<MapMarker> _baseMarkers;
         private static Material _normalLine;
         private static Material _dottedLine;
 
@@ -100,20 +120,17 @@ namespace OWMiniature.Utils
             return color;
         }
 
-        public static void PrepareMarkers()
+        public static void ToggleBaseMarkers(bool visible)
         {
-            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+            foreach (MapMarker baseMarker in BaseMarkers)
             {
-                if (!astro.TryGetComponent(out MapMarker marker))
-                    continue;
-
-                Markers.Add(marker);
+                baseMarker._disableMapMarker = !visible;
             }
         }
 
         public static void ResetCache()
         {
-            Markers.Clear();
+            _baseMarkers.Clear();
         }
     }
 }

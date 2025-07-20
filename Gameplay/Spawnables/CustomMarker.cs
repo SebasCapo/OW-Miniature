@@ -11,16 +11,16 @@ namespace OWMiniature.Gameplay.Spawnables
     /// <summary>
     /// Component that can be attached to any <see cref="GameObject"/> to give it a marker on the map. <para/>
     /// 
-    /// <see cref="Label"/> grants it a visual name/text on the map.
+    /// <see cref="StartingLabel"/> grants it a visual name/text on the map.
     /// </summary>
     public class CustomMarker : MonoBehaviour
     {
         public static List<CustomMarker> Instances = new List<CustomMarker>();
 
         /// <summary>
-        /// The label that will be given to this marker on the map.
+        /// The label that will be given to this marker on the map upon initialization.
         /// </summary>
-        public string Label { get; set; } = string.Empty;
+        public string StartingLabel { get; set; } = string.Empty;
 
         /// <summary>
         /// The <see cref="CustomMapMode"/> assigned to this marker.
@@ -56,9 +56,20 @@ namespace OWMiniature.Gameplay.Spawnables
         /// <summary>
         /// The <see cref="global::MapMarker"/> instance used by this component.
         /// </summary>
-        protected MapMarker MapMarker { get; private set; }
+        public MapMarker MapMarker { get; private set; }
 
         private MapMarker.MarkerType _markerType;
+
+        public void UpdateLabel(string label)
+        {
+            if (MapMarker == null)
+                return;
+
+            if (!MapMarker._canvasMarkerInitialized)
+                return;
+
+            MapMarker._canvasMarker.SetLabel(label);
+        }
 
         /// <inheritdoc />
         protected virtual void Awake()
@@ -96,7 +107,7 @@ namespace OWMiniature.Gameplay.Spawnables
             if (ev.Marker.gameObject != MapMarker.gameObject)
                 return;
 
-            ev.Label = Label;
+            ev.Label = StartingLabel;
         }
 
         protected virtual void RefreshVisibility()
@@ -127,7 +138,11 @@ namespace OWMiniature.Gameplay.Spawnables
             if (ev.CanvasMarker != MapMarker._canvasMarker)
                 return;
 
+            bool wasVisible = ev.IsVisible;
             ev.IsVisible = this.IsMarkerActive();
+            bool isVisible = ev.IsVisible;
+
+            OWMiniature.Console.WriteLine($"");
         }
     }
 }

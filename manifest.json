@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/manifest_schema.json",
   "filename": "OW-Miniature.dll",
   "author": "Ender, Beryl",
-  "name": "TBD Mod Name Entry",
-  "uniqueName": "Ender.BerylModJam5",
-  "version": "0.0.1",
+  "name": "Bright Spark",
+  "uniqueName": "Ender.Beryl.BrightSpark",
+  "version": "0.5.0",
   "owmlVersion": "2.15.1",
   "dependencies": [ "xen.NewHorizons", "xen-42.ModJam5" ]
 }

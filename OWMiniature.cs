@@ -64,6 +64,7 @@ public class OWMiniature : ModBehaviour
         if (!starSystem.Equals(SolarSystemName))
             return;
 
+        CrystaliaStation.Generate();
         EnergyReplicator.Generate();
         StarController.Generate();
         WarpPlatform.Generate();
@@ -82,17 +83,15 @@ public class OWMiniature : ModBehaviour
             GameObject markerObj = astroTransform.CreateChild(objName: "Custom Marker");
             TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
 
-            marker.Label = $"<color=green>Test</color>";
+            marker.StartingLabel = $"<color=green>Test</color>";
             marker.MapMode = CustomMapMode.EnergyReplicators;
             marker.MapModeExclusive = true;
             marker.SetTarget(astroTransform);
         }
 
-        MapInteractableBase.Attach<EnergyReplicatorTerminal>(true);
-        MapInteractableBase.Attach<WarpTerminal>(true);
-        MapInteractableBase.Attach<ConnectionsMap>(true);
-
-        VisualUtils.PrepareMarkers();
+        MapInteractableBase.Attach<EnergyReplicatorTerminal>();
+        MapInteractableBase.Attach<WarpTerminal>();
+        MapInteractableBase.Attach<ConnectionsMap>();
     }
 
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
