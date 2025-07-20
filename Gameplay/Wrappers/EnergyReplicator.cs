@@ -14,7 +14,7 @@ namespace OWMiniature.Gameplay.Wrappers
         private const float AngleThreshold = 0.15f;
         private const float MaxRotationAngle = 180f;
         private const float ShootingPosOffset = 25f;
-        private const float RaySpeed = 0.25f;
+        private const float RaySpeed = 0.45f;
         private const float LineWidth = 15f;
 
         public static readonly List<EnergyReplicator> Instances = new List<EnergyReplicator>();
@@ -24,8 +24,11 @@ namespace OWMiniature.Gameplay.Wrappers
 
         public KinematicRigidbody Rigidbody { get; set; }
 
-        public Transform ShootingPosition { get; private set; }
         public Vector3 Forward => _cachedTransform.right;
+        public Transform ShootingPosition { get; private set; }
+        public Transform Target => _target;
+        public bool HasTarget => _hasTarget;
+
         private ConnectionLine Line { get; set; }
 
         private Vector3 _cachedAngularVelocity;
@@ -105,7 +108,7 @@ namespace OWMiniature.Gameplay.Wrappers
 
             if (!Line.IsVisible)
             {
-                bool shouldBeHidden = !Line.VisibleInWorld && !MapUtils.IsMapOpen;
+                bool shouldBeHidden = !Line.VisibleInWorld && (!MapUtils.IsMapOpen || MapUtils.CustomMap is not CustomMapMode.EnergyReplicators);
 
                 if (shouldBeHidden)
                     Line.LerpValue = 0f;

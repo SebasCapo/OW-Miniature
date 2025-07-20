@@ -17,6 +17,7 @@
   "Star": {
     "stellarDeathType": "supernova",
     "size": 75,
+    "solarLuminosity": 0,
     "lightTint": {
       "r": 255,
       "g": 250,

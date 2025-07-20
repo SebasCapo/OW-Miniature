@@ -12,6 +12,12 @@ namespace OWMiniature.Gameplay.Interactables
         public override CustomMapMode MapMode => CustomMapMode.EnergyReplicators;
 
         /// <inheritdoc />
+        protected override Vector3 BaseOffset => new Vector3(0, -0.62f, 0);
+
+        /// <inheritdoc />
+        protected override Vector3 TerminalHeightOffset => new Vector3(0, 1f, -0.0009f);
+
+        /// <inheritdoc />
         protected override void OnTargetSelect(ReferenceFrame frame, Transform attachedObject)
         {
             base.OnTargetSelect(frame, attachedObject);

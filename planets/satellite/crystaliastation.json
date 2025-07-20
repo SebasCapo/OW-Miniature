@@ -1,6 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
-	"name": "Overview Station",
+	"name": "Crystalia Station",
 	"starSystem": "Jam5",
 	"Base": {
 		"surfaceSize": 100
@@ -17,8 +17,12 @@
         },
         "isStatic": true
 	},
+    "ReferenceFrame":
+    {
+        "enabled": false
+    },
     "MapMarker": {
-		"enabled": true
+		"enabled": false
 	},
      "Volumes": {
         "zeroGravityVolumes": 
@@ -46,12 +50,28 @@
                     "Interactibles_WhiteholeStation/StationRotationInterface"
                 ],
                 "rename": "OverviewStation",
-                "keepLoaded": true
+                "keepLoaded": false
             },
             {
                 "path": "WhiteholeStationSuperstructure_Body/Geometry_WhiteholeStationSuperstructure/ControlledByProxy_WhiteholeStation",
-                "rename": "OverviewStation",
-                "keepLoaded": true
+                "rename": "OverviewStation_Ring",
+                "keepLoaded": false
+            },
+            {
+                "rename": "EnergyReplicatorTerminal",
+                "parentPath": "CrystaliaStation_Body/Sector/OverviewStation",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "keepLoaded": false,
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": { "x": -0.018, "y": -1.679, "z": -23.97223 },
+                "rotation": { "x": 30, "y": 90.00024, "z": 90.00024 },
             }
         ],
         "warpReceivers": [

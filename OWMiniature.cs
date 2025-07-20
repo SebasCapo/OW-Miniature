@@ -64,6 +64,7 @@ public class OWMiniature : ModBehaviour
         if (!starSystem.Equals(SolarSystemName))
             return;
 
+        CrystaliaStation.Generate();
         EnergyReplicator.Generate();
         StarController.Generate();
         WarpPlatform.Generate();
@@ -88,9 +89,9 @@ public class OWMiniature : ModBehaviour
             marker.SetTarget(astroTransform);
         }
 
-        MapInteractableBase.Attach<EnergyReplicatorTerminal>(true);
-        MapInteractableBase.Attach<WarpTerminal>(true);
-        MapInteractableBase.Attach<ConnectionsMap>(true);
+        MapInteractableBase.Attach<EnergyReplicatorTerminal>();
+        MapInteractableBase.Attach<WarpTerminal>();
+        MapInteractableBase.Attach<ConnectionsMap>();
     }
 
     public void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
