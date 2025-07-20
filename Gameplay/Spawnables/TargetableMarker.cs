@@ -1,4 +1,6 @@
-﻿using OWMiniature.Utils;
+﻿using System.Collections.Generic;
+
+using OWMiniature.Utils;
 
 using UnityEngine;
 
@@ -27,9 +29,14 @@ namespace OWMiniature.Gameplay.Spawnables
             set 
             {
                 base.IsEnabled = value;
-                
-                _frameVolume.gameObject.SetActive(value);
+
+                _frameVolume.enabled = value;
                 _owr._isTargetable = value;
+
+                foreach (Collider collider in _colliders)
+                {
+                    collider.enabled = value;
+                }
             } 
         }
 
@@ -51,6 +58,7 @@ namespace OWMiniature.Gameplay.Spawnables
         private ReferenceFrameVolume _frameVolume;
         private Transform _cachedTransform;
         private OWRigidbody _owr;
+        private List<Collider> _colliders = new List<Collider>();
 
         public void SetTarget(Transform target)
         {
@@ -77,7 +85,7 @@ namespace OWMiniature.Gameplay.Spawnables
 
             base.Start();
 
-            AddCollider(gameObject, true);
+            _colliders.Add(AddCollider(gameObject, true));
 
             Rigidbody body = AddRigidbody(gameObject);
             OWRigidbody owr = AddCustomRigidbody(gameObject, body);
@@ -151,7 +159,7 @@ namespace OWMiniature.Gameplay.Spawnables
             obj.transform.SetParent(parent.transform);
             obj.transform.localPosition = Vector3.zero;
 
-            AddCollider(obj, isTrigger: true);
+            _colliders.Add(AddCollider(obj, isTrigger: true));
 
             ReferenceFrameVolume rf = obj.AddComponent<ReferenceFrameVolume>();
 

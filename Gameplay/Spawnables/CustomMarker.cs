@@ -110,7 +110,7 @@ namespace OWMiniature.Gameplay.Spawnables
             ev.Label = StartingLabel;
         }
 
-        protected virtual void RefreshVisibility()
+        protected void RefreshVisibility()
         {
             if (!MapModeExclusive)
             {
