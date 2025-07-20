@@ -59,7 +59,7 @@
             },
             {
                 "rename": "EnergyReplicatorTerminal",
-                "parentPath": "CrystaliaStation_Body/Sector/OverviewStation",
+                "parentPath": "Sector/OverviewStation",
                 "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
                 "keepLoaded": false,
                 "removeComponents": true,

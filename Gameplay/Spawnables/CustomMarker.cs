@@ -138,11 +138,7 @@ namespace OWMiniature.Gameplay.Spawnables
             if (ev.CanvasMarker != MapMarker._canvasMarker)
                 return;
 
-            bool wasVisible = ev.IsVisible;
             ev.IsVisible = this.IsMarkerActive();
-            bool isVisible = ev.IsVisible;
-
-            OWMiniature.Console.WriteLine($"");
         }
     }
 }

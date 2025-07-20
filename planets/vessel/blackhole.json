@@ -1,0 +1,49 @@
+{
+	"$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+	"name": "Gloaming Galaxy",
+	"starSystem": "Jam5",
+	"Base": {
+		"surfaceSize": 200
+	},
+	"Orbit": {
+		"semiMajorAxis": 2300,
+		"primaryBody": "Bright Spark",
+		"inclination": 0,
+        "showOrbitLine": false,
+        "trueAnomaly": 90,
+        "staticPosition": {
+            "x": 0,
+            "y": 2400,
+            "z": 0
+        },
+        "isStatic": true
+	},
+    "ShipLog":
+    {
+        "mapMode": 
+        {
+            "remove": true
+        }
+    },
+    "MapMarker": {
+		"enabled": false
+	},
+    "ReferenceFrame": 
+    {
+        "enabled": false
+    },
+    "Props": 
+    {
+        "singularities": 
+        [
+            {
+                "horizonRadius": 350,
+                "distortRadius": 0,
+                "rename": "Singularity",
+                "hasWarpEffects": true,
+                "renderQueueOverride": 3000,
+                "pairedSingularity": "TestWarp"
+            }
+        ]
+    }
+}

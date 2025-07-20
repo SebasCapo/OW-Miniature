@@ -24,6 +24,11 @@ namespace OWMiniature.Gameplay.Interactables
         {
             base.Awake();
 
+            GenerateMarkers();
+        }
+
+        private static void GenerateMarkers()
+        {
             foreach (NomaiWarpReceiver receiver in FindObjectsOfType<NomaiWarpReceiver>())
             {
                 Transform targetTransform = receiver.transform;

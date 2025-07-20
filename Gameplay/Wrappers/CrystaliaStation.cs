@@ -6,13 +6,13 @@ namespace OWMiniature.Gameplay.Wrappers
 {
     public class CrystaliaStation : MonoBehaviour
     {
-        private const string TargetObjectName = "CrystaliaStation_Body";
+        private const string TargetObjectName = "CrystaliaStation";
         public bool IsPowered { get; private set; }
         public NomaiMultiPartDoor[] Airlocks;
 
         public static void Generate()
         {
-            GameObject.Find(TargetObjectName).AddComponent<CrystaliaStation>();
+            GameObject.Find(TargetObjectName.GetHierarchyName()).AddComponent<CrystaliaStation>();
         }
 
         /// <inheritdoc />

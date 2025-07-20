@@ -27,7 +27,9 @@ namespace OWMiniature.Gameplay.Spawnables
             set 
             {
                 base.IsEnabled = value;
+                
                 _frameVolume.gameObject.SetActive(value);
+                _owr._isTargetable = value;
             } 
         }
 
@@ -48,13 +50,15 @@ namespace OWMiniature.Gameplay.Spawnables
 
         private ReferenceFrameVolume _frameVolume;
         private Transform _cachedTransform;
+        private OWRigidbody _owr;
 
         public void SetTarget(Transform target)
         {
             HasTarget = target != null;
             Target = target;
 
-            _cachedTransform.position = target.position;
+            if (HasTarget)
+                _cachedTransform.position = target.position;
         }
 
         /// <inheritdoc />
@@ -102,22 +106,22 @@ namespace OWMiniature.Gameplay.Spawnables
 
         private OWRigidbody AddCustomRigidbody(GameObject obj, Rigidbody rb)
         {
-            OWRigidbody owr = obj.GetAddComponent<OWRigidbody>();
+            _owr = obj.GetAddComponent<OWRigidbody>();
             KinematicRigidbody krd = obj.GetAddComponent<KinematicRigidbody>();
 
-            owr._rigidbody = rb;
-            owr._kinematicRigidbody = krd;
-            owr._origParent = MapUtils.SolarSystemRoot.transform;
-            owr._maintainOriginalCenterOfMass = true;
-            owr._autoGenerateCenterOfMass = true;
-            owr._kinematicSimulation = true;
-            owr._isTargetable = true;
-            owr.tag = "Ship";
+            _owr._rigidbody = rb;
+            _owr._kinematicRigidbody = krd;
+            _owr._origParent = MapUtils.SolarSystemRoot.transform;
+            _owr._maintainOriginalCenterOfMass = true;
+            _owr._autoGenerateCenterOfMass = true;
+            _owr._kinematicSimulation = true;
+            _owr._isTargetable = true;
+            _owr.tag = "Ship";
 
-            owr.MakeKinematic();
-            owr.EnableKinematicSimulation();
+            _owr.MakeKinematic();
+            _owr.EnableKinematicSimulation();
 
-            return owr;
+            return _owr;
         }
 
         private Rigidbody AddRigidbody(GameObject obj)
