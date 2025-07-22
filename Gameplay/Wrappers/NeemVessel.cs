@@ -107,8 +107,8 @@ namespace OWMiniature.Gameplay.Wrappers
                 return;
 
             _endingStarted = true;
-            //_blackHoleSector.SetActive(false);
             StarController.Instance.StartCollapse();
+            DialogueConditionManager.SharedInstance.SetConditionState("BRIGHTSPARK_ENDING_1", true);
         }
 
         private void CleanupBodies()

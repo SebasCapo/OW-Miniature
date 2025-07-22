@@ -1,3 +1,18 @@
 {
-    "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/addon_manifest_schema.json"
+    "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/addon_manifest_schema.json",
+    "credits": [
+        "Mod Creators:\n#Ender\n#Beryl",
+    ],
+    "gameOver": 
+    [
+        {
+            "creditsType": "none",
+            "text": "..and so they left, with a glimmer of hope.",
+            "condition": "BRIGHTSPARK_ENDING_1",
+            "audio": "OW New Raft Music 082321_4 AP theme",
+            "audioVolume": 0.75,
+            "length": 120,
+            "audioLooping": true
+        }
+    ]
 }
