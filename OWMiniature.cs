@@ -69,6 +69,7 @@ public class OWMiniature : ModBehaviour
         StarController.Generate();
         WarpPlatform.Generate();
         NeemVessel.Generate();
+        EnergyController.Generate();
 
         // These had to be spawned with a few seconds delay, I don't understand why, I hate it.
         StartCoroutine(SpawnDelayed(3.5f));

@@ -96,6 +96,55 @@
                     "y": 0,
                     "z": 0
                 }
+            },
+            {
+                "rename": "ConnectionsMap",
+                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "keepLoaded": true,
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": {
+                    "x": -181.0404,
+                    "y": 24.78207,
+                    "z": -122.8175
+                },
+                "rotation": {
+                    "x": 302.8683,
+                    "y": 121.0701,
+                    "z": 292.6702
+                }
+            },
+            {
+                "rename": "Door",
+                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
+                "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
+                "keepLoaded": true,
+                "position": {
+                    "x": -163.8815,
+                    "y": 48.02905,
+                    "z": -135.7594
+                },
+                "rotation": {
+                    "x": 312.7631,
+                    "y": 127.0293,
+                    "z": 287.9434
+                },
+                "scale": 0.66
+            },
+            {
+                "rename": "GravityCrystal",
+                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
+                "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+                "keepLoaded": true,
+                "position": { "x": -161.6593, "y": 53.35901, "z": -136.6572 },
+                "rotation": { "x": 21.41964, "y": 145.2162, "z": 282.9849 }
             }
         ],
         "scatter": [
@@ -143,11 +192,18 @@
                 "reveals": "ENDER_TEST_RUMOR_FACT_3"
             }
         ],
-        "warpReceivers": 
-        [
+        "warpReceivers": [
             {
-                "position": {"x": 0, "y": 324.955, "z": 0},
-                "rotation": {"x": 0, "y": 0, "z": 0},
+                "position": {
+                    "x": 0,
+                    "y": 324.955,
+                    "z": 0
+                },
+                "rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
                 "frequency": "BrightSpark_Laboratory",
                 "alignRadial": true,
                 "parentPath": "Sector/Laboratory"
