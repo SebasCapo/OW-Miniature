@@ -52,7 +52,7 @@ namespace OWMiniature.Utils
             }
         }
 
-        private static List<MapMarker> _baseMarkers;
+        private static List<MapMarker> _baseMarkers = [];
         private static Material _normalLine;
         private static Material _dottedLine;
 

@@ -1,4 +1,5 @@
 ﻿using OWMiniature.Gameplay.Lines;
+using OWMiniature.Gameplay.Spawnables;
 using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
@@ -25,6 +26,42 @@ namespace OWMiniature.Gameplay.Interactables
             foreach (EnergyReplicator replicator in EnergyReplicator.Instances)
             {
                 replicator.SetTarget(attachedObject);
+            }
+
+            NeemVessel vessel = NeemVessel.Instance;
+
+            if (vessel == null)
+                return;
+
+            if (!attachedObject.TryGetComponent(out TargetableMarker marker))
+                return;
+
+            if (!marker.HasTarget || marker.Target.gameObject != vessel.gameObject)
+                return;
+
+            NeemVessel.BeginEnding();
+        }
+
+        /// <inheritdoc />
+        protected override void Awake()
+        {
+            base.Awake();
+
+            GenerateMarkers();
+        }
+
+        private static void GenerateMarkers()
+        {
+            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
+            {
+                Transform astroTransform = astro.gameObject.transform;
+                GameObject markerObj = astroTransform.CreateChild(objName: "Custom Marker");
+                TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
+
+                marker.StartingLabel = $"<color=green>Test</color>";
+                marker.MapMode = CustomMapMode.EnergyReplicators;
+                marker.MapModeExclusive = true;
+                marker.SetTarget(astroTransform);
             }
         }
     }

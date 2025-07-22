@@ -110,7 +110,7 @@ namespace OWMiniature.Gameplay.Spawnables
             ev.Label = StartingLabel;
         }
 
-        protected virtual void RefreshVisibility()
+        protected void RefreshVisibility()
         {
             if (!MapModeExclusive)
             {
@@ -138,11 +138,7 @@ namespace OWMiniature.Gameplay.Spawnables
             if (ev.CanvasMarker != MapMarker._canvasMarker)
                 return;
 
-            bool wasVisible = ev.IsVisible;
             ev.IsVisible = this.IsMarkerActive();
-            bool isVisible = ev.IsVisible;
-
-            OWMiniature.Console.WriteLine($"");
         }
     }
 }
