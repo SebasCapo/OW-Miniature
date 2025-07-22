@@ -42,7 +42,8 @@
             "b": 64,
             "a": 64
         },
-        "size": 315
+        "size": 315,
+        "buoyancy": 1
     },
     "Props": {
         "details": [
@@ -123,28 +124,18 @@
             },
             {
                 "rename": "Door",
-                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
-                "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
+                "path": "WhiteholeStation_Body/Sector_WhiteholeStation/Interactibles_WhiteholeStation/Prefab_NOM_Airlock",
                 "keepLoaded": true,
                 "position": {
-                    "x": -163.8815,
-                    "y": 48.02905,
-                    "z": -135.7594
+                    "x": -164.61,
+                    "y": 51.13,
+                    "z": -138.85
                 },
                 "rotation": {
-                    "x": 312.7631,
-                    "y": 127.0293,
-                    "z": 287.9434
-                },
-                "scale": 0.66
-            },
-            {
-                "rename": "GravityCrystal",
-                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
-                "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
-                "keepLoaded": true,
-                "position": { "x": -161.6593, "y": 53.35901, "z": -136.6572 },
-                "rotation": { "x": 21.41964, "y": 145.2162, "z": 282.9849 }
+                    "x": 0.99,
+                    "y": 35.51,
+                    "z": 48.55
+                }
             }
         ],
         "scatter": [

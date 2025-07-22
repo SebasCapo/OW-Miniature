@@ -32,14 +32,25 @@ namespace OWMiniature.Gameplay.Wrappers
         /// <inheritdoc />
         protected void Update()
         {
+            bool wasPowered = IsPowered;
+
             UpdatePoweredState();
+
+            if (wasPowered && IsPowered)
+                return;
 
             if (Doors == null || Doors.Length == 0)
                 return;
-
+            
             foreach (var item in Doors)
             {
-                item._locked = !IsPowered;
+                bool isOpen = item.IsOpen();
+
+                if (!wasPowered && IsPowered)
+                    item.Close(null);
+
+                if (!IsPowered && !isOpen)
+                    item.Open(null);
             }
         }
 
@@ -51,7 +62,7 @@ namespace OWMiniature.Gameplay.Wrappers
                 if (!rep.HasTarget)
                     return;
 
-                if (rep.Target != gameObject)
+                if (rep.Target.gameObject.name != gameObject.name)
                     continue;
 
                 stationEnergy++;
