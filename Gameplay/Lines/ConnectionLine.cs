@@ -27,6 +27,9 @@ namespace OWMiniature.Gameplay.Lines
         /// <inheritdoc />
         public override bool VisibleInWorld { get; set; } = false;
 
+        /// <inheritdoc />
+        public bool SwapPositions { get; set; } = false;
+
         /// <summary>
         /// The point between the "origin" and "target" position at which the line will end.
         /// </summary>
@@ -41,8 +44,8 @@ namespace OWMiniature.Gameplay.Lines
         public float LerpSpeed { get; set; } = 0.5f;
 
         private Transform _cachedTransform;
-        private Color _startColor/* = Color.green*/;
-        private Color _endColor/* = Color.cyan*/;
+        private Color _startColor;
+        private Color _endColor;
 
         /// <summary>
         /// Sets the <see cref="StartColor"/> and <see cref="EndColor"/> of this line.
@@ -84,8 +87,8 @@ namespace OWMiniature.Gameplay.Lines
                 target = Vector3.Lerp(origin, target, LerpValue);
             }
 
-            Line.SetPosition(0, origin);
-            Line.SetPosition(1, target);
+            Line.SetPosition(0, SwapPositions ? target : origin);
+            Line.SetPosition(1, SwapPositions ? origin : target);
         }
     }
 }

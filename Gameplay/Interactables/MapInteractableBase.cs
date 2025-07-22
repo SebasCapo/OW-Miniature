@@ -60,6 +60,8 @@ namespace OWMiniature.Gameplay.Interactables
         /// </summary>
         protected virtual Vector3 TerminalHeightOffset => Vector3.up;
 
+        protected abstract string MapViewText { get; }
+
         /// <summary>
         /// The <see cref="PlanetaryLineBase">lines</see> created by this <see cref="MapInteractableBase"/>.
         /// </summary>
@@ -153,7 +155,7 @@ namespace OWMiniature.Gameplay.Interactables
 
             if (_screenPrompt == null)
             {
-                _screenPrompt = new ScreenPrompt(InputLibrary.lockOn, $"{MapMode}", 0, ScreenPrompt.DisplayState.Normal, false);
+                _screenPrompt = new ScreenPrompt(InputLibrary.lockOn, MapViewText, 0, ScreenPrompt.DisplayState.Normal, false);
                 Locator.GetPromptManager().AddScreenPrompt(_screenPrompt, PromptPosition.UpperRight, false);
             }
         }
