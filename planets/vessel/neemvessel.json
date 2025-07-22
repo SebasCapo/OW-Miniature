@@ -3,7 +3,8 @@
 	"name": "Nomai Vessel",
 	"starSystem": "Jam5",
 	"Base": {
-		"surfaceSize": 100
+		"surfaceSize": 100,
+        "showMinimap": false
 	},
 	"Orbit": {
 		"semiMajorAxis": 2300,
@@ -12,8 +13,8 @@
         "trueAnomaly": 90,
         "staticPosition": {
             "x": 0,
-            "y": 1000,
-            "z": 0
+            "y": 1500,
+            "z": 200
         },
         "isStatic": true
 	},
@@ -68,6 +69,13 @@
                 "startWithSuit": true,
                 "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_NOMAI",
                 "alignRadial": true
+            }
+        ],
+        "shipSpawnPoints": [
+            {
+                "position": {"x": -61.67292, "y": -45.8276, "z": -120.9503},
+                "rotation": {"x": 346.3585, "y": 126.2409, "z": 4.162411},
+                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_NOMAI"
             }
         ]
     },

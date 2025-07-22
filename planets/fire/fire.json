@@ -8,16 +8,16 @@
         "surfaceGravity": 12
     },
     "Orbit": {
-        "semiMajorAxis": 900,
+        "semiMajorAxis": 700,
         "primaryBody": "Bright Spark"
     },
     "Atmosphere": {
         "size": 200,
         "fogTint": {
-            "r": 200,
-            "g": 200,
-            "b": 200,
-            "a": 175
+            "r": 250,
+            "g": 193,
+            "b": 101,
+            "a": 255
         },
         "fogSize": 200,
         "fogDensity": 0.2,
@@ -28,9 +28,9 @@
             "texturePath": "assets/textures/cloudtest.png",
             "tint":
             {
-                "r" : 190,
-                "g" : 150,
-                "b" : 19,
+                "r" : 250,
+                "g" : 193,
+                "b" : 101,
                 "a" : 255
             },
             "fluidType": "plasma",

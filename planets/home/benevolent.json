@@ -1,14 +1,14 @@
 {
     "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
-    "name": "Benevolent Reprieve",
+    "name": "Benevolent Basin",
     "starSystem": "Jam5",
     "Base": {
         "groundSize": 0,
-        "surfaceSize": 440,
-        "surfaceGravity": 23
+        "surfaceSize": 350,
+        "surfaceGravity": 19
     },
     "Orbit": {
-        "semiMajorAxis": 1900,
+        "semiMajorAxis": 1300,
         "primaryBody": "Bright Spark",
         "initialRotation": 0,
         "trueAnomaly": 165
@@ -32,22 +32,17 @@
 	    "heightMap" : "assets/textures/homeheight.png",	
         "textureMap": "assets/textures/hometext.png",
         "smoothnessMap": "assets/textures/homesmooth.png",
-	    "minHeight" : 380,
-		"maxHeight" : 440
+	    "minHeight" : 50,
+		"maxHeight" : 330
 	},
     "Water": {
         "tint": {
-            "r": 13,
-            "g": 128,
-            "b": 255,
-            "a": 255
+            "r": 4,
+            "g": 16,
+            "b": 64,
+            "a": 64
         },
-        "size": 385,
-        "curve":
-        [
-            {"time": 10, "value":1.0},
-            {"time": 20, "value":1.1}
-        ]
+        "size": 315
     },
     "Props": {
         "details": [
@@ -56,19 +51,24 @@
             "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
             "position": {"x": 62.60316, "y": 432.9628, "z": -16.33652},
             "rotation": {"x": 356.1786, "y": 335.7569, "z": 352.7908}
-        },
-        {
-            "rename": "LightTest",
-            "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Staff",
-            "position": {"x": 52.50924, "y": 432.9218, "z": 30.16298},
-            "rotation": {"x": 1.416404, "y": 142.2292, "z": 7.102391}
-        },
-        {
-            "rename": "CampfireTest",
-            "path": "TimberHearth_Body/Sector_TH/Sector_RadioTower/RadioTower_DLC/Interactibles_RadioTower/Hornfels'GrovePivot/Prefab_HEA_Campfire",
-            "position": {"x": 63.10164, "y": 432.6925, "z": 1.401495},
-            "rotation": {"x": 356.882, "y": 323.1868, "z": 352.1926}
         }
+        ],
+        "scatter": [
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_TH/Interactables_THState/Crater_Surface/Surface_AlpineClump_S/Surface_AlpineClump_S/BatchedGroup",
+                "count": 12,
+                "minHeight": 323
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_TH/Interactables_THState/Crater_Surface/Surface_AlpineClump_L/Q_AlpineClump_L/BatchedGroup",
+                "count": 12,
+                "minHeight": 323
+            },
+            {
+                "path": "QuantumMoon_Body/Sector_QuantumMoon/State_TH/Interactables_THState/Crater_Surface/Surface_AlpineClump_S/Surface_AlpineClump_S/BatchedGroup",
+                "count": 60,
+                "minHeight": 323
+            }
         ],
         "dialogue" :
         [
@@ -99,7 +99,7 @@
         "Spawn": {
             "playerSpawnPoints": [
             {
-                "position": {"x": 58.5487, "y": 433.2654, "z": 3.371964},
+                "position": {"x": 36.89075, "y": 331.6643, "z": 10.33467},
                 "startWithSuit": true,
                 "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME",
                 "alignRadial": true
@@ -107,8 +107,8 @@
         ],
         "shipSpawnPoints": [
             {
-                "position": {"x": 52.23612, "y": 444.4367, "z": -6.566679},
-                "rotation": {"x": 2.211086, "y": 48.47688, "z": 353.9194},
+                "position": {"x": 35.33315, "y": 337.381, "z": -3.429382},
+                "rotation": {"x": 357.683, "y": 339.0251, "z": 353.9799},
                 "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME"
             }
         ]
