@@ -47,7 +47,7 @@ namespace OWMiniature.Gameplay.Interactables
 
                 isInputCorrect = IsInputCorrect;
                 string code = string.Join(string.Empty, _input);
-                string validate = isInputCorrect ? "<<< SEQUENCE INITIATED >>>" : $"[INVALID CODE] {code}";
+                string validate = isInputCorrect ? ">>> SEQUENCE INITIATED <<<" : $"[INVALID CODE] {code}";
 
                 _codePrompt.SetText(validate);
             }
@@ -111,6 +111,7 @@ namespace OWMiniature.Gameplay.Interactables
             base.OnEnterMapView();
 
             _codePrompt.SetText(AwaitingInput);
+            PlayerData.SetPersistentCondition("CodeObtained", true);
             UpdatePromptVisibility(true);
         }
 

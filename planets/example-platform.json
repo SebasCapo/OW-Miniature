@@ -9,46 +9,34 @@
   "Props": {
     "details": [
       {
-        "rename": "ShatteredCrystal3",
-        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
-        "position": {
+           "rename": "ShowcaseMap",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": {
           "x": 0,
           "y": 0,
           "z": 60
-        },
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0
-        }
-      },
+                },
+            },
+    ],
+    "dialogue": 
+    [
       {
-        "rename": "ShatteredCrystal2",
-        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
-        "position": {
-          "x": -5,
-          "y": 0,
-          "z": 60
-        },
-        "rotation": {
+        "position": 
+        {
           "x": 0,
           "y": 0,
           "z": 0
-        }
-      },
-      {
-        "rename": "ShatteredCrystal",
-        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
-        "position": {
-          "x": 5,
-          "y": 0,
-          "z": 60
         },
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0
-        }
+        "xmlFile" : "assets/dialogue/platform.xml",
+        "range": 4
       }
     ],
     "signals": [
