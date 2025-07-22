@@ -42,7 +42,8 @@
             "b": 64,
             "a": 64
         },
-        "size": 315
+        "size": 315,
+        "buoyancy": 1
     },
     "Props": {
         "details": [
@@ -79,6 +80,45 @@
                     "x": 0,
                     "y": 0,
                     "z": 0
+                }
+            },
+            {
+                "rename": "ConnectionsMap",
+                "parentPath": "BenevolentBasin_Body/Sector/UnderwaterLaboratory/Structure_NOM_SunStation_ControlINT/CONTROL_INT_COLLIDE",
+                "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket/Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+                "keepLoaded": true,
+                "removeComponents": true,
+                "removeChildren": [
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (1)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (2)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (3)/Props_NOM_VesselComputer_Ring",
+                    "Props_NOM_Vessel_Computer 1/Props_NOM_Vessel_Computer_Effects (4)/Props_NOM_VesselComputer_Ring"
+                ],
+                "position": {
+                    "x": -181.0404,
+                    "y": 24.78207,
+                    "z": -122.8175
+                },
+                "rotation": {
+                    "x": 302.8683,
+                    "y": 121.0701,
+                    "z": 292.6702
+                }
+            },
+            {
+                "rename": "Door",
+                "path": "WhiteholeStation_Body/Sector_WhiteholeStation/Interactibles_WhiteholeStation/Prefab_NOM_Airlock",
+                "keepLoaded": true,
+                "position": {
+                    "x": -164.61,
+                    "y": 51.13,
+                    "z": -138.85
+                },
+                "rotation": {
+                    "x": 0.99,
+                    "y": 35.51,
+                    "z": 48.55
                 }
             }
         ],
@@ -138,11 +178,18 @@
 				"alignRadial": true
 			}
         ],
-        "warpReceivers": 
-        [
+        "warpReceivers": [
             {
-                "position": {"x": 0, "y": 324.955, "z": 0},
-                "rotation": {"x": 0, "y": 0, "z": 0},
+                "position": {
+                    "x": 0,
+                    "y": 324.955,
+                    "z": 0
+                },
+                "rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
                 "frequency": "BrightSpark_Laboratory",
                 "alignRadial": true,
                 "parentPath": "Sector/Laboratory"

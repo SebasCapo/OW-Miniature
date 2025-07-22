@@ -98,7 +98,9 @@ namespace OWMiniature.Gameplay.Interactables
             base.OnExitMapView();
 
             _connections.Clear();
-            _input.Clear();
+
+            if (!IsInputCorrect)
+                _input.Clear();
 
             UpdatePromptVisibility(false);
         }
