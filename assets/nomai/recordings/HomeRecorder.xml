@@ -1,0 +1,83 @@
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+	<TextBlock>
+		<ID>1</ID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: Are you ready, <![CDATA[<color=#B3E2AE>Enginell</color>]]>? </Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>2</ID>
+		<ParentID>1</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: About as ready as I'll ever be.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>3</ID>
+		<ParentID>2</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: Have you checked the targeting mechanisms?</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>4</ID>
+		<ParentID>3</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: Yes, I've ensured they can target any planet in the system.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>5</ID>
+		<ParentID>4</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: What is the status of the the mass condensors?</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>6</ID>
+		<ParentID>5</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: They are still functioning at near-perfect efficiency.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>7</ID>
+		<ParentID>6</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: Have you ensured that the self-looping warp is still calibrated? I know we had struggles with the lens, but we can't afford to--</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>8</ID>
+		<ParentID>7</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: <![CDATA[<color=#EAF0B4>Reseircha</color>]]>, before we begin, I wanted to discuss a new hypothesis.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>9</ID>
+		<ParentID>8</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: A hypothesis? What is it?</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>10</ID>
+		<ParentID>9</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: Hypothesis: You worry far too much.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>11</ID>
+		<ParentID>10</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: We have ensured the safety of this test countless times over. Every single potential issue has been accounted for.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>12</ID>
+		<ParentID>11</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: The festival is right around the corner. Think of how much we could further the Nomai species with this discovery!</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>13</ID>
+		<ParentID>12</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: It's not like we're aiming to fundamentally destroy our understanding of the laws of thermodynamics here.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>14</ID>
+		<ParentID>13</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: ...</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>15</ID>
+		<ParentID>14</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: You can never be too careful, <![CDATA[<color=#B3E2AE>Enginell</color>]]>. But you are correct. It is time to begin testing.</Text>
+	</TextBlock>
+    <TextBlock>
+		<ID>16</ID>
+		<ParentID>15</ParentID>
+		<Text><![CDATA[<color=#EAF0B4>RESEIRCHA</color>]]>: Let's make our way to the lab. The valley of the northern glacier cap isn't too far a walk from here.</Text>
+	</TextBlock>
+</NomaiObject>
+
+  

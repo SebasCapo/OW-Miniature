@@ -1,0 +1,58 @@
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+	<TextBlock>
+		<ID>1</ID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: I am preserving this recording as an explanation to what has happened to this system.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>2</ID>
+		<ParentID>1</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: We are the Nomai, a peaceful species driven by our pursuit of knowledge. </Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>3</ID>
+		<ParentID>2</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: This laboratory was constructed to research a potential means of creating infinite, clean energy. </Text> 
+	</TextBlock>
+	<TextBlock>
+		<ID>4</ID>
+		<ParentID>3</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: We have invented specialized 'Energy Replicators', capable of producing an excess energy without the introduction of additional matter.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>5</ID>
+		<ParentID>4</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: A recent test with these Energy Replicators has gone awry. It has destroyed one of the systems planets, leaving a molten core surrounded by a cloud of debris.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>6</ID>
+		<ParentID>5</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: Due to its proximity, the glacial planet we have come to call home is melting. This lab will soon be flooded.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>7</ID>
+		<ParentID>6</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: This system has been irreversibly damaged. Our actions constitude an act of war in most galactic diplomatic regions. We Nomai cannot afford to be seen having caused this.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>8</ID>
+		<ParentID>7</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: It pains me to say this, but we must evacuate this system immediately.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>9</ID>
+		<ParentID>8</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: If you are reading this recording, know that we Nomai did not intend to cause this senseless destruction.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>10</ID>
+		<ParentID>9</ParentID>
+		<Text><![CDATA[<color=#E0ACAC>ZENIVE</color>]]>: I do not have the time to redact our research. I am leaving this message to urge readers to reconsider any findings within this structure. Our mistake cannot afford to be repeated.</Text>
+	</TextBlock>
+	<TextBlock>
+		<ID>11</ID>
+		<ParentID>10</ParentID>
+		<Text><![CDATA[<color=#B3E2AE>ENGINELL</color>]]>: <![CDATA[<color=#E0ACAC>Zenive</color>]]>! What are you still doing in the laboratory? We need to go, come on!</Text>
+	</TextBlock>
+</NomaiObject>
+
+  
