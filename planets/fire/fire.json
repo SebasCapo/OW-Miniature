@@ -3,7 +3,7 @@
     "name": "Molten Fury",
     "starSystem": "Jam5",
     "Base": {
-        "groundSize": 101,
+        "groundSize": 0,
         "surfaceSize": 100,
         "surfaceGravity": 12
     },
@@ -36,6 +36,9 @@
             "fluidType": "plasma",
             "hasLightning": true
         }
+    },
+    "Lava": {
+        "size": 80
     },
     "MapMarker": {
         "enabled": true
