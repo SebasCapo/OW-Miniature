@@ -31,7 +31,7 @@
 				"rename": "VesselRecorder",
                 "isRelativeToParent": true,
 				"path" : "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo", 
-                "position": {"x": 11.17003, "y": -6.920934, "z": -21.70194},
+                "position": {"x": 15.24598, "y": -6.912521, "z": -22.00761},
                 "rotation": {"x": 0.07074948, "y": 1.081161, "z": 0.1141388}
 			}, 
             {
@@ -56,18 +56,19 @@
                     "y": 270,
                     "z": 0
                 }
-            },
+            }
         ],
         "dialogue": [
 			{
-				"position": {"x": 11.17003, "y": -6.920934, "z": -21.70194},
+				"position": {"x": 15.24598, "y": -6.912521, "z": -22.00761},
 				"xmlFile" : "assets/dialogue/TestRecorder3.xml"
 			},
             {
-				"position": {"x": 9.199162, "y": -6.924936, "z": -21.60563},
+				"position": {"x": 9.191265, "y": -5.432755, "z": -21.01389},
                 "pathToAnimController": "Sector/Neem",
                 "lookAtRadius" : 10,
-				"xmlFile" : "assets/dialogue/Neem.xml"
+				"xmlFile" : "assets/dialogue/Neem.xml",
+                "range": 10
 			}
         ],
         "warpReceivers": [
