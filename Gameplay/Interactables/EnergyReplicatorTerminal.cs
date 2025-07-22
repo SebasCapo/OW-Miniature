@@ -19,6 +19,9 @@ namespace OWMiniature.Gameplay.Interactables
         protected override Vector3 TerminalHeightOffset => new Vector3(0, 1f, -0.0009f);
 
         /// <inheritdoc />
+        protected override string MapViewText => "Restore Energy";
+
+        /// <inheritdoc />
         protected override void OnTargetSelect(ReferenceFrame frame, Transform attachedObject)
         {
             base.OnTargetSelect(frame, attachedObject);

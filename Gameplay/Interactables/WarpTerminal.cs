@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 
 using OWMiniature.Gameplay.Spawnables;
-using OWMiniature.Gameplay.Wrappers;
 using OWMiniature.Utils;
 
 using UnityEngine;
-using UnityEngine.Timeline;
 
 namespace OWMiniature.Gameplay.Interactables
 {
@@ -18,6 +16,9 @@ namespace OWMiniature.Gameplay.Interactables
 
         /// <inheritdoc />
         public override CustomMapMode MapMode => CustomMapMode.WarpTower;
+
+        /// <inheritdoc />
+        protected override string MapViewText => "Select Warp Target";
 
         /// <inheritdoc />
         protected override void Awake()
