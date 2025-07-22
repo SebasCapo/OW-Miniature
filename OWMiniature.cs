@@ -71,24 +71,12 @@ public class OWMiniature : ModBehaviour
         NeemVessel.Generate();
 
         // These had to be spawned with a few seconds delay, I don't understand why, I hate it.
-        StartCoroutine(SpawnDelayed(5f));
+        StartCoroutine(SpawnDelayed(3.5f));
     }
 
     private IEnumerator SpawnDelayed(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
-        {
-            Transform astroTransform = astro.gameObject.transform;
-            GameObject markerObj = astroTransform.CreateChild(objName: "Custom Marker");
-            TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
-
-            marker.StartingLabel = $"<color=green>Test</color>";
-            marker.MapMode = CustomMapMode.EnergyReplicators;
-            marker.MapModeExclusive = true;
-            marker.SetTarget(astroTransform);
-        }
 
         MapInteractableBase.Attach<EnergyReplicatorTerminal>();
         MapInteractableBase.Attach<WarpTerminal>();

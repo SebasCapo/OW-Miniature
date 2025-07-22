@@ -29,8 +29,13 @@ namespace OWMiniature.Gameplay.Interactables
 
         private static void GenerateMarkers()
         {
-            foreach (NomaiWarpReceiver receiver in FindObjectsOfType<NomaiWarpReceiver>())
+            foreach (AstroObject astro in PlanetaryUtils.AstroObjects)
             {
+                NomaiWarpReceiver receiver = astro.GetComponentInChildren<NomaiWarpReceiver>();
+
+                if (receiver == null)
+                    continue;
+
                 Transform targetTransform = receiver.transform;
                 GameObject markerObj = targetTransform.CreateChild(objName: "Custom Marker");
                 TargetableMarker marker = markerObj.AddComponent<TargetableMarker>();
