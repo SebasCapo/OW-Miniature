@@ -28,13 +28,13 @@
     "MapMarker": {
         "enabled": true
     },
-    "HeightMap": {
-        "heightMap": "assets/textures/homeheight.png",
+    "HeightMap" :{
+	    "heightMap" : "assets/textures/homeheight.png",	
         "textureMap": "assets/textures/hometext.png",
         "smoothnessMap": "assets/textures/homesmooth.png",
-        "minHeight": 50,
-        "maxHeight": 330
-    },
+	    "minHeight" : 50,
+		"maxHeight" : 330
+	},
     "Water": {
         "tint": {
             "r": 4,
@@ -46,37 +46,21 @@
     },
     "Props": {
         "details": [
-            {
-                "rename": "HomeRecorder",
-                "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
-                "position": {
-                    "x": 0.2762703,
-                    "y": 324.4474,
-                    "z": -0.2780558
-                },
-                "rotation": {
-                    "x": 0,
-                    "y": 39.77163,
-                    "z": 0
-                }
-            },
-            {
-                "rename": "UnderwaterLaboratory",
-                "path": "SunStation_Body/Sector_SunStation/Geometry_SunStation/SunStation_ControlModule_Geo/",
-                "position": {
-                    "x": -165.3775,
-                    "y": 46.20479,
-                    "z": -134.5878
-                },
-                "rotation": {
-                    "x": 39.80576,
-                    "y": 150.6709,
-                    "z": 285.8003
-                },
-                "scale": 1,
-                "keepLoaded": true
-            },
-            {
+        {
+            "rename": "HomeRecorder",
+            "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
+            "position": {"x": 0.2762703, "y": 324.4474, "z": -0.2780558},
+            "rotation": {"x": 0, "y": 39.77163, "z": 0}
+        },
+        {
+            "rename": "UnderwaterLaboratory",
+            "path": "SunStation_Body/Sector_SunStation/Geometry_SunStation/SunStation_ControlModule_Geo/",
+            "position": {"x": -165.3775, "y": 46.20479, "z": -134.5878},
+            "rotation": {"x": 39.80576, "y": 150.6709, "z": 285.8003},
+            "scale": 1,
+            "keepLoaded": true
+        },
+        {
                 "rename": "Laboratory",
                 "path": "TowerTwin_Body/Sector_TowerTwin/Sector_Tower_BH",
                 "removeChildren": [
@@ -115,33 +99,44 @@
                 "minHeight": 323
             }
         ],
-        "dialogue": [
+        "dialogue" :
+        [
             {
-                "position": {
-                    "x": 0.2762703,
-                    "y": 324.4474,
-                    "z": -0.2780558
-                },
+                "position": {"x": 11.78239, "y": 323.962, "z": 14.10027},
                 "range": 4,
                 "isRelativeToParent": true,
-                "xmlFile": "assets/dialogue/TestDialogue2.xml"
+                "xmlFile" : "assets/dialogue/TestDialogue2.xml"
             }
         ],
-        "signals": [
+        "translatorText": [
+			{
+				"position": {"x": -4.428329, "y": 325.7996, "z": 5.166278},
+                "rotation": {"x": 359.9509, "y": 100.0123, "z": 0.0762984},
+				"xmlFile": "assets/nomai/recordings/HomeRecorder.xml",
+				"type": "recorder",
+				"alignRadial": true
+			},
             {
-                "audio": "Sun_Collapse",
-                "parentPath": "Sector/HomeRecorder",
-                "isRelativeToParent": true,
-                "name": "Home Recorder",
-                "frequency": "ENDER_TEST",
-                "onlyAudibleToScope": false,
-                "volume": 1,
-                "maxDistance": 20,
-                "minDistance": 5,
-                "sourceRadius": 5,
-                "detectionRadius": 55,
-                "reveals": "ENDER_TEST_RUMOR_FACT_3"
-            }
+                "position": {"x": -157.5856, "y": 61.01195, "z": -137.6558},
+                "rotation": {"x": 0.1847, "y": 110.8267, "z": 0.9386},
+				"xmlFile": "assets/nomai/recordings/LabRecorder.xml",
+				"type": "recorder",
+				"alignRadial": true
+			},
+            {
+                "position": {"x": -167.0027, "y": 41.5971, "z": -134.1448},
+                "rotation": {"x": 0.99804, "y": 113.5699, "z": 0.5965},
+				"xmlFile": "assets/nomai/recordings/LabRecorderInside.xml",
+				"type": "recorder",
+				"alignRadial": true
+			},
+            {
+                "position": {"x": -179.2804, "y": 31.40936, "z": -122.7213},
+                "rotation": {"x": 0.6596, "y": 113.9622, "z": 0.8852},
+				"xmlFile": "assets/nomai/recordings/LabRecorderInfo.xml",
+				"type": "recorder",
+				"alignRadial": true
+			}
         ],
         "warpReceivers": 
         [
@@ -153,15 +148,11 @@
                 "parentPath": "Sector/Laboratory"
             }
         ]
-    },
-    "Spawn": {
-        "playerSpawnPoints": [
+    }, 
+        "Spawn": {
+            "playerSpawnPoints": [
             {
-                "position": {
-                    "x": 0.2762703,
-                    "y": 324.4474,
-                    "z": -0.2780558
-                },
+                "position": {"x": 0.2762703, "y": 324.4474, "z": -0.2780558},
                 "startWithSuit": true,
                 "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME",
                 "alignRadial": true
@@ -169,16 +160,8 @@
         ],
         "shipSpawnPoints": [
             {
-                "position": {
-                    "x": 20.33315,
-                    "y": 337.381,
-                    "z": 20.429382
-                },
-                "rotation": {
-                    "x": 0,
-                    "y": 39.77163,
-                    "z": 0
-                },
+                "position": {"x": 20.33315, "y": 337.381, "z": 20.429382},
+                "rotation": {"x": 0, "y": 39.77163, "z": 0},
                 "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME"
             }
         ]
@@ -187,5 +170,7 @@
         {
             "intensity": 1
         }
-    ]
+    ]   
 }
+
+
