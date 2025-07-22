@@ -1,78 +1,120 @@
-<!-- Example Dialogue -->
-<!-- All files must have `DialogueTree` as the root element, the xmlns:xsi=... and xsi:noNamespaceSchemaLocation=... is optional but provides improved error checking if your editor supports it -->
+
 <DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
- <NameField>Demo Reel</NameField> <!-- The name of this character -->
+ <NameField>Neem</NameField>
 
- <DialogueNode> <!-- A dialogue node is a set of pages displayed to the player optionally followed by options -->
-  <Name>Start</Name> <!-- The name of this node, used to go to this node from another node -->
-  <EntryCondition>DEFAULT</EntryCondition> <!-- The condition that must be met for this node to be reached; A file should always have a node with "DEFAULT" -->
-  <Dialogue> <!-- The actual dialogue we want to show the player -->
-   <Page>Start</Page> <!-- A single page of the dialogue -->
-        <Page>Start Part 2</Page> <!-- Another page -->
+ <DialogueNode>
+  <Name>Start</Name>
+  <EntryCondition>DEFAULT</EntryCondition>
+  <SetPersistentCondition>MeetNeem</SetPersistentCondition>
+  <Dialogue>
+      <Page>...</Page>
+      <Page>Hello there, golden one.</Page>
+      <Page>Can you understand me? Does my translator work towards your native tongue?</Page>
   </Dialogue>
 
   <DialogueOptionsList> <!-- Show options the player can choose from when the character is done talking -->
    <DialogueOption> <!-- A single option the player can pick -->
-    <Text>Override Spawn @ 1</Text> <!-- The text to display for the option -->
+    <Text>Yes, your translator works.</Text> <!-- The text to display for the option -->
     <DialogueTarget>1</DialogueTarget> <!-- The name of the node to jump to -->
    </DialogueOption>
-   <!-- A few more options... -->
    <DialogueOption>
-    <Text>Disable Override @ 2</Text>
-    <DialogueTarget>2</DialogueTarget>
-   </DialogueOption>
-   <DialogueOption>
-    <Text>End Discussion</Text>
-    <DialogueTarget>End</DialogueTarget>
-   </DialogueOption>
-  </DialogueOptionsList>
- </DialogueNode>
-
- <DialogueNode> <!-- Another node -->
-  <Name>1</Name> <!-- Name of the node -->
-  <!-- (Note the lack of an EntryCondition) -->
-  <SetPersistentCondition>ENDER_OVERRIDE_SPAWN_NOMAI</SetPersistentCondition>
-  <Dialogue>
-   <Page>Node 1 has overriden spawn!</Page>
-  </Dialogue>
-
-  <DialogueOptionsList>
-   <DialogueOption>
-    <Text>Disable Override @ 2</Text>
-    <DialogueTarget>2</DialogueTarget>
-   </DialogueOption>
-   <DialogueOption>
-    <Text>End Discussion</Text>
-    <DialogueTarget>End</DialogueTarget>
-   </DialogueOption>
-  </DialogueOptionsList>
- </DialogueNode>
-
- <DialogueNode> <!-- Another node why not -->
-  <Name>2</Name>
-  <DisablePersistentCondition>ENDER_OVERRIDE_SPAWN_NOMAI</DisablePersistentCondition>
-  <Dialogue>
-   <Page>Node 2 has removed spawn overrides!</Page>
-  </Dialogue>
-
-  <DialogueOptionsList>
-   <DialogueOption>
-    <Text>Override Spawn @ 1</Text>
+    <Text>I can hear you just fine!</Text>
     <DialogueTarget>1</DialogueTarget>
    </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+ <DialogueNode>
+  <Name>1</Name>
+  <Dialogue>
+   <Page>I'm glad to hear it!</Page>
+   <Page>It's not every day that a stranger like you boards our Vessel.</Page>
+   <Page>...especially through the giant hole in our hull.</Page>
+  </Dialogue>
+
+  <DialogueOptionsList>
    <DialogueOption>
-    <Text>End Discussion</Text>
-    <DialogueTarget>End</DialogueTarget>
+    <Text>What happened to you?</Text>
+    <DialogueTarget>2</DialogueTarget>
+   </DialogueOption>
+   <DialogueOption>
+    <Text>How'd that come to be?</Text>
+    <DialogueTarget>2</DialogueTarget>
    </DialogueOption>
   </DialogueOptionsList>
  </DialogueNode>
 
- <DialogueNode> <!-- The end node -->
-  <Name>End</Name>
+ <DialogueNode>
+  <Name>2</Name>
   <Dialogue>
-   <Page>Done!</Page>
+   <Page>A collision occurred while en-route. The Vessel teleported directly into an asteroid. I was forced to make an emergency jump.</Page>
+   <Page>Luckily this system is known to us. The Bright Spark trio houses a Nomai clan here.</Page>
+   <Page>...or so it did. I've been trying to contact any nearby communicators, but nothing has come of it.</Page>
+   <Page>Our communications system has not been damaged, and by the lack of noticable activity, I've begun to worry.</Page>
   </Dialogue>
-  <!-- When a node doesn't have any options defined the dialogue box will close once the pages have been read -->
+
+  <DialogueOptionsList>
+   <DialogueOption>
+    <Text>Are you okay?</Text>
+    <DialogueTarget>3</DialogueTarget>
+   </DialogueOption>
+   <DialogueOption>
+    <Text>Is there anything I can do?</Text>
+    <DialogueTarget>3</DialogueTarget>
+   </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+ <DialogueNode>
+  <Name>3</Name>
+  <Dialogue>
+   <Page>The lack of activity is frightening.</Page>
+      <Page>The Nomai that lived here were known to survive on the largest planet in the system.</Page>
+      <Page>We need their help in order to repair my ship. The electrical systems have been heavily damaged, and we don't have enough power to make any subsequent jumps.</Page>
+      <Page>As it seems that you holster a functional space-fairing craft, would you be able to offer some assistance?</Page>
+  </Dialogue>
+
+  <DialogueOptionsList>
+   <DialogueOption>
+    <Text>Sure. What do I need to do?</Text>
+    <DialogueTarget>4</DialogueTarget>
+   </DialogueOption>
+   <DialogueOption>
+    <Text>I'm not too sure about that...</Text>
+    <DialogueTarget>FakeOut</DialogueTarget>
+   </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+ <DialogueNode>
+  <Name>FakeOut</Name>
+  <Dialogue>
+   <Page>Please.</Page>
+      <Page>There's not much I can do without your help.</Page>
+  </Dialogue>
+
+<DialogueOptionsList>
+   <DialogueOption>
+    <Text>I'll help you.</Text>
+    <DialogueTarget>4</DialogueTarget>
+   </DialogueOption>
+   <DialogueOption>
+    <Text>I've changed my mind.</Text>
+    <DialogueTarget>4</DialogueTarget>
+   </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+ <DialogueNode>
+  <Name>4</Name>
+  <SetPersistentCondition>NeemQuest</SetPersistentCondition>
+  <Dialogue>
+   <Page>Thank you!</Page>
+   <Page>Could you investigate the nearby astral bodies in search of any Nomai?</Page>
+   <Page>...</Page>
+      <Page>...and if you cannot find any Nomai, could you look for any potential large sources of energy?</Page>
+      <Page>Report back to me with anything you find.</Page>
+  </Dialogue>
  </DialogueNode>
 </DialogueTree>
