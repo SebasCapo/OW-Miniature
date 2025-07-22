@@ -117,4 +117,52 @@
       <Page>Report back to me with anything you find.</Page>
   </Dialogue>
  </DialogueNode>
+
+<DialogueNode>
+  <Name>5</Name>
+<EntryCondition>NeemQuest</EntryCondition>
+  <Dialogue>
+   <Page>Have you found a way to get out of here?</Page>
+  </Dialogue>
+
+<DialogueOptionsList>
+   <DialogueOption>
+    <Text>Not yet. I'll keep looking.</Text>
+    <DialogueTarget>6</DialogueTarget>
+   </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+<DialogueNode>
+  <Name>6</Name>
+  <Dialogue>
+   <Page>Sounds good.</Page>
+  </Dialogue>
+ </DialogueNode>
+
+<DialogueNode>
+  <Name>7</Name>
+    <EntryCondition>CodeObtained</EntryCondition>
+  <Dialogue>
+   <Page>Have you found a way to get out of here?</Page>
+  </Dialogue>
+
+<DialogueOptionsList>
+   <DialogueOption>
+    <Text>Yes.</Text>
+    <DialogueTarget>8</DialogueTarget>
+   </DialogueOption>
+  </DialogueOptionsList>
+ </DialogueNode>
+
+<DialogueNode>
+  <Name>8</Name>
+  <Dialogue>
+   <Page>That's amazing! What will you be doing?</Page>
+   <Page>...</Page>
+   <Page>...</Page>
+   <Page>...so you'll be firing an overlocked energy source directly at my ship. With it, I'll be able to warp out of this system.</Page>
+   <Page>I suppose we don't have any other choice. I will prepare myself.</Page>
+  </Dialogue>
+ </DialogueNode>
 </DialogueTree>
