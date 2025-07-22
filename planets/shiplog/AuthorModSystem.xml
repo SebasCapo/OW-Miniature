@@ -3,13 +3,13 @@
   <ID>AUTHOR_MOD_SYSTEM</ID>
   <Entry>
     <ID>AUTHOR_MOD_SYSTEM_ROOT</ID>
-    <Name>A Strange Crystal</Name>
+    <Name>No Entries</Name>
     <Curiosity>AUTHOR_MOD_CURIOSITY</Curiosity>
     <IsCuriosity/>
     <IgnoreMoreToExplore/>
     <ExploreFact>
       <ID>AUTHOR_MOD_SYSTEM_EXPLORE_FACT</ID>
-      <Text>A strange crystal eminates quantum noises. What could it mean?</Text>
+      <Text>This mod was not able to get ship logs done in time. Sorry :(</Text>
     </ExploreFact>
   </Entry>
 </AstroObjectEntry>

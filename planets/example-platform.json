@@ -38,22 +38,6 @@
         "xmlFile" : "assets/dialogue/platform.xml",
         "range": 4
       }
-    ],
-    "signals": [
-        {
-				"audio": "Sun_Collapse",
-				"parentPath": "Sector/ShatteredCrystal",
-				"isRelativeToParent": true,
-				"name": "Test",
-				"frequency": "ENDER_TEST",
-				"onlyAudibleToScope": false,
-				"volume": 1,
-				"maxDistance": 20,
-				"minDistance": 5,
-				"sourceRadius": 5,
-        "detectionRadius": 55,
-        "reveals": "ENDER_TEST_EXPLORE_FACT_1"
-			}
     ]
   }
 }

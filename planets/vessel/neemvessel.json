@@ -27,13 +27,6 @@
                 "rename": "QuantumSatellite",
                 "path": "HearthianMapSatellite_Body/Sector_HearthianMapSatellite/Geometry_HearthianMapSatellite"
             },
-            { 
-				"rename": "VesselRecorder",
-                "isRelativeToParent": true,
-				"path" : "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo", 
-                "position": {"x": 15.24598, "y": -6.912521, "z": -22.00761},
-                "rotation": {"x": 0.07074948, "y": 1.081161, "z": 0.1141388}
-			}, 
             {
                 "rename": "Neem",
                 "isRelativeToParent": true,
@@ -59,10 +52,6 @@
             }
         ],
         "dialogue": [
-			{
-				"position": {"x": 15.24598, "y": -6.912521, "z": -22.00761},
-				"xmlFile" : "assets/dialogue/TestRecorder3.xml"
-			},
             {
 				"position": {"x": 9.191265, "y": -5.432755, "z": -21.01389},
                 "pathToAnimController": "Sector/Neem",
@@ -78,25 +67,5 @@
                 "frequency": "Frequency2"
             }
         ]
-    },
-        "Spawn": {
-            "playerSpawnPoints": [
-            {
-                "position": {"x": -0.09818339, "y": -5.890474, "z": -64.54631},
-                "startWithSuit": true,
-                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_NOMAI",
-                "alignRadial": true
-            }
-        ],
-        "shipSpawnPoints": [
-            {
-                "position": {"x": -61.67292, "y": -45.8276, "z": -120.9503},
-                "rotation": {"x": 346.3585, "y": 126.2409, "z": 4.162411},
-                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_NOMAI"
-            }
-        ]
-    },
-    "ShipLog": {
-        "xmlFile": "planets/shiplog/cursedsatellite.xml"
     }
 }

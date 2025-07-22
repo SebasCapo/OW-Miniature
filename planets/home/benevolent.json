@@ -48,12 +48,6 @@
     "Props": {
         "details": [
         {
-            "rename": "HomeRecorder",
-            "path": "Moon_Body/Sector_THM/Interactables_THM/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
-            "position": {"x": 0.2762703, "y": 324.4474, "z": -0.2780558},
-            "rotation": {"x": 0, "y": 39.77163, "z": 0}
-        },
-        {
             "rename": "UnderwaterLaboratory",
             "path": "SunStation_Body/Sector_SunStation/Geometry_SunStation/SunStation_ControlModule_Geo/",
             "position": {"x": -165.3775, "y": 46.20479, "z": -134.5878},
@@ -139,15 +133,6 @@
                 "minHeight": 323
             }
         ],
-        "dialogue" :
-        [
-            {
-                "position": {"x": 11.78239, "y": 323.962, "z": 14.10027},
-                "range": 4,
-                "isRelativeToParent": true,
-                "xmlFile" : "assets/dialogue/TestDialogue2.xml"
-            }
-        ],
         "translatorText": [
 			{
 				"position": {"x": -4.428329, "y": 325.7996, "z": 5.166278},
@@ -196,23 +181,6 @@
             }
         ]
     }, 
-        "Spawn": {
-            "playerSpawnPoints": [
-            {
-                "position": {"x": 0.2762703, "y": 324.4474, "z": -0.2780558},
-                "startWithSuit": true,
-                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME",
-                "alignRadial": true
-            }
-        ],
-        "shipSpawnPoints": [
-            {
-                "position": {"x": 20.33315, "y": 337.381, "z": 20.429382},
-                "rotation": {"x": 0, "y": 39.77163, "z": 0},
-                "makeDefaultIfPersistentCondition": "ENDER_OVERRIDE_SPAWN_HOME"
-            }
-        ]
-    },
     "AmbientLights": [
         {
             "intensity": 1
