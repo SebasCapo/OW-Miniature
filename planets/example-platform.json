@@ -23,8 +23,8 @@
           "x": 0,
           "y": 0,
           "z": 60
-                },
-            },
+                }
+            }
     ],
     "dialogue": 
     [
@@ -33,9 +33,9 @@
         {
           "x": 0,
           "y": 0,
-          "z": 0
+          "z": 60
         },
-        "xmlFile" : "assets/dialogue/platform.xml",
+        "xmlFile" : "planets/assets/dialogue/platform.xml",
         "range": 4
       }
     ]

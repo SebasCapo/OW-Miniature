@@ -4,7 +4,7 @@
   "author": "Ender, Beryl",
   "name": "Bright Spark",
   "uniqueName": "Ender.Beryl.BrightSpark",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "owmlVersion": "2.15.1",
   "dependencies": [ "xen.NewHorizons", "xen-42.ModJam5" ]
 }

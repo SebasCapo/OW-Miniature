@@ -32,8 +32,8 @@
 
     "HeightMap" :
 	{
-	    "heightMap" : "assets/textures/iceheight.png",	
-        "textureMap": "assets/textures/icetest.png",
+	    "heightMap" : "planets/assets/textures/iceheight.png",	
+        "textureMap": "planets/assets/textures/icetest.png",
 	    "minHeight" : 71,
 		"maxHeight" : 80
 	},

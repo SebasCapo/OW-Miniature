@@ -25,7 +25,7 @@
         "clouds": {
             "outerCloudRadius": 150,
             "innerCloudRadius": 125,
-            "texturePath": "assets/textures/cloudtest.png",
+            "texturePath": "planets/assets/textures/cloudtest.png",
             "tint":
             {
                 "r" : 250,

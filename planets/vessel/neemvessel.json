@@ -56,7 +56,7 @@
 				"position": {"x": 9.191265, "y": -5.432755, "z": -21.01389},
                 "pathToAnimController": "Sector/Neem",
                 "lookAtRadius" : 10,
-				"xmlFile" : "assets/dialogue/Neem.xml",
+				"xmlFile" : "planets/assets/dialogue/Neem.xml",
                 "range": 10
 			}
         ],
