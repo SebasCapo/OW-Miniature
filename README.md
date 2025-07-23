@@ -1,0 +1,3 @@
+Bright Spark!
+
+README todo
